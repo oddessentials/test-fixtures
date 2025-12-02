@@ -1,0 +1,53 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log
+
+# TypeScript
+dist/
+out/
+build/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Editor junk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Test / Coverage
+coverage/
+nyc_output/
+*.lcov
+
+# Optional: if using Jest or Vitest snapshots (your kit does not use these)
+__tests__/**/__snapshots__/
+
+# Husky internal backups
+.husky/_
+
+# Local temp files
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# OS metadata
+.nfs*
+
+# If someone accidentally generates Swarm data here
+.swarm/
