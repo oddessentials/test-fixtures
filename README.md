@@ -244,3 +244,19 @@ npm run verify -- --update         # refresh goldens
 # add new tasks under fixtures/...
 npm run verify                     # all tasks auto-discovered
 ```
+
+## **Why `npm run verify -- --update` Exists (for Contributors)**
+
+Fixtures in this repo use **golden outputs** (`expected.json` / `expected.patch`) that represent the _correct_ result for each scenario. Over time, these goldens can become **outdated** when we intentionally improve schemas, prompts, or agent contracts. When that happens, running `npm run verify` will fail across many fixtures—not because the fixtures are wrong, but because the **spec evolved**.
+
+Instead of editing dozens or hundreds of files by hand, contributors use:
+
+```bash
+npm run verify -- --update
+```
+
+This command automatically regenerates each fixture’s `expected.*` file using the **new** schema and normalization rules. It updates only what legitimately changed and keeps everything consistent with the latest contract. After running it, `npm run verify` will pass again.
+
+Think of it like Jest’s snapshot updates:
+
+> _You write a fixture once, and snapshot mode keeps it healthy whenever the spec evolves._
