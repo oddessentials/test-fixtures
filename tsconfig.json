@@ -10,7 +10,8 @@
     "baseUrl": ".",
     "paths": {
       "@kit/*": ["src/*"]
-    }
+    },
+    "types": ["node"]
   },
   "include": ["src", "fixtures"]
 }
