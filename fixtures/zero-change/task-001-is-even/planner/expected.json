@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": "fix-is-even-logic",
+      "description": "Fix the isEven(n: number) implementation in src/utils/isEven.ts so that even numbers (including 0 and negatives) return true and odd numbers return false.",
+      "file": "src/utils/isEven.ts",
+      "type": "fix",
+      "complexity": "low",
+      "dependsOn": []
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

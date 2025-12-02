@@ -1,0 +1,18 @@
+{
+  "highLevelSummary": "Define and clarify a tiny isEven(n: number): boolean utility with strict non-goals: do not change any other functions or behavior in the system.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [
+    {
+      "name": "NumberUtils",
+      "fields": ["value"],
+      "primaryKey": null,
+      "indexes": null,
+      "relations": null
+    }
+  ],
+  "recommendedFileStructure": [
+    "src/utils/isEven.ts",
+    "test/utils/isEven.test.ts"
+  ]
+}

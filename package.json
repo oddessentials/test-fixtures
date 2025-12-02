@@ -1,0 +1,43 @@
+{
+  "name": "test-fixtures",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "verify": "tsx src/run-verify.ts"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./fixture-helpers": {
+      "import": "./dist/fixture-helpers.js",
+      "types": "./dist/fixture-helpers.d.ts"
+    },
+    "./schemas/architect": {
+      "import": "./dist/schemas/architect.js",
+      "types": "./dist/schemas/architect.d.ts"
+    },
+    "./schemas/planner": {
+      "import": "./dist/schemas/planner.js",
+      "types": "./dist/schemas/planner.d.ts"
+    },
+    "./schemas/coder": {
+      "import": "./dist/schemas/coder.js",
+      "types": "./dist/schemas/coder.d.ts"
+    },
+    "./schemas/reviewer": {
+      "import": "./dist/schemas/reviewer.js",
+      "types": "./dist/schemas/reviewer.d.ts"
+    }
+  },
+  "devDependencies": {
+    "tsx": "^4.0.0",
+    "typescript": "^5.6.0",
+    "zod": "^3.23.0"
+  }
+}

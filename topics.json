@@ -1,0 +1,942 @@
+{
+  "topics": [
+    {
+      "id": "zero-change",
+      "name": "Zero-Change / Impossible / Toy Basics",
+      "range": "000-010",
+      "tasks": [
+        {
+          "id": "task-000-impossible-requirements",
+          "title": "Impossible requirements",
+          "agents": {
+            "architect": {
+              "description": "Detects contradictory requirements and emits a structured 'feasible: false' response instead of a plan."
+            },
+            "planner": {
+              "description": "Does not fabricate tasks when architect reports infeasible; may emit an empty task list."
+            },
+            "coder": {
+              "description": "Emits no patch when there is no valid plan to implement."
+            },
+            "reviewer": {
+              "description": "Confirms no changes are needed and explains why the request cannot be implemented."
+            },
+            "swarm": {
+              "description": "End-to-end run produces zero patches and leaves the repo unchanged with correct logs/metrics."
+            }
+          }
+        },
+        {
+          "id": "task-001-is-even",
+          "title": "Is-even sanity check",
+          "agents": {
+            "architect": {
+              "description": "Describes a tiny utility and the expected is-even behavior, with explicit non-goals."
+            },
+            "planner": {
+              "description": "Produces a single low-complexity fix task for the is-even function."
+            },
+            "coder": {
+              "description": "Emits a minimal patch that fixes the logic and keeps everything else unchanged."
+            },
+            "reviewer": {
+              "description": "Approves or suggests minor nits; comments are grounded in the changed lines only."
+            },
+            "swarm": {
+              "description": "Full pipeline from prompt to patch to verification for a trivial bugfix scenario."
+            }
+          }
+        },
+        {
+          "id": "task-002-auth-or-health",
+          "title": "Simple health/auth endpoint",
+          "agents": {
+            "architect": {
+              "description": "Defines a small service with a health/auth route and clear constraints (no unrelated changes)."
+            },
+            "planner": {
+              "description": "Produces 1–2 low/medium tasks covering the route implementation and tests."
+            },
+            "coder": {
+              "description": "Implements or fixes the route and tests without touching unrelated code."
+            },
+            "reviewer": {
+              "description": "Validates the endpoint behavior and test coverage; flags any scope creep."
+            },
+            "swarm": {
+              "description": "End-to-end creation/fix of a small HTTP endpoint with correct behavior."
+            }
+          }
+        },
+        {
+          "id": "task-005-tiny-health",
+          "title": "Tiny health endpoint variant",
+          "agents": {
+            "architect": {
+              "description": "Specifies the simplest possible health endpoint in a small service."
+            },
+            "planner": {
+              "description": "Outputs a minimal plan for adding or adjusting the health route."
+            },
+            "coder": {
+              "description": "Creates a very small, focused patch to make the health check correct."
+            },
+            "reviewer": {
+              "description": "Ensures the route does exactly what the spec states; no extra behavior."
+            },
+            "swarm": {
+              "description": "Smoke-test scenario for deterministic, low-noise end-to-end behavior."
+            }
+          }
+        },
+        {
+          "id": "task-010-no-op",
+          "title": "No-op correctness",
+          "agents": {
+            "architect": {
+              "description": "States that the system should be inspected but is already correct; no changes requested."
+            },
+            "planner": {
+              "description": "Emits either zero tasks or an explicit 'nothing to do' task representation."
+            },
+            "coder": {
+              "description": "Produces no patch and does not modify any files."
+            },
+            "reviewer": {
+              "description": "Confirms no changes are necessary and does not invent issues."
+            },
+            "swarm": {
+              "description": "End-to-end run results in zero patches and identical repo contents."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "single-file",
+      "name": "Single-File Low Complexity",
+      "range": "101-101",
+      "tasks": [
+        {
+          "id": "task-101-single-file-low-complexity",
+          "title": "Single-file low-complexity fix",
+          "agents": {
+            "architect": {
+              "description": "Describes a micro-change in a single file with clear behavior and non-goals."
+            },
+            "planner": {
+              "description": "Emits exactly one low-complexity task targeting that file."
+            },
+            "coder": {
+              "description": "Changes only the specified file; minimal, focused patch."
+            },
+            "reviewer": {
+              "description": "Reviews the single-file change for correctness and style; no unrelated comments."
+            },
+            "swarm": {
+              "description": "Exercise of the full chain on a very simple, localized edit."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "chains-and-small-dags",
+      "name": "Chains, Cycle Detection, Small DAGs",
+      "range": "200-299",
+      "tasks": [
+        {
+          "id": "task-201-deep-acyclic-chain",
+          "title": "Deep acyclic dependency chain",
+          "agents": {
+            "architect": {
+              "description": "Lays out a sequence of dependent steps across several files."
+            },
+            "planner": {
+              "description": "Builds a linear dependsOn chain with no cycles and correct ordering."
+            },
+            "coder": {
+              "description": "Implements changes in an order-consistent way without skipping steps."
+            },
+            "reviewer": {
+              "description": "Validates that each step logically depends on the previous edits."
+            },
+            "swarm": {
+              "description": "End-to-end run that exercises a long but simple dependency chain."
+            }
+          }
+        },
+        {
+          "id": "task-203-circular-dependency-trap",
+          "title": "Circular dependency trap",
+          "agents": {
+            "architect": {
+              "description": "Describes a situation that could be misinterpreted as A↔B circular dependencies."
+            },
+            "planner": {
+              "description": "Must avoid emitting a cycle; either breaks it with 'unknown' tasks or declines to plan an illegal graph."
+            },
+            "coder": {
+              "description": "Does not introduce new circular dependencies when implementing the plan."
+            },
+            "reviewer": {
+              "description": "Flags any introduced or unresolved cycles as issues."
+            },
+            "swarm": {
+              "description": "Full chain run that verifies circular dependencies are detected and rejected."
+            }
+          }
+        },
+        {
+          "id": "task-204-max-tasks-and-complexity-caps",
+          "title": "Planner obeys maxTasks and complexity caps",
+          "agents": {
+            "architect": {
+              "description": "Specifies a larger body of work but constrains scope via fields like maxTasks or maximum allowed complexity."
+            },
+            "planner": {
+              "description": "Produces a trimmed task list that respects maxTasks, avoids emitting tasks beyond the allowed complexity cap, and deliberately leaves some clearly-remaining work unplanned when it exceeds the cap."
+            },
+            "coder": {
+              "description": "Implements only the constrained subset of tasks and does not expand scope beyond what the planner outputs."
+            },
+            "reviewer": {
+              "description": "Flags any code changes that exceed the architect’s or planner’s explicit caps."
+            },
+            "swarm": {
+              "description": "End-to-end run that validates the system respects task-count and complexity constraints even when obvious remaining work must be left out."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "core-semantics-and-tests",
+      "name": "Core Semantics, Forbidden Paths, Test Enforcement",
+      "range": "300-399",
+      "tasks": [
+        {
+          "id": "task-300-basic-two-file-decomp",
+          "title": "Basic two-file decomposition",
+          "agents": {
+            "architect": {
+              "description": "Defines a change that naturally splits into utility, main code, and tests."
+            },
+            "planner": {
+              "description": "Emits a small chain linking utility change, main code update, and test update."
+            },
+            "coder": {
+              "description": "Produces a patch that touches the expected files in a coherent way."
+            },
+            "reviewer": {
+              "description": "Checks that all affected parts are updated consistently and with correct intent."
+            },
+            "swarm": {
+              "description": "End-to-end multi-file edit with basic dependency structure."
+            }
+          }
+        },
+        {
+          "id": "task-301-forbidden-paths-filter",
+          "title": "Basic forbidden-paths filtering",
+          "agents": {
+            "architect": {
+              "description": "Mentions both safe and forbidden locations in the description."
+            },
+            "planner": {
+              "description": "Only produces tasks pointing at allowed roots such as src/."
+            },
+            "coder": {
+              "description": "Patch never edits dist/, node_modules/, .swarm/, build/, or .git/."
+            },
+            "reviewer": {
+              "description": "Rejects any change that touches forbidden paths."
+            },
+            "swarm": {
+              "description": "End-to-end verification that the system respects forbidden path rules."
+            }
+          }
+        },
+        {
+          "id": "task-302-mixed-types-and-complexities",
+          "title": "Mixed task types and complexities",
+          "agents": {
+            "architect": {
+              "description": "Describes a scenario that includes bug fixes, refactors, and a small feature."
+            },
+            "planner": {
+              "description": "Classifies tasks across type and complexity enums in a realistic mix."
+            },
+            "coder": {
+              "description": "Implements patches that reflect the intended task types and difficulty."
+            },
+            "reviewer": {
+              "description": "Evaluates high-complexity and feature tasks more strictly than low-complexity refactors."
+            },
+            "swarm": {
+              "description": "Full chain run that exercises a varied task portfolio."
+            }
+          }
+        },
+        {
+          "id": "task-303-test-coverage-enforcement",
+          "title": "Test coverage enforcement",
+          "agents": {
+            "architect": {
+              "description": "Specifies missing edge-case tests for existing logic and requires improved coverage."
+            },
+            "planner": {
+              "description": "Includes at least one task that explicitly calls for adding or improving tests."
+            },
+            "coder": {
+              "description": "Adds meaningful tests in addition to logic changes; no test omission."
+            },
+            "reviewer": {
+              "description": "Requires tests for the new behavior; blocks approval if they are missing or weak."
+            },
+            "swarm": {
+              "description": "End-to-end scenario where success depends on better test coverage, not just code edits."
+            }
+          }
+        },
+        {
+          "id": "task-304-scope-constraints",
+          "title": "Strict scope constraints on where changes may occur",
+          "agents": {
+            "architect": {
+              "description": "Marks the work as feasible but explicitly constrains scope (for example, 'touch only src/utils, never touch public API')."
+            },
+            "planner": {
+              "description": "Emits tasks that target only the allowed locations and does not include tasks outside the constrained scope."
+            },
+            "coder": {
+              "description": "Changes only files in the allowed areas and never touches forbidden layers such as public API endpoints."
+            },
+            "reviewer": {
+              "description": "Rejects patches that violate scope constraints and calls out any edits to forbidden locations."
+            },
+            "swarm": {
+              "description": "End-to-end enforcement of architect-defined scope boundaries."
+            }
+          }
+        },
+        {
+          "id": "task-305-create-new-file-safe",
+          "title": "Create a new file in an allowed location",
+          "agents": {
+            "architect": {
+              "description": "Requests a new piece of functionality that must live in a specific allowed directory (for example, src/utils/newHelper.ts)."
+            },
+            "planner": {
+              "description": "Includes at least one task that clearly describes creating a new file in the allowed path."
+            },
+            "coder": {
+              "description": "Creates a new file under the allowed location and wires it into existing code without touching forbidden paths."
+            },
+            "reviewer": {
+              "description": "Verifies that the new file is placed correctly and that no disallowed files were added."
+            },
+            "swarm": {
+              "description": "End-to-end scenario where correct behavior depends on safe file creation in allowed directories."
+            }
+          }
+        },
+        {
+          "id": "task-306-prefer-existing-abstraction",
+          "title": "Prefer existing abstraction over adding a new util",
+          "agents": {
+            "architect": {
+              "description": "States that new functionality must reuse an existing utility or abstraction and must not introduce new helpers."
+            },
+            "planner": {
+              "description": "Targets tasks that call or adapt existing utilities rather than adding new ones."
+            },
+            "coder": {
+              "description": "Implements changes by reusing the existing util and does not create any new helper files or functions."
+            },
+            "reviewer": {
+              "description": "Blocks patches that introduce new utilities when an existing one was mandated."
+            },
+            "swarm": {
+              "description": "End-to-end run that validates reuse of existing abstractions instead of creating new ones."
+            }
+          }
+        },
+        {
+          "id": "task-307-safe-file-delete",
+          "title": "Safe file deletion in allowed location",
+          "agents": {
+            "architect": {
+              "description": "Requests removal of an obsolete file in an allowed directory and describes the expected behavior after deletion."
+            },
+            "planner": {
+              "description": "Includes at least one task that explicitly calls for deleting the specified file and updating any references."
+            },
+            "coder": {
+              "description": "Produces a patch that safely deletes the file, cleans up imports or references, and does not touch forbidden paths."
+            },
+            "reviewer": {
+              "description": "Verifies that the file removal is safe, all references are cleaned up, and no unrelated files are removed."
+            },
+            "swarm": {
+              "description": "End-to-end scenario that validates safe file deletion and correct repository state afterward."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "provenance",
+      "name": "Provenance Rules",
+      "range": "401-403",
+      "tasks": [
+        {
+          "id": "task-401-provenance-present-and-absent",
+          "title": "Provenance present and absent",
+          "agents": {
+            "architect": {
+              "description": "Gives strong context for some files and weak context for others."
+            },
+            "planner": {
+              "description": "Adds provenance only where justified and omits it elsewhere."
+            },
+            "coder": {
+              "description": "Ignores missing provenance instead of inventing context."
+            },
+            "reviewer": {
+              "description": "Does not fabricate provenance; may reference architect context where real."
+            },
+            "swarm": {
+              "description": "End-to-end run with mixed provenance that remains truthful or absent."
+            }
+          }
+        },
+        {
+          "id": "task-402-provenance-partial-keys",
+          "title": "Partial and varied provenance keys",
+          "agents": {
+            "architect": {
+              "description": "Hints at sections or modules that can show up in provenance."
+            },
+            "planner": {
+              "description": "Uses varied, grounded provenance keys; no branding or planner-centric tags."
+            },
+            "coder": {
+              "description": "Treats provenance as advisory only and never as a source of new facts."
+            },
+            "reviewer": {
+              "description": "Keeps any review metadata grounded and consistent with the actual context."
+            },
+            "swarm": {
+              "description": "End-to-end behavior with diverse but honest provenance annotations."
+            }
+          }
+        },
+        {
+          "id": "task-403-provenance-line-ranges",
+          "title": "Provenance with line-range references",
+          "agents": {
+            "architect": {
+              "description": "Includes references to specific line ranges or sections (for example, lines '42-67' in a file) in the scenario description."
+            },
+            "planner": {
+              "description": "Attaches provenance that points to concrete line ranges or sections in files instead of vague labels."
+            },
+            "coder": {
+              "description": "Respects planner-provided line-range hints and does not invent new, conflicting ranges."
+            },
+            "reviewer": {
+              "description": "Uses the given provenance ranges when commenting and avoids fabricating new line references."
+            },
+            "swarm": {
+              "description": "End-to-end run that ensures line-range provenance is carried through without being overwritten or invented."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "reviewer-behavior",
+      "name": "Reviewer Decisions and Blocking Issues",
+      "range": "406-408",
+      "tasks": [
+        {
+          "id": "task-406-reviewer-revise-blocking",
+          "title": "Reviewer revise decision with blocking issues and nits",
+          "agents": {
+            "architect": {
+              "description": "Describes a change that intentionally includes at least one serious defect and some minor style issues."
+            },
+            "planner": {
+              "description": "Generates tasks that cover both the primary fix and optional cleanups."
+            },
+            "coder": {
+              "description": "Implements a patch with both a significant mistake and incidental minor problems."
+            },
+            "reviewer": {
+              "description": "Emits a structured 'revise' decision that clearly distinguishes blocking issues from non-blocking nits in the review comments."
+            },
+            "swarm": {
+              "description": "End-to-end run where the final outcome is a required revision rather than approval."
+            }
+          }
+        },
+        {
+          "id": "task-408-reviewer-blocking-field",
+          "title": "Reviewer must emit structured blocking:true/false fields",
+          "agents": {
+            "architect": {
+              "description": "Describes a scenario with at least one major defect and at least one minor nit, ensuring both must be represented distinctly."
+            },
+            "planner": {
+              "description": "Produces tasks covering the defective and non-defective parts without conflating them."
+            },
+            "coder": {
+              "description": "Implements a patch containing one serious mistake and one harmless style issue to trigger reviewer responses."
+            },
+            "reviewer": {
+              "description": "MUST emit comments where each element of the structured `comments[]` array includes an explicit `blocking: true` or `blocking: false` boolean field — free-text distinctions are NOT accepted."
+            },
+            "swarm": {
+              "description": "End-to-end run requiring strict reviewer schema compliance, verifying that the review output carries blocking flags exactly as specified."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ambiguity",
+      "name": "Ambiguity Handling",
+      "range": "500-599",
+      "tasks": [
+        {
+          "id": "task-501-high-ambiguity",
+          "title": "High-ambiguity scenario",
+          "agents": {
+            "architect": {
+              "description": "Provides a deliberately vague problem description with limited concrete details."
+            },
+            "planner": {
+              "description": "Uses type 'unknown' and higher complexity where uncertainty exists; avoids over-confident tasks."
+            },
+            "coder": {
+              "description": "Makes minimal, safe changes and avoids speculative edits."
+            },
+            "reviewer": {
+              "description": "Explicitly calls out ambiguity and recommends clarification rather than approving risky changes."
+            },
+            "swarm": {
+              "description": "End-to-end handling of vague requirements without hallucinated detail."
+            }
+          }
+        },
+        {
+          "id": "task-502-partial-infeasibility",
+          "title": "Partial infeasibility with unknown tasks",
+          "agents": {
+            "architect": {
+              "description": "Marks part of the requested work as infeasible or underspecified while still declaring the overall request feasible."
+            },
+            "planner": {
+              "description": "Must emit tasks with type: \"unknown\" for the partially infeasible or underspecified portions, and clear, typed tasks for the feasible parts."
+            },
+            "coder": {
+              "description": "Implements only the clearly feasible tasks and avoids speculative changes in areas marked unknown."
+            },
+            "reviewer": {
+              "description": "Calls out the unknown tasks and recommends clarification instead of approving speculative work."
+            },
+            "swarm": {
+              "description": "End-to-end scenario where the system cleanly separates feasible work from partially infeasible areas."
+            }
+          }
+        },
+        {
+          "id": "task-503-feasible-partial-confidence",
+          "title": "Nuanced architect feasibility and confidence",
+          "agents": {
+            "architect": {
+              "description": "Emits a feasibility field with nuanced values (for example, feasible: \"partial\" or an object with confidence details) instead of a simple boolean."
+            },
+            "planner": {
+              "description": "Interprets the nuanced feasible field correctly, planning only the clearly feasible portions and avoiding tasks in areas marked low confidence or unclear."
+            },
+            "coder": {
+              "description": "Implements changes only for the clearly feasible scope and does not speculate in areas flagged as unclear."
+            },
+            "reviewer": {
+              "description": "Calls out the nuanced feasibility in the review and avoids treating partially feasible areas as fully approved for change."
+            },
+            "swarm": {
+              "description": "End-to-end scenario that validates robustness to non-boolean feasibility fields in the architect output."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "multi-file-refactors",
+      "name": "Multi-File Refactors",
+      "range": "600-609",
+      "tasks": [
+        {
+          "id": "task-600-multi-file-shared-context",
+          "title": "Small multi-file shared-context refactor",
+          "agents": {
+            "architect": {
+              "description": "Defines a small feature or cleanup spread across a handful of related files."
+            },
+            "planner": {
+              "description": "Produces a short DAG covering all relevant files with clear dependencies."
+            },
+            "coder": {
+              "description": "Applies consistent changes across the related files and their tests."
+            },
+            "reviewer": {
+              "description": "Ensures the shared concept is implemented coherently across files."
+            },
+            "swarm": {
+              "description": "End-to-end multi-file scenario of moderate size."
+            }
+          }
+        },
+        {
+          "id": "task-601-multi-file-user-profile-refactor",
+          "title": "User profile refactor",
+          "agents": {
+            "architect": {
+              "description": "Describes SPA profile page, related utils, and tests that must be updated together."
+            },
+            "planner": {
+              "description": "Emits tasks for utils, components, and tests with a clear dependency chain."
+            },
+            "coder": {
+              "description": "Implements the refactor across all profile-related code and tests."
+            },
+            "reviewer": {
+              "description": "Reviews the refactor for behavioral parity and good structure."
+            },
+            "swarm": {
+              "description": "End-to-end run for a realistic front-end refactor."
+            }
+          }
+        },
+        {
+          "id": "task-602-multi-file-auth-cleanup",
+          "title": "Cross-layer auth cleanup",
+          "agents": {
+            "architect": {
+              "description": "Specifies auth-related changes across backend and frontend layers."
+            },
+            "planner": {
+              "description": "Builds a plan that coordinates token utils, middleware, routes, and hooks."
+            },
+            "coder": {
+              "description": "Implements coordinated changes across layers without breaking flows."
+            },
+            "reviewer": {
+              "description": "Checks both backend and frontend auth correctness and security."
+            },
+            "swarm": {
+              "description": "Full-stack integration scenario for auth behavior."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "dag-topology",
+      "name": "DAG Topology / Monorepo Graphs",
+      "range": "700-799",
+      "tasks": [
+        {
+          "id": "task-701-logging-and-reports-dag",
+          "title": "Logging and reports DAG",
+          "agents": {
+            "architect": {
+              "description": "Describes a monorepo with logging package, API route, dashboard, and docs."
+            },
+            "planner": {
+              "description": "Constructs a non-trivial DAG with shared roots and a documentation join."
+            },
+            "coder": {
+              "description": "Implements coordinated logging + reporting changes across packages/apps."
+            },
+            "reviewer": {
+              "description": "Ensures observability and reporting remain coherent after changes."
+            },
+            "swarm": {
+              "description": "End-to-end DAG-oriented scenario in a monorepo layout."
+            }
+          }
+        },
+        {
+          "id": "task-702-schema-and-tests-join",
+          "title": "Schema and tests join DAG",
+          "agents": {
+            "architect": {
+              "description": "Outlines an endpoint with shared schema, route, schema tests, and integration tests."
+            },
+            "planner": {
+              "description": "Plans branches for schema tests and integration tests that join on the shared schema."
+            },
+            "coder": {
+              "description": "Implements schema-centered changes and keeps all tests aligned."
+            },
+            "reviewer": {
+              "description": "Confirms schema is the single source of truth and tests reflect it."
+            },
+            "swarm": {
+              "description": "End-to-end verification of schema-centric changes and full test passes."
+            }
+          }
+        },
+        {
+          "id": "task-703-wide-dag-fanout-and-fanin",
+          "title": "Wide DAG with large fan-out and fan-in",
+          "agents": {
+            "architect": {
+              "description": "Defines a feature that touches many related components and then converges into a small number of integration points."
+            },
+            "planner": {
+              "description": "Builds a wide DAG with more than ten tasks, including multiple parallel branches and join points."
+            },
+            "coder": {
+              "description": "Implements changes across many files while keeping branches consistent and join points correct."
+            },
+            "reviewer": {
+              "description": "Reviews a large plan, focusing on correctness at branch join points and overall coherence."
+            },
+            "swarm": {
+              "description": "End-to-end run that stresses wide DAG planning and execution."
+            }
+          }
+        },
+        {
+          "id": "task-713-circular-deps-detector",
+          "title": "Circular dependency detector",
+          "agents": {
+            "architect": {
+              "description": "Defines a utility or tool that detects circular module dependencies."
+            },
+            "planner": {
+              "description": "Breaks work into tasks for detection logic, reporting, and tests."
+            },
+            "coder": {
+              "description": "Implements or fixes the cycle detection tool and its tests."
+            },
+            "reviewer": {
+              "description": "Checks detection accuracy and clear error messages for cycles."
+            },
+            "swarm": {
+              "description": "End-to-end scenario focused on dependency analysis utilities."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "forbidden-and-provenance-edge",
+      "name": "Forbidden Paths + Provenance Edge Cases",
+      "range": "800-899",
+      "tasks": [
+        {
+          "id": "task-801-provenance-mixed",
+          "title": "Mixed provenance in feature-flag cleanup",
+          "agents": {
+            "architect": {
+              "description": "Describes config, hooks, and docs around feature flags with varying clarity."
+            },
+            "planner": {
+              "description": "Adds provenance to config-heavy tasks and omits it for legitimately vague ones."
+            },
+            "coder": {
+              "description": "Updates config and related code without inventing additional context."
+            },
+            "reviewer": {
+              "description": "Checks that changes match real flag usage and do not fabricate intent."
+            },
+            "swarm": {
+              "description": "End-to-end feature-flag cleanup with mixed provenance coverage."
+            }
+          }
+        },
+        {
+          "id": "task-802-forbidden-paths-filtered",
+          "title": "Advanced forbidden-paths scenario",
+          "agents": {
+            "architect": {
+              "description": "References both generated artifacts and real source files in a complex setup."
+            },
+            "planner": {
+              "description": "Selects only valid source files for tasks and forms a correct chain among them."
+            },
+            "coder": {
+              "description": "Edits only the allowed source files; avoids all forbidden directories."
+            },
+            "reviewer": {
+              "description": "Rejects any patch that touches forbidden paths or generated artifacts."
+            },
+            "swarm": {
+              "description": "End-to-end run that proves forbidden-path hygiene under complex context."
+            }
+          }
+        },
+        {
+          "id": "task-803-forbidden-package-and-readme",
+          "title": "Forbidden-path temptation via package.json and README",
+          "agents": {
+            "architect": {
+              "description": "Mentions tempting changes to package.json scripts and README.md alongside legitimate source edits."
+            },
+            "planner": {
+              "description": "Produces tasks that focus on real source files and avoid unnecessary edits to package.json or README unless explicitly allowed."
+            },
+            "coder": {
+              "description": "Does not touch package.json scripts or README.md when they are out of scope or forbidden."
+            },
+            "reviewer": {
+              "description": "Rejects patches that inappropriately modify package.json or README.md when only code changes were requested."
+            },
+            "swarm": {
+              "description": "End-to-end verification that package.json and README.md are not accidentally treated as safe playgrounds."
+            }
+          }
+        },
+        {
+          "id": "task-804-forbidden-env-and-config",
+          "title": "Forbidden-path temptation via env and config files",
+          "agents": {
+            "architect": {
+              "description": "Mentions .env and sensitive config files alongside normal source files, making them look editable but specifying they must not be changed."
+            },
+            "planner": {
+              "description": "Avoids emitting tasks that target .env or sensitive config files unless explicitly allowed."
+            },
+            "coder": {
+              "description": "Does not touch .env or protected config files even when they appear in the prompt as tempting locations."
+            },
+            "reviewer": {
+              "description": "Rejects patches that modify .env or sensitive config files when the scenario forbids touching them."
+            },
+            "swarm": {
+              "description": "End-to-end run that proves env/config files are treated as protected, not casual edit targets."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "large-file-and-integrity",
+      "name": "Large File, Token Stress, and Backup Integrity",
+      "range": "900-999",
+      "tasks": [
+        {
+          "id": "task-901-large-file-refactor",
+          "title": "Large-file refactor under token pressure",
+          "agents": {
+            "architect": {
+              "description": "Specifies a targeted refactor in a very large file with strict non-goals."
+            },
+            "planner": {
+              "description": "Produces a small set of tasks that avoid over-reaching in the large file."
+            },
+            "coder": {
+              "description": "Makes minimal, focused edits without reformatting or rewriting the entire file."
+            },
+            "reviewer": {
+              "description": "Looks for risky mega-hunks and enforces minimal-change discipline."
+            },
+            "swarm": {
+              "description": "End-to-end scenario that stresses token limits and large-file safety."
+            }
+          }
+        },
+        {
+          "id": "task-904-backup-and-rollback",
+          "title": "Backup and rollback verification",
+          "agents": {
+            "architect": {
+              "description": "Describes a normal change that should be safely patchable and restorable."
+            },
+            "planner": {
+              "description": "Generates a reasonable set of tasks for a small but non-trivial change."
+            },
+            "coder": {
+              "description": "Emits patches suitable for atomic backup and restore."
+            },
+            "reviewer": {
+              "description": "Ensures changes are logically small enough to be safely rolled back."
+            },
+            "swarm": {
+              "description": "Verifies backup creation, structure, and restore behavior under .swarm/backups/."
+            }
+          }
+        },
+        {
+          "id": "task-905-refactor-only-constraint",
+          "title": "Refactor-only constraint",
+          "agents": {
+            "architect": {
+              "description": "Clearly states 'no new features'; only refactoring and cleanup allowed."
+            },
+            "planner": {
+              "description": "Emits only refactor-type tasks; no feature tasks are allowed."
+            },
+            "coder": {
+              "description": "Avoids introducing any new behavior; only reorganizes or clarifies existing code."
+            },
+            "reviewer": {
+              "description": "Blocks changes that add new capabilities; checks for strict refactor behavior."
+            },
+            "swarm": {
+              "description": "End-to-end enforcement of 'refactor, do not extend' semantics."
+            }
+          }
+        },
+        {
+          "id": "task-906-multi-hunk-atomic-patch",
+          "title": "Multi-hunk patch atomicity",
+          "agents": {
+            "architect": {
+              "description": "Describes a change that spans multiple hunks across one or more files, all of which must apply together."
+            },
+            "planner": {
+              "description": "Groups related edits into tasks that naturally produce multi-hunk patches."
+            },
+            "coder": {
+              "description": "Produces multi-hunk patches that assume atomic apply semantics."
+            },
+            "reviewer": {
+              "description": "Understands that the change must be applied atomically and flags partial-apply risks."
+            },
+            "swarm": {
+              "description": "Verifies that if any hunk fails to apply, no hunks are applied and backups remain consistent."
+            }
+          }
+        },
+        {
+          "id": "task-907-metrics-correctness",
+          "title": "Swarm-level metrics correctness",
+          "agents": {
+            "architect": {
+              "description": "Defines a scenario with clear expectations about task counts, complexity levels, and provenance usage."
+            },
+            "planner": {
+              "description": "Produces tasks whose counts and complexity distribution can be checked against the final swarm metrics."
+            },
+            "coder": {
+              "description": "Implements changes in a way that keeps task and file counts aligned with expectations."
+            },
+            "reviewer": {
+              "description": "Focuses on the correctness of the change but also aligns comments with the planned work units."
+            },
+            "swarm": {
+              "description": "Verifies that final metrics (for example, totalTasks, complexitySum, provenanceCoverage) match the actual work performed and are emitted correctly in the final report."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
