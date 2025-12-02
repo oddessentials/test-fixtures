@@ -54,13 +54,13 @@ function discoverFixtureAgentDirs(): Array<{
 
   const topics = fs
     .readdirSync(FIXTURES_ROOT)
-    .filter((name) => isDirectory(path.join(FIXTURES_ROOT, name)));
+    .filter((name: string) => isDirectory(path.join(FIXTURES_ROOT, name)));
 
   for (const topic of topics) {
     const topicDir = path.join(FIXTURES_ROOT, topic);
     const tasks = fs
       .readdirSync(topicDir)
-      .filter((name) => isDirectory(path.join(topicDir, name)));
+      .filter((name: string) => isDirectory(path.join(topicDir, name)));
 
     for (const task of tasks) {
       const taskDir = path.join(topicDir, task);
@@ -136,7 +136,7 @@ async function runOneFixtureAgent(
   }
 
   const verifyModuleUrl = pathToFileUrl(verifyPath);
-  const verifyModule = (await import(verifyModuleUrl)) as {
+  const verifyModule = (await import(verifyModuleUrl.href)) as {
     verify: (ctx: VerifyCtx) => VerifyResult;
   };
 
