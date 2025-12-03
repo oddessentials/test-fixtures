@@ -1,6 +1,6 @@
 # \*\*The Future of Software Engineering:
 
-Welcome to the Supercolony\*\*
+Supercolonies: Where the Most Skilled Engineers Command Hives and Swarms\*\*
 
 By: Peter M. Palles
 
