@@ -1,0 +1,76 @@
+# **Odd Essentials Test Fixtures License (OETFL) – Version 1.0**
+
+**Copyright © 2025 Odd Essentials, LLC. All rights reserved.**
+
+This repository and all associated test fixtures (“the Software”) are provided under a **source-available, non-commercial license**.
+You are free to **read, clone, fork, modify, and contribute** to the Software, under the terms below.
+
+---
+
+## **1. Permitted Use**
+
+You may use, modify, and run the Software **for personal, educational, research, or open-source development purposes**, including:
+
+- Experimentation
+- Learning
+- Internal development
+- Submitting contributions (pull requests)
+- Using the fixtures to improve your own open-source projects
+
+---
+
+## **2. Non-Commercial Restriction**
+
+You **may not** use the Software, or any derivative of it, **for commercial purposes**, which include but are not limited to:
+
+- Selling the Software
+- Selling products or services that depend on the Software
+- Using the Software as part of a revenue-generating product, platform, or SaaS
+- Using the Software to train or evaluate commercial AI models or tools
+- Incorporating the Software into any tool, framework, or product offered for a fee
+- Using the Software to build a paid competitor to Odd Essentials tools or services
+
+If you want to use the Software commercially, you must obtain a **separate commercial license** from Odd Essentials, LLC.
+
+---
+
+## **3. Contributions**
+
+By submitting a pull request or contribution:
+
+- You grant Odd Essentials, LLC a **perpetual, irrevocable, royalty-free license** to use, modify, distribute, and relicense your contributions.
+- You confirm that your contribution is your own original work and does not infringe on others’ rights.
+
+---
+
+## **4. No Warranty**
+
+The Software is provided **“as is”**, without warranty of any kind.
+Odd Essentials, LLC is **not liable** for any damages arising from its use.
+
+---
+
+## **5. Trademark**
+
+The names **Odd Essentials**, **Odd-Hive-Mind**, **Swarm**, and related branding may not be used without prior written permission.
+
+---
+
+## **6. Termination**
+
+This license is automatically terminated if you violate its terms.
+Upon termination, you must stop using and destroy all copies of the Software.
+
+---
+
+## **7. Optional Commercial License**
+
+For commercial use, redistribution, integration, or partnership inquiries, contact:
+
+**Odd Essentials, LLC**
+📧 [legal@oddessentials.com](mailto:legal@oddessentials.com)
+🌐 [https://oddessentials.com/](https://oddessentials.com/)
+
+---
+
+# **END OF LICENSE**
