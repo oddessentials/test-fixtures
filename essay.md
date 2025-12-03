@@ -1,4 +1,4 @@
-# The Future of Software Engineering:
+# The Future of Software Engineering
 
 ## Supercolonies: Where the Most Skilled Engineers Command Hives and Swarms
 
