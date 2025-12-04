@@ -1,0 +1,7 @@
+{
+  "highLevelSummary": "The requirements are contradictory: the service must be stateless yet remember sessions across restarts, and must have no persistent storage yet store credentials in a database. These constraints are mutually exclusive and cannot be satisfied simultaneously.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": []
+}

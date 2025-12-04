@@ -1,0 +1,17 @@
+{
+  "highLevelSummary": "Add minimal GET /health endpoint returning { ok: true } with no auth. No tests, no logging, absolute minimum implementation.",
+  "pagesOrScreens": [],
+  "apis": [
+    {
+      "name": "Health",
+      "description": "Minimal health check",
+      "method": "GET",
+      "path": "/health",
+      "authRequired": false
+    }
+  ],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "app.js"
+  ]
+}

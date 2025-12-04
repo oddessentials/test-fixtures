@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Change correctly implements capitalize using charAt(0).toUpperCase() and slice(1).toLowerCase(); consider adding edge case tests for empty strings and single-character inputs if not already covered.",
+      "path": "test/utils/capitalize.test.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

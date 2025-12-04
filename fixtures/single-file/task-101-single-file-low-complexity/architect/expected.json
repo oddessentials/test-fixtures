@@ -1,0 +1,18 @@
+{
+  "highLevelSummary": "Define and clarify a tiny capitalize(str: string): string utility with strict non-goals: do not change any other functions or behavior in the system.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [
+    {
+      "name": "StringUtils",
+      "fields": ["value"],
+      "primaryKey": null,
+      "indexes": null,
+      "relations": null
+    }
+  ],
+  "recommendedFileStructure": [
+    "src/utils/capitalize.ts",
+    "test/utils/capitalize.test.ts"
+  ]
+}

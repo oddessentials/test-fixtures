@@ -1,0 +1,17 @@
+{
+  "tasks": [
+    {
+      "id": "impossible-task",
+      "description": "Cannot proceed: requirements are contradictory and cannot be implemented as specified.",
+      "file": "",
+      "type": "unknown",
+      "complexity": "high",
+      "dependsOn": []
+    }
+  ],
+  "ambiguities": [
+    "Requirements specify both stateless design and persistent session storage, which are mutually exclusive.",
+    "Requirements specify no persistent storage yet require storing credentials in a database."
+  ],
+  "invalidTaskCount": 0
+}

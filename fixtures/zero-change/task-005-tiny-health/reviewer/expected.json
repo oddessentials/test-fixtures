@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Minimal health endpoint correctly implemented as specified.",
+      "path": "app.js",
+      "line": 5,
+      "blocking": false
+    }
+  ]
+}
