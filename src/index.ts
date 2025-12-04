@@ -1,3 +1,4 @@
+// src/index.ts
 export * from "./schemas/architect";
 export * from "./schemas/planner";
 export * from "./schemas/coder";

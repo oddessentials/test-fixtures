@@ -1,3 +1,4 @@
+// src/fixture-helpers.ts
 import { ArchitectSpecSchema, type ArchitectSpec } from "./schemas/architect";
 import { plannerOutputSchema, type PlannerOutput } from "./schemas/planner";
 import { coderOutputSchema, type CoderOutput } from "./schemas/coder";

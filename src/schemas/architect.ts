@@ -1,3 +1,4 @@
+// src/schemas/architect.ts
 import { z } from "zod";
 
 export const ArchitectApiSchema = z.object({
