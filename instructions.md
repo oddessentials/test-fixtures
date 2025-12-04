@@ -43,6 +43,7 @@ fixtures/
 * `<topic-id>` and `<task-id>` come directly from the master JSON.
 * Adding a readable slug (`.../task-001-is-even/`) is recommended.
 * `repo/` is included only when a scenario requires source files.
+* fixtures/zero-change/task-001-is-even/* is already completed and serves as a template for new tasks.
 
 ---
 
