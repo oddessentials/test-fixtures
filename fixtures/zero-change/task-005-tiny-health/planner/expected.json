@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": "add-health",
+      "description": "Add GET /health endpoint to app.js returning { ok: true }",
+      "file": "app.js",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

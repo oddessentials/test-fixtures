@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "add-health-endpoint",
+      "description": "Add GET /health endpoint to src/server.ts that returns { status: 'ok' } with 200 status code and no authentication.",
+      "file": "src/server.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "add-health-test",
+      "description": "Add test for /health endpoint in test/routes/health.test.ts to verify it returns correct status.",
+      "file": "test/routes/health.test.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["add-health-endpoint"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": "fix-capitalize-logic",
+      "description": "Fix the capitalize(str: string) implementation in src/utils/capitalize.ts so that it capitalizes the first letter and lowercases the rest.",
+      "file": "src/utils/capitalize.ts",
+      "type": "fix",
+      "complexity": "low",
+      "dependsOn": []
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

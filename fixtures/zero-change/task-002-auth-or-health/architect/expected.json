@@ -1,0 +1,18 @@
+{
+  "highLevelSummary": "Add a simple GET /health endpoint that returns status ok with no authentication required. Include corresponding test coverage. Do not modify existing business logic or server configuration.",
+  "pagesOrScreens": [],
+  "apis": [
+    {
+      "name": "Health Check",
+      "description": "Returns service health status",
+      "method": "GET",
+      "path": "/health",
+      "authRequired": false
+    }
+  ],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/routes/health.ts",
+    "test/routes/health.test.ts"
+  ]
+}

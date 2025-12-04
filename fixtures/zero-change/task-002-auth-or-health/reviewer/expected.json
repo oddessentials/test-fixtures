@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Health endpoint correctly implements the spec: returns { status: 'ok' } with 200 status and no authentication. Test coverage is appropriate.",
+      "path": "src/server.ts",
+      "line": 7,
+      "blocking": false
+    }
+  ]
+}
