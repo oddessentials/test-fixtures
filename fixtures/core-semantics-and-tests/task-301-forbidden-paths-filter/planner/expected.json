@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "update-helper-error-handling",
+      "description": "Update helper utility to improve error handling",
+      "file": "src/utils/helper.ts",
+      "type": "fix",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "update-api-error-handling",
+      "description": "Update API service to use improved error handling",
+      "file": "src/services/api.ts",
+      "type": "fix",
+      "complexity": "low",
+      "dependsOn": ["update-helper-error-handling"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

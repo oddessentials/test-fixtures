@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "define-provenance-types",
+      "description": "Define types for provenance records and metadata",
+      "file": "src/provenance/types.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "implement-tracker",
+      "description": "Implement provenance tracker to record and query changes",
+      "file": "src/provenance/tracker.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": ["define-provenance-types"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

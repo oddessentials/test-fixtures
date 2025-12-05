@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "define-types",
+      "description": "Define types for task graph nodes and edges",
+      "file": "src/graph/types.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "implement-cycle-detector",
+      "description": "Implement cycle detection algorithm using DFS",
+      "file": "src/graph/cycleDetector.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": ["define-types"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

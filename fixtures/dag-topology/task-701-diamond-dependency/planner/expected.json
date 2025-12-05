@@ -1,0 +1,38 @@
+{
+  "tasks": [
+    {
+      "id": "task-a",
+      "description": "Implement root task A with no dependencies",
+      "file": "src/tasks/taskA.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "task-b",
+      "description": "Implement task B depending on task A",
+      "file": "src/tasks/taskB.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["task-a"]
+    },
+    {
+      "id": "task-c",
+      "description": "Implement task C depending on task A",
+      "file": "src/tasks/taskC.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["task-a"]
+    },
+    {
+      "id": "task-d",
+      "description": "Implement task D depending on both B and C (diamond convergence)",
+      "file": "src/tasks/taskD.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["task-b", "task-c"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

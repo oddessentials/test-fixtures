@@ -1,0 +1,11 @@
+{
+  "highLevelSummary": "Extract common validation logic from multiple files into a new shared module src/utils/validation.ts, then update all files to import from the shared module.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/utils/validation.ts",
+    "src/forms/login.ts",
+    "src/forms/register.ts"
+  ]
+}

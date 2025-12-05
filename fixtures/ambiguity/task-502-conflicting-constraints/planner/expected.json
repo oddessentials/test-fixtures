@@ -1,0 +1,17 @@
+{
+  "tasks": [
+    {
+      "id": "resolve-conflict",
+      "description": "Resolve conflicting constraints: cannot add feature to src/api/handler.ts while also not modifying src/api/",
+      "file": "",
+      "type": "unknown",
+      "complexity": "low",
+      "dependsOn": []
+    }
+  ],
+  "ambiguities": [
+    "Constraint conflict: must add feature to src/api/handler.ts but cannot modify src/api/",
+    "These requirements are mutually exclusive"
+  ],
+  "invalidTaskCount": 0
+}

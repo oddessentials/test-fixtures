@@ -1,0 +1,30 @@
+{
+  "tasks": [
+    {
+      "id": "refactor-database",
+      "description": "Refactor the legacy database layer to improve maintainability",
+      "file": "src/legacy/database.ts",
+      "type": "refactor",
+      "complexity": "medium",
+      "dependsOn": []
+    },
+    {
+      "id": "refactor-api",
+      "description": "Refactor the legacy API layer to align with updated database",
+      "file": "src/legacy/api.ts",
+      "type": "refactor",
+      "complexity": "medium",
+      "dependsOn": ["refactor-database"]
+    },
+    {
+      "id": "update-utils",
+      "description": "Update utility functions to support refactored modules",
+      "file": "src/legacy/utils.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": ["refactor-api"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

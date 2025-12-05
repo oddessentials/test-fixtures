@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Implement binary file detection to distinguish between binary and text files, with appropriate handling strategies to prevent corruption from text operations.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/files/binaryDetector.ts",
+    "src/files/fileTypeHandler.ts"
+  ]
+}

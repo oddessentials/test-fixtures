@@ -1,0 +1,38 @@
+{
+  "tasks": [
+    {
+      "id": "update-reader",
+      "description": "Update the reader stage to read raw data from input source",
+      "file": "src/pipeline/reader.ts",
+      "type": "fix",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "update-parser",
+      "description": "Update the parser stage to parse raw data into structured format",
+      "file": "src/pipeline/parser.ts",
+      "type": "fix",
+      "complexity": "low",
+      "dependsOn": ["update-reader"]
+    },
+    {
+      "id": "update-transformer",
+      "description": "Update the transformer stage to transform parsed data",
+      "file": "src/pipeline/transformer.ts",
+      "type": "fix",
+      "complexity": "low",
+      "dependsOn": ["update-parser"]
+    },
+    {
+      "id": "update-writer",
+      "description": "Update the writer stage to write final output",
+      "file": "src/pipeline/writer.ts",
+      "type": "fix",
+      "complexity": "low",
+      "dependsOn": ["update-transformer"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

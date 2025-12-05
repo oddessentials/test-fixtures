@@ -1,0 +1,11 @@
+{
+  "highLevelSummary": "Rename getUserData to fetchUserProfile across the codebase, updating all imports and references to ensure consistency across all files.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/services/user.ts",
+    "src/api/handlers.ts",
+    "src/components/Profile.tsx"
+  ]
+}

@@ -1,0 +1,11 @@
+diff --git a/TODO.md b/TODO.md
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/TODO.md
+@@ -0,0 +1,5 @@
++# Clarification Needed
++
++The request "make the app better" requires clarification:
++- Which specific files or features should be improved?
++- What are the success criteria for "better"?

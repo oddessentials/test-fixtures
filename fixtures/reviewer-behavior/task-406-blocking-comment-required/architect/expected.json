@@ -1,0 +1,9 @@
+{
+  "highLevelSummary": "Fix SQL injection vulnerability in src/db/query.ts. This is a security-critical change requiring thorough review with blocking comments for any issues found.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/db/query.ts"
+  ]
+}

@@ -13,5 +13,13 @@
     },
     "types": ["node"]
   },
-  "include": ["src", "fixtures"]
+  "include": [
+    "src",
+    "fixtures"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "fixtures/**/repo/**"
+  ]
 }

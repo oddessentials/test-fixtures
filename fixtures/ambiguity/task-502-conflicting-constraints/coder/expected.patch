@@ -1,0 +1,13 @@
+diff --git a/CONFLICT.md b/CONFLICT.md
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/CONFLICT.md
+@@ -0,0 +1,7 @@
++# Constraint Conflict
++
++Cannot proceed due to conflicting constraints:
++1. Requirement: Add a feature to src/api/handler.ts
++2. Constraint: Do not modify any files in src/api/
++
++These requirements are mutually exclusive. Please clarify which constraint takes priority.

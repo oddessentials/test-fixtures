@@ -1,0 +1,49 @@
+diff --git a/src/chain/step1.ts b/src/chain/step1.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/chain/step1.ts
+@@ -0,0 +1,4 @@
++export async function step1(): Promise<number> {
++  console.log("Executing Step 1");
++  return 1;
++}
+diff --git a/src/chain/step2.ts b/src/chain/step2.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/chain/step2.ts
+@@ -0,0 +1,6 @@
++import { step1 } from "./step1";
++
++export async function step2(): Promise<number> {
++  const prev = await step1();
++  console.log("Executing Step 2");
++  return prev + 1;
++}
+diff --git a/src/chain/step3.ts b/src/chain/step3.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/chain/step3.ts
+@@ -0,0 +1,6 @@
++import { step2 } from "./step2";
++
++export async function step3(): Promise<number> {
++  const prev = await step2();
++  console.log("Executing Step 3");
++  return prev + 1;
++}
+diff --git a/src/chain/step4.ts b/src/chain/step4.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/chain/step4.ts
+@@ -0,0 +1,6 @@
++import { step3 } from "./step3";
++
++export async function step4(): Promise<number> {
++  const prev = await step3();
++  console.log("Executing Step 4");
++  return prev + 1;
++}

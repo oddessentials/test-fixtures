@@ -1,0 +1,42 @@
+diff --git a/src/validation/forbiddenPaths.ts b/src/validation/forbiddenPaths.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/validation/forbiddenPaths.ts
+@@ -0,0 +1,10 @@
++export const FORBIDDEN_PATHS = [
++  "dist/",
++  "node_modules/",
++  ".git/",
++  ".swarm/",
++  "build/",
++  ".env",
++];
++
++export type ForbiddenPath = (typeof FORBIDDEN_PATHS)[number];
+diff --git a/src/validation/pathMatcher.ts b/src/validation/pathMatcher.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/validation/pathMatcher.ts
+@@ -0,0 +1,20 @@
++import { FORBIDDEN_PATHS } from "./forbiddenPaths";
++
++export interface PathViolation {
++  path: string;
++  matchedForbidden: string;
++  message: string;
++}
++
++export function checkForbiddenPath(path: string): PathViolation | null {
++  for (const forbidden of FORBIDDEN_PATHS) {
++    if (path.startsWith(forbidden) || path.includes(`/${forbidden}`)) {
++      return {
++        path,
++        matchedForbidden: forbidden,
++        message: `Path "${path}" is forbidden: matches "${forbidden}"`,
++      };
++    }
++  }
++  return null;
++}

@@ -1,0 +1,13 @@
+diff --git a/src/utils/transform.ts b/src/utils/transform.ts
+index 0000000..0000001 100644
+--- a/src/utils/transform.ts
++++ b/src/utils/transform.ts
+@@ -1,6 +1,10 @@
+-export function t(d: any): any {
+-  const r = d.map((x: any) => x * 2);
+-  return r.filter((x: any) => x > 0);
++export function transformData(inputData: number[]): number[] {
++  const doubledValues = inputData.map((value) => value * 2);
++  const positiveValues = doubledValues.filter((value) => value > 0);
++  return positiveValues;
+ }

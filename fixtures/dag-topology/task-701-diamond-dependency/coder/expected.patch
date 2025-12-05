@@ -1,0 +1,50 @@
+diff --git a/src/tasks/taskA.ts b/src/tasks/taskA.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/tasks/taskA.ts
+@@ -0,0 +1,5 @@
++export async function taskA(): Promise<string> {
++  console.log("Executing Task A (root)");
++  return "A";
++}
+diff --git a/src/tasks/taskB.ts b/src/tasks/taskB.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/tasks/taskB.ts
+@@ -0,0 +1,7 @@
++import { taskA } from "./taskA";
++
++export async function taskB(): Promise<string> {
++  const resultA = await taskA();
++  console.log("Executing Task B (depends on A)");
++  return `${resultA}->B`;
++}
+diff --git a/src/tasks/taskC.ts b/src/tasks/taskC.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/tasks/taskC.ts
+@@ -0,0 +1,7 @@
++import { taskA } from "./taskA";
++
++export async function taskC(): Promise<string> {
++  const resultA = await taskA();
++  console.log("Executing Task C (depends on A)");
++  return `${resultA}->C`;
++}
+diff --git a/src/tasks/taskD.ts b/src/tasks/taskD.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/tasks/taskD.ts
+@@ -0,0 +1,9 @@
++import { taskB } from "./taskB";
++import { taskC } from "./taskC";
++
++export async function taskD(): Promise<string> {
++  const [resultB, resultC] = await Promise.all([taskB(), taskC()]);
++  console.log("Executing Task D (diamond convergence)");
++  return `${resultB}+${resultC}->D`;
++}

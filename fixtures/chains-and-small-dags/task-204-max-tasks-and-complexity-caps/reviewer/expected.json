@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Patch correctly respects the maxTasks constraint of 3 and only touches the prioritized critical files.",
+      "path": "src/legacy/database.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

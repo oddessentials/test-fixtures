@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Implement functionality by reusing the existing utility in src/utils/existing.ts and not creating new helpers, adapting existing abstractions instead of introducing new ones.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/utils/existing.ts",
+    "src/features/newFeature.ts"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "add-attribution-comments",
+      "description": "Add attribution comments to derived code in src/utils/derived.ts",
+      "file": "src/utils/derived.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "update-attribution-doc",
+      "description": "Update ATTRIBUTION.md with license compliance information",
+      "file": "ATTRIBUTION.md",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["add-attribution-comments"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

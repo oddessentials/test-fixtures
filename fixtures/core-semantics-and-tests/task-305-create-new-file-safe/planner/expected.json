@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "create-new-helper",
+      "description": "Create new helper utility file at src/utils/newHelper.ts with string manipulation function",
+      "file": "src/utils/newHelper.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "wire-helper-to-main",
+      "description": "Wire the new helper utility into src/main.ts",
+      "file": "src/main.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["create-new-helper"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "implement-binary-detector",
+      "description": "Implement binary file detection logic to distinguish binary from text files",
+      "file": "src/files/binaryDetector.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": []
+    },
+    {
+      "id": "implement-file-type-handler",
+      "description": "Implement file type handler with appropriate strategies for binary files",
+      "file": "src/files/fileTypeHandler.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["implement-binary-detector"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

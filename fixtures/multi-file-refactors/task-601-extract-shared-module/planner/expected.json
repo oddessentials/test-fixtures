@@ -1,0 +1,30 @@
+{
+  "tasks": [
+    {
+      "id": "create-validation-module",
+      "description": "Create shared validation module at src/utils/validation.ts with common validation logic",
+      "file": "src/utils/validation.ts",
+      "type": "refactor",
+      "complexity": "medium",
+      "dependsOn": []
+    },
+    {
+      "id": "update-login-form",
+      "description": "Update src/forms/login.ts to import from shared validation module",
+      "file": "src/forms/login.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": ["create-validation-module"]
+    },
+    {
+      "id": "update-register-form",
+      "description": "Update src/forms/register.ts to import from shared validation module",
+      "file": "src/forms/register.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": ["create-validation-module"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

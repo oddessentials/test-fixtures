@@ -1,0 +1,34 @@
+diff --git a/src/services/user.ts b/src/services/user.ts
+index 0000000..0000001 100644
+--- a/src/services/user.ts
++++ b/src/services/user.ts
+@@ -1,3 +1,3 @@
+-export function getUserData(userId: string): Promise<User> {
++export function fetchUserProfile(userId: string): Promise<User> {
+   return fetch(`/api/users/${userId}`).then((res) => res.json());
+ }
+diff --git a/src/api/handlers.ts b/src/api/handlers.ts
+index 0000000..0000001 100644
+--- a/src/api/handlers.ts
++++ b/src/api/handlers.ts
+@@ -1,5 +1,5 @@
+-import { getUserData } from "../services/user";
++import { fetchUserProfile } from "../services/user";
+ 
+ export async function handleUserRequest(userId: string) {
+-  return getUserData(userId);
++  return fetchUserProfile(userId);
+ }
+diff --git a/src/components/Profile.tsx b/src/components/Profile.tsx
+index 0000000..0000001 100644
+--- a/src/components/Profile.tsx
++++ b/src/components/Profile.tsx
+@@ -1,7 +1,7 @@
+-import { getUserData } from "../services/user";
++import { fetchUserProfile } from "../services/user";
+ 
+ export function Profile({ userId }: { userId: string }) {
+-  const user = getUserData(userId);
++  const user = fetchUserProfile(userId);
+   return <div>{user.name}</div>;
+ }

@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "update-helper-utility",
+      "description": "Update helper utility in src/utils/helper.ts",
+      "file": "src/utils/helper.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "update-format-utility",
+      "description": "Update format utility in src/utils/format.ts",
+      "file": "src/utils/format.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": ["update-helper-utility"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

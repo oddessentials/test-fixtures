@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "implement-checksum-computer",
+      "description": "Implement checksum computation supporting multiple hash algorithms",
+      "file": "src/integrity/checksumComputer.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": []
+    },
+    {
+      "id": "implement-validator",
+      "description": "Implement file validator to verify checksums against expected values",
+      "file": "src/integrity/validator.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["implement-checksum-computer"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": "add-edge-case-tests",
+      "description": "Add comprehensive edge-case tests for the parser utility covering empty strings, null/undefined, long strings, and special characters",
+      "file": "test/utils/parser.test.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": []
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

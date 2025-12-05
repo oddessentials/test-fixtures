@@ -1,0 +1,52 @@
+diff --git a/src/utils/validation.ts b/src/utils/validation.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/utils/validation.ts
+@@ -0,0 +1,11 @@
++export function validateEmail(email: string): boolean {
++  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
++}
++
++export function validatePassword(password: string): boolean {
++  return password.length >= 8;
++}
++
++export function validateRequired(value: string): boolean {
++  return value.trim().length > 0;
++}
+diff --git a/src/forms/login.ts b/src/forms/login.ts
+index 0000000..0000001 100644
+--- a/src/forms/login.ts
++++ b/src/forms/login.ts
+@@ -1,10 +1,5 @@
+-function validateEmail(email: string): boolean {
+-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+-}
+-
+-function validatePassword(password: string): boolean {
+-  return password.length >= 8;
+-}
++import { validateEmail, validatePassword } from "../utils/validation";
+ 
+ export function validateLoginForm(email: string, password: string): boolean {
+   return validateEmail(email) && validatePassword(password);
+ }
+diff --git a/src/forms/register.ts b/src/forms/register.ts
+index 0000000..0000001 100644
+--- a/src/forms/register.ts
++++ b/src/forms/register.ts
+@@ -1,10 +1,5 @@
+-function validateEmail(email: string): boolean {
+-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+-}
+-
+-function validatePassword(password: string): boolean {
+-  return password.length >= 8;
+-}
++import { validateEmail, validatePassword, validateRequired } from "../utils/validation";
+ 
+ export function validateRegisterForm(email: string, password: string, name: string): boolean {
+-  return validateEmail(email) && validatePassword(password) && name.trim().length > 0;
++  return validateEmail(email) && validatePassword(password) && validateRequired(name);
+ }

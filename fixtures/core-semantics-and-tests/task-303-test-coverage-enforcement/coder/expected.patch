@@ -1,0 +1,37 @@
+diff --git a/test/utils/parser.test.ts b/test/utils/parser.test.ts
+index 0000000..0000001 100644
+--- a/test/utils/parser.test.ts
++++ b/test/utils/parser.test.ts
+@@ -1,9 +1,37 @@
+ import { parse } from "../../src/utils/parser";
+ 
+ describe("parse", () => {
+   it("should parse valid input", () => {
+     expect(parse("hello")).toBe("hello");
+   });
++
++  describe("edge cases", () => {
++    it("should handle empty string input", () => {
++      expect(parse("")).toBe("");
++    });
++
++    it("should handle null input", () => {
++      expect(() => parse(null as unknown as string)).toThrow();
++    });
++
++    it("should handle undefined input", () => {
++      expect(() => parse(undefined as unknown as string)).toThrow();
++    });
++
++    it("should handle very long strings", () => {
++      const longString = "a".repeat(10000);
++      expect(parse(longString)).toBe(longString);
++    });
++
++    it("should handle special characters", () => {
++      expect(parse("hello\nworld")).toBe("hello\nworld");
++      expect(parse("hello\tworld")).toBe("hello\tworld");
++      expect(parse("<script>alert('xss')</script>")).toBe("<script>alert('xss')</script>");
++    });
++  });
+ });

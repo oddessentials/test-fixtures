@@ -1,0 +1,16 @@
+diff --git a/src/features/newFeature.ts b/src/features/newFeature.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/features/newFeature.ts
+@@ -0,0 +1,9 @@
++import { formatString, trimWhitespace } from "../utils/existing";
++
++export function processUserInput(input: string): string {
++  const trimmed = trimWhitespace(input);
++  return formatString(trimmed);
++}
++
++export function formatOutput(data: string): string {
++  return formatString(data);
++}

@@ -1,0 +1,9 @@
+{
+  "highLevelSummary": "Refactor src/utils/transform.ts to improve readability. Review comments must be grounded in actual patch lines with no speculative or hypothetical feedback.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/utils/transform.ts"
+  ]
+}

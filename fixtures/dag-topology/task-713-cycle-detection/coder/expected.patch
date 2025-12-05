@@ -1,0 +1,65 @@
+diff --git a/src/graph/types.ts b/src/graph/types.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/graph/types.ts
+@@ -0,0 +1,9 @@
++export interface TaskNode {
++  id: string;
++  dependsOn: string[];
++}
++
++export interface CycleError {
++  message: string;
++  cycle: string[];
++}
+diff --git a/src/graph/cycleDetector.ts b/src/graph/cycleDetector.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/graph/cycleDetector.ts
+@@ -0,0 +1,35 @@
++import { TaskNode, CycleError } from "./types";
++
++export function detectCycle(tasks: TaskNode[]): CycleError | null {
++  const taskMap = new Map<string, TaskNode>();
++  for (const task of tasks) {
++    taskMap.set(task.id, task);
++  }
++
++  const visited = new Set<string>();
++  const recursionStack = new Set<string>();
++  const path: string[] = [];
++
++  function dfs(nodeId: string): CycleError | null {
++    visited.add(nodeId);
++    recursionStack.add(nodeId);
++    path.push(nodeId);
++
++    const node = taskMap.get(nodeId);
++    if (node) {
++      for (const dep of node.dependsOn) {
++        if (!visited.has(dep)) {
++          const result = dfs(dep);
++          if (result) return result;
++        } else if (recursionStack.has(dep)) {
++          const cycleStart = path.indexOf(dep);
++          return { message: "Cycle detected", cycle: path.slice(cycleStart) };
++        }
++      }
++    }
++
++    path.pop();
++    recursionStack.delete(nodeId);
++    return null;
++  }
++
++  for (const task of tasks) {
++    if (!visited.has(task.id)) {
++      const result = dfs(task.id);
++      if (result) return result;
++    }
++  }
++
++  return null;
++}

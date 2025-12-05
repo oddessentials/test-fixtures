@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "define-sensitive-patterns",
+      "description": "Define patterns for sensitive files (.env, credentials.json, etc.)",
+      "file": "src/security/sensitivePatterns.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "implement-secret-detector",
+      "description": "Implement secret detection logic to identify potential leaks",
+      "file": "src/security/secretDetector.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": ["define-sensitive-patterns"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

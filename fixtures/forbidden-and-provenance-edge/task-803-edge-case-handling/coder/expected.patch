@@ -1,0 +1,56 @@
+diff --git a/src/validation/pathNormalizer.ts b/src/validation/pathNormalizer.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/validation/pathNormalizer.ts
+@@ -0,0 +1,20 @@
++import * as path from "path";
++
++export function normalizePath(inputPath: string): string {
++  // Convert backslashes to forward slashes for cross-platform support
++  let normalized = inputPath.replace(/\\/g, "/");
++
++  // Remove leading ./
++  normalized = normalized.replace(/^\.\//, "");
++
++  // Resolve .. and . segments
++  normalized = path.posix.normalize(normalized);
++
++  // Remove trailing slashes except for root
++  if (normalized.length > 1 && normalized.endsWith("/")) {
++    normalized = normalized.slice(0, -1);
++  }
++
++  return normalized;
++}
+diff --git a/src/validation/edgeCases.ts b/src/validation/edgeCases.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/validation/edgeCases.ts
+@@ -0,0 +1,25 @@
++import { normalizePath } from "./pathNormalizer";
++
++export interface EdgeCaseResult {
++  isValid: boolean;
++  normalizedPath: string;
++  warnings: string[];
++}
++
++export function handleEdgeCases(inputPath: string): EdgeCaseResult {
++  const warnings: string[] = [];
++
++  // Check for special characters that might cause issues
++  if (/[<>:"|?*]/.test(inputPath)) {
++    warnings.push("Path contains special characters that may not be portable");
++  }
++
++  // Check for potential symlink traversal
++  if (inputPath.includes("..")) {
++    warnings.push("Path contains parent directory references");
++  }
++
++  const normalizedPath = normalizePath(inputPath);
++
++  return { isValid: true, normalizedPath, warnings };
++}

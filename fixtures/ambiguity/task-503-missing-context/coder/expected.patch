@@ -1,0 +1,13 @@
+diff --git a/MISSING_CONTEXT.md b/MISSING_CONTEXT.md
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/MISSING_CONTEXT.md
+@@ -0,0 +1,7 @@
++# Missing Context
++
++Cannot proceed with the request:
++- Referenced: UserService class
++- Status: Does not exist in the codebase
++
++Please clarify: Should a new UserService be created, or was a different class intended?

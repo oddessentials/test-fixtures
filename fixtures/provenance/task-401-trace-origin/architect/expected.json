@@ -1,0 +1,9 @@
+{
+  "highLevelSummary": "Trace the origin and provenance of code in src/services/handler.ts, documenting the chain of custody from original implementation through any transformations to the current state.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/services/handler.ts"
+  ]
+}

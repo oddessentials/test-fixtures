@@ -1,0 +1,12 @@
+{
+  "highLevelSummary": "Implement a sequential chain of tasks where each task depends on the previous one (Task 1 → Task 2 → Task 3 → Task 4), ensuring strict sequential execution with no parallel branches.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/chain/step1.ts",
+    "src/chain/step2.ts",
+    "src/chain/step3.ts",
+    "src/chain/step4.ts"
+  ]
+}

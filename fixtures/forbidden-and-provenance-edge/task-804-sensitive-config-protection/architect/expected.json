@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Implement sensitive config protection to prevent accidental exposure of secrets in files like .env and credentials.json, with detection logic and clear warnings for potential leaks.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/security/sensitivePatterns.ts",
+    "src/security/secretDetector.ts"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "implement-chunk-processor",
+      "description": "Implement chunk processor for handling large files in segments",
+      "file": "src/files/chunkProcessor.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": []
+    },
+    {
+      "id": "implement-large-file-handler",
+      "description": "Implement large file handler with size thresholds and progress feedback",
+      "file": "src/files/largeFileHandler.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": ["implement-chunk-processor"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

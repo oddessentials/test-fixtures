@@ -1,0 +1,30 @@
+{
+  "tasks": [
+    {
+      "id": "task-x",
+      "description": "Implement independent task X",
+      "file": "src/parallel/taskX.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "task-y",
+      "description": "Implement independent task Y",
+      "file": "src/parallel/taskY.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "task-z",
+      "description": "Implement independent task Z",
+      "file": "src/parallel/taskZ.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

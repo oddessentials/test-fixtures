@@ -1,0 +1,58 @@
+diff --git a/src/files/chunkProcessor.ts b/src/files/chunkProcessor.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/files/chunkProcessor.ts
+@@ -0,0 +1,20 @@
++export interface ChunkResult {
++  chunkIndex: number;
++  bytesProcessed: number;
++  data: Buffer;
++}
++
++export async function* processChunks(
++  buffer: Buffer,
++  chunkSize: number
++): AsyncGenerator<ChunkResult> {
++  let offset = 0;
++  let chunkIndex = 0;
++
++  while (offset < buffer.length) {
++    const chunk = buffer.slice(offset, offset + chunkSize);
++    yield { chunkIndex, bytesProcessed: chunk.length, data: chunk };
++    offset += chunkSize;
++    chunkIndex++;
++  }
++}
+diff --git a/src/files/largeFileHandler.ts b/src/files/largeFileHandler.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/files/largeFileHandler.ts
+@@ -0,0 +1,25 @@
++import { processChunks } from "./chunkProcessor";
++
++export const SIZE_THRESHOLD = 10 * 1024 * 1024; // 10MB
++export const CHUNK_SIZE = 1024 * 1024; // 1MB
++
++export interface ProgressCallback {
++  (processed: number, total: number): void;
++}
++
++export async function handleLargeFile(
++  buffer: Buffer,
++  onProgress?: ProgressCallback
++): Promise<void> {
++  const total = buffer.length;
++  let processed = 0;
++
++  if (buffer.length <= SIZE_THRESHOLD) {
++    onProgress?.(total, total);
++    return;
++  }
++
++  for await (const chunk of processChunks(buffer, CHUNK_SIZE)) {
++    processed += chunk.bytesProcessed;
++    onProgress?.(processed, total);
++  }
++}

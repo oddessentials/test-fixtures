@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Update utility function to improve error handling, targeting only safe locations in src/ and explicitly avoiding forbidden paths like dist/, node_modules/, .swarm/, build/, and .git/.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/utils/helper.ts",
+    "src/services/api.ts"
+  ]
+}

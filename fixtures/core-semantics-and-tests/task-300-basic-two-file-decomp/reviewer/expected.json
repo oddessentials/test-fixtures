@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Clean decomposition with utility, main code, and tests properly separated and consistently updated.",
+      "path": "src/utils/format.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

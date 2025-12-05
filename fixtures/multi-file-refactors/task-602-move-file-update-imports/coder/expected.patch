@@ -1,0 +1,26 @@
+diff --git a/src/helpers/utils.ts b/src/utils/helpers.ts
+similarity index 100%
+rename from src/helpers/utils.ts
+rename to src/utils/helpers.ts
+diff --git a/src/services/api.ts b/src/services/api.ts
+index 0000000..0000001 100644
+--- a/src/services/api.ts
++++ b/src/services/api.ts
+@@ -1,4 +1,4 @@
+-import { formatData } from "../helpers/utils";
++import { formatData } from "../utils/helpers";
+ 
+ export function fetchData() {
+   return formatData({});
+ }
+diff --git a/src/components/App.tsx b/src/components/App.tsx
+index 0000000..0000001 100644
+--- a/src/components/App.tsx
++++ b/src/components/App.tsx
+@@ -1,4 +1,4 @@
+-import { formatData } from "../helpers/utils";
++import { formatData } from "../utils/helpers";
+ 
+ export function App() {
+   return <div>{formatData({})}</div>;
+ }

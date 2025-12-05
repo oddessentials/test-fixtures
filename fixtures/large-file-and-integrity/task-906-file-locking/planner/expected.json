@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "define-lock-types",
+      "description": "Define types for file locks and lock states",
+      "file": "src/files/lockTypes.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "implement-lock-manager",
+      "description": "Implement lock manager with acquisition, release, and timeout handling",
+      "file": "src/files/lockManager.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": ["define-lock-types"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

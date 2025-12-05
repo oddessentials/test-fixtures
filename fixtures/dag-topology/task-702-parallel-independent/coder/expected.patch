@@ -1,0 +1,30 @@
+diff --git a/src/parallel/taskX.ts b/src/parallel/taskX.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/parallel/taskX.ts
+@@ -0,0 +1,4 @@
++export async function taskX(): Promise<string> {
++  console.log("Executing independent Task X");
++  return "X";
++}
+diff --git a/src/parallel/taskY.ts b/src/parallel/taskY.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/parallel/taskY.ts
+@@ -0,0 +1,4 @@
++export async function taskY(): Promise<string> {
++  console.log("Executing independent Task Y");
++  return "Y";
++}
+diff --git a/src/parallel/taskZ.ts b/src/parallel/taskZ.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/parallel/taskZ.ts
+@@ -0,0 +1,4 @@
++export async function taskZ(): Promise<string> {
++  console.log("Executing independent Task Z");
++  return "Z";
++}

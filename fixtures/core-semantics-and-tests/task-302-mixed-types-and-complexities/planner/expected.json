@@ -1,0 +1,30 @@
+{
+  "tasks": [
+    {
+      "id": "fix-validation-error",
+      "description": "Fix the validation error in input validator",
+      "file": "src/validators/input.ts",
+      "type": "fix",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "refactor-service-layer",
+      "description": "Clean up and refactor the data service layer",
+      "file": "src/services/data.ts",
+      "type": "refactor",
+      "complexity": "medium",
+      "dependsOn": []
+    },
+    {
+      "id": "add-caching-feature",
+      "description": "Add new memory caching mechanism",
+      "file": "src/cache/memory.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": ["refactor-service-layer"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

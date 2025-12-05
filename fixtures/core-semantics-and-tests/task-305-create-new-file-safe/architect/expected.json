@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Create a new helper utility file at src/utils/newHelper.ts and wire it into existing code in src/main.ts, ensuring the file is placed in an allowed location.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/utils/newHelper.ts",
+    "src/main.ts"
+  ]
+}

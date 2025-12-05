@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "update-references",
+      "description": "Update any remaining references from deprecated.ts to modern.ts",
+      "file": "src/main.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "delete-deprecated-file",
+      "description": "Delete the obsolete file src/utils/deprecated.ts",
+      "file": "src/utils/deprecated.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": ["update-references"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Maintain attribution chains for code derived from external sources, ensuring license compliance and documenting the chain of attribution from original source to current implementation.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/utils/derived.ts",
+    "ATTRIBUTION.md"
+  ]
+}

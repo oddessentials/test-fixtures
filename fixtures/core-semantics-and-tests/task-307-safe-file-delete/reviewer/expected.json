@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Obsolete file safely deleted and all references properly migrated to modern.ts.",
+      "path": "src/utils/deprecated.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "define-forbidden-paths",
+      "description": "Define the list of forbidden paths (dist/, node_modules/, .git/, etc.)",
+      "file": "src/validation/forbiddenPaths.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "implement-path-matcher",
+      "description": "Implement path matching logic to detect forbidden path violations",
+      "file": "src/validation/pathMatcher.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": ["define-forbidden-paths"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

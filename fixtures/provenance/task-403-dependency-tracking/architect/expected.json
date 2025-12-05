@@ -1,0 +1,11 @@
+{
+  "highLevelSummary": "Track and document dependencies between files, creating a dependency graph to understand the impact of changes and identify affected files.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/core/module.ts",
+    "src/utils/helper.ts",
+    "DEPENDENCIES.md"
+  ]
+}
