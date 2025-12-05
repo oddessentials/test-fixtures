@@ -1,0 +1,49 @@
+diff --git a/src/pipeline/reader.ts b/src/pipeline/reader.ts
+index 0000000..0000001 100644
+--- a/src/pipeline/reader.ts
++++ b/src/pipeline/reader.ts
+@@ -1,3 +1,5 @@
+-export function read(): string {
+-  return "";
++export function read(source: string): string {
++  if (!source) {
++    throw new Error("Source is required");
++  }
++  return source;
+ }
+diff --git a/src/pipeline/parser.ts b/src/pipeline/parser.ts
+index 0000000..0000001 100644
+--- a/src/pipeline/parser.ts
++++ b/src/pipeline/parser.ts
+@@ -1,3 +1,5 @@
+-export function parse(raw: string): object {
+-  return {};
++export function parse(raw: string): Record<string, unknown> {
++  if (!raw) {
++    throw new Error("Raw data is required");
++  }
++  return JSON.parse(raw);
+ }
+diff --git a/src/pipeline/transformer.ts b/src/pipeline/transformer.ts
+index 0000000..0000001 100644
+--- a/src/pipeline/transformer.ts
++++ b/src/pipeline/transformer.ts
+@@ -1,3 +1,5 @@
+-export function transform(data: object): object {
+-  return data;
++export function transform(data: Record<string, unknown>): Record<string, unknown> {
++  return {
++    ...data,
++    transformed: true,
++  };
+ }
+diff --git a/src/pipeline/writer.ts b/src/pipeline/writer.ts
+index 0000000..0000001 100644
+--- a/src/pipeline/writer.ts
++++ b/src/pipeline/writer.ts
+@@ -1,3 +1,3 @@
+-export function write(data: object): void {
+-  // no-op
++export function write(data: Record<string, unknown>): string {
++  return JSON.stringify(data, null, 2);
+ }

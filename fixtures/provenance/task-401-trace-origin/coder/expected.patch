@@ -1,0 +1,15 @@
+diff --git a/src/services/handler.ts b/src/services/handler.ts
+index 0000000..0000001 100644
+--- a/src/services/handler.ts
++++ b/src/services/handler.ts
+@@ -1,3 +1,10 @@
++/**
++ * @provenance
++ * Origin: Initial implementation in src/legacy/handler.ts
++ * Transformation: Migrated to services layer in v2.0
++ * Current: Refactored for TypeScript strict mode
++ */
++
+ export function handleRequest(data: unknown): void {
+   console.log("Handling request", data);
+ }

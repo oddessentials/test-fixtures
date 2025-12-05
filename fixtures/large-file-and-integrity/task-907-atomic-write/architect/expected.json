@@ -1,0 +1,9 @@
+{
+  "highLevelSummary": "Implement atomic file writes using temporary files and rename operations to prevent partial writes and ensure data integrity on failures.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/files/atomicWriter.ts"
+  ]
+}

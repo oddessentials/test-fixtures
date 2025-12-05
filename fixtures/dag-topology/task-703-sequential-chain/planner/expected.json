@@ -1,0 +1,38 @@
+{
+  "tasks": [
+    {
+      "id": "step-1",
+      "description": "Implement step 1 of the sequential chain",
+      "file": "src/chain/step1.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "step-2",
+      "description": "Implement step 2 depending on step 1",
+      "file": "src/chain/step2.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["step-1"]
+    },
+    {
+      "id": "step-3",
+      "description": "Implement step 3 depending on step 2",
+      "file": "src/chain/step3.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["step-2"]
+    },
+    {
+      "id": "step-4",
+      "description": "Implement step 4 depending on step 3",
+      "file": "src/chain/step4.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["step-3"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

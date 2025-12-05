@@ -1,0 +1,45 @@
+diff --git a/src/files/atomicWriter.ts b/src/files/atomicWriter.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/files/atomicWriter.ts
+@@ -0,0 +1,35 @@
++import * as fs from "fs";
++import * as path from "path";
++
++export interface AtomicWriteResult {
++  success: boolean;
++  path: string;
++  error?: string;
++}
++
++export async function atomicWrite(
++  filePath: string,
++  content: string | Buffer
++): Promise<AtomicWriteResult> {
++  const dir = path.dirname(filePath);
++  const tempPath = path.join(dir, `.tmp-${Date.now()}-${path.basename(filePath)}`);
++
++  try {
++    // Write to temporary file first
++    await fs.promises.writeFile(tempPath, content);
++
++    // Atomically rename temp file to target
++    await fs.promises.rename(tempPath, filePath);
++
++    return { success: true, path: filePath };
++  } catch (error) {
++    // Cleanup temp file on failure
++    try {
++      await fs.promises.unlink(tempPath);
++    } catch {
++      // Ignore cleanup errors
++    }
++
++    return {
++      success: false,
++      path: filePath,
++      error: error instanceof Error ? error.message : "Unknown error",
++    };
++  }
++}

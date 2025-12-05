@@ -1,0 +1,26 @@
+{
+  "highLevelSummary": "Resolve apparent circular dependency between auth and user modules by introducing a shared interface or dependency injection pattern to break the cycle while maintaining both modules' functionality.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [
+    {
+      "name": "AuthContext",
+      "fields": ["userId", "permissions", "token"],
+      "primaryKey": null,
+      "indexes": null,
+      "relations": null
+    },
+    {
+      "name": "UserContext",
+      "fields": ["id", "name", "role"],
+      "primaryKey": null,
+      "indexes": null,
+      "relations": null
+    }
+  ],
+  "recommendedFileStructure": [
+    "src/modules/auth.ts",
+    "src/modules/user.ts",
+    "src/modules/types.ts"
+  ]
+}

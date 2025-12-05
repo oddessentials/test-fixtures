@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Implement file locking to prevent concurrent modifications, with lock acquisition, release, timeout handling, and clear conflict messages.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/files/lockManager.ts",
+    "src/files/lockTypes.ts"
+  ]
+}

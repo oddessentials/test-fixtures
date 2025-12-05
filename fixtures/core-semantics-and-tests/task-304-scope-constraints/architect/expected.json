@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Update internal utilities with strict scope constraints: only touch src/utils/, never touch public API endpoints in src/api/ or configuration files.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/utils/helper.ts",
+    "src/utils/format.ts"
+  ]
+}

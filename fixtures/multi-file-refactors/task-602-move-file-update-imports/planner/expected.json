@@ -1,0 +1,30 @@
+{
+  "tasks": [
+    {
+      "id": "move-utils-file",
+      "description": "Move src/helpers/utils.ts to src/utils/helpers.ts",
+      "file": "src/utils/helpers.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "update-api-imports",
+      "description": "Update import paths in src/services/api.ts",
+      "file": "src/services/api.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": ["move-utils-file"]
+    },
+    {
+      "id": "update-app-imports",
+      "description": "Update import paths in src/components/App.tsx",
+      "file": "src/components/App.tsx",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": ["move-utils-file"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

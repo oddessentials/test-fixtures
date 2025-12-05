@@ -1,0 +1,67 @@
+diff --git a/src/files/lockTypes.ts b/src/files/lockTypes.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/files/lockTypes.ts
+@@ -0,0 +1,15 @@
++export interface FileLock {
++  path: string;
++  owner: string;
++  acquiredAt: Date;
++  expiresAt: Date;
++}
++
++export interface LockResult {
++  success: boolean;
++  lock?: FileLock;
++  error?: string;
++}
++
++export type LockState = "unlocked" | "locked" | "expired";
+diff --git a/src/files/lockManager.ts b/src/files/lockManager.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/files/lockManager.ts
+@@ -0,0 +1,35 @@
++import { FileLock, LockResult, LockState } from "./lockTypes";
++
++const locks = new Map<string, FileLock>();
++const DEFAULT_TIMEOUT_MS = 30000;
++
++export function acquireLock(path: string, owner: string, timeoutMs = DEFAULT_TIMEOUT_MS): LockResult {
++  const existing = locks.get(path);
++
++  if (existing && existing.expiresAt > new Date()) {
++    return {
++      success: false,
++      error: `File "${path}" is locked by "${existing.owner}" until ${existing.expiresAt.toISOString()}`,
++    };
++  }
++
++  const lock: FileLock = {
++    path,
++    owner,
++    acquiredAt: new Date(),
++    expiresAt: new Date(Date.now() + timeoutMs),
++  };
++
++  locks.set(path, lock);
++  return { success: true, lock };
++}
++
++export function releaseLock(path: string, owner: string): boolean {
++  const existing = locks.get(path);
++  if (existing && existing.owner === owner) {
++    locks.delete(path);
++    return true;
++  }
++  return false;
++}
++
++export function getLockState(path: string): LockState {
++  const lock = locks.get(path);
++  if (!lock) return "unlocked";
++  if (lock.expiresAt < new Date()) return "expired";
++  return "locked";
++}

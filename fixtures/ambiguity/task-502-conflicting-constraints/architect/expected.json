@@ -1,0 +1,7 @@
+{
+  "highLevelSummary": "The request contains conflicting constraints: add a feature to src/api/handler.ts while not modifying any files in src/api/. These constraints are mutually exclusive and require clarification before proceeding.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": []
+}

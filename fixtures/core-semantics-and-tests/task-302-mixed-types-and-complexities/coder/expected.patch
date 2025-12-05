@@ -1,0 +1,60 @@
+diff --git a/src/validators/input.ts b/src/validators/input.ts
+index 0000000..0000001 100644
+--- a/src/validators/input.ts
++++ b/src/validators/input.ts
+@@ -1,4 +1,4 @@
+-export function validateInput(input: string): boolean {
+-  return input.length > 0;
++export function validateInput(input: string | null | undefined): boolean {
++  return typeof input === "string" && input.length > 0;
+ }
+diff --git a/src/services/data.ts b/src/services/data.ts
+index 0000000..0000001 100644
+--- a/src/services/data.ts
++++ b/src/services/data.ts
+@@ -1,8 +1,12 @@
+-export function getData(id: string): any {
+-  // legacy implementation
+-  const result = fetch(id);
+-  return result;
++export interface DataResult<T> {
++  data: T;
++  timestamp: number;
++}
++
++export async function getData<T>(id: string): Promise<DataResult<T>> {
++  const response = await fetch(`/api/data/${id}`);
++  const data = await response.json();
++  return { data, timestamp: Date.now() };
+ }
+diff --git a/src/cache/memory.ts b/src/cache/memory.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/cache/memory.ts
+@@ -0,0 +1,23 @@
++export interface CacheEntry<T> {
++  value: T;
++  ttl: number;
++  createdAt: number;
++}
++
++const cache = new Map<string, CacheEntry<unknown>>();
++
++export function set<T>(key: string, value: T, ttl: number): void {
++  cache.set(key, { value, ttl, createdAt: Date.now() });
++}
++
++export function get<T>(key: string): T | undefined {
++  const entry = cache.get(key) as CacheEntry<T> | undefined;
++  if (!entry) return undefined;
++  if (Date.now() - entry.createdAt > entry.ttl) {
++    cache.delete(key);
++    return undefined;
++  }
++  return entry.value;
++}
++
++export function clear(): void {
++  cache.clear();
++}

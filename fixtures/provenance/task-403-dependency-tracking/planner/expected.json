@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": "document-dependencies",
+      "description": "Document the dependency graph showing which files depend on which other files",
+      "file": "DEPENDENCIES.md",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

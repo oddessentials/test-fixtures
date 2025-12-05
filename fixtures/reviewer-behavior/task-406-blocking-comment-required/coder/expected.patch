@@ -1,0 +1,16 @@
+diff --git a/src/db/query.ts b/src/db/query.ts
+index 0000000..0000001 100644
+--- a/src/db/query.ts
++++ b/src/db/query.ts
+@@ -1,5 +1,5 @@
+-export function getUserById(id: string): string {
+-  return `SELECT * FROM users WHERE id = '${id}'`;
++export function getUserById(id: string): { query: string; params: string[] } {
++  return { query: "SELECT * FROM users WHERE id = $1", params: [id] };
+ }
+ 
+-export function searchUsers(name: string): string {
+-  return `SELECT * FROM users WHERE name LIKE '%${name}%'`;
++export function searchUsers(name: string): { query: string; params: string[] } {
++  return { query: "SELECT * FROM users WHERE name LIKE $1", params: [`%${name}%`] };
+ }

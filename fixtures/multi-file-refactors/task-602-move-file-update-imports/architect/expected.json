@@ -1,0 +1,11 @@
+{
+  "highLevelSummary": "Move src/helpers/utils.ts to src/utils/helpers.ts and update all import paths across the codebase to ensure no broken imports remain.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/utils/helpers.ts",
+    "src/services/api.ts",
+    "src/components/App.tsx"
+  ]
+}

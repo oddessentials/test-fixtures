@@ -1,0 +1,61 @@
+diff --git a/src/security/sensitivePatterns.ts b/src/security/sensitivePatterns.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/security/sensitivePatterns.ts
+@@ -0,0 +1,15 @@
++export const SENSITIVE_FILE_PATTERNS = [
++  ".env",
++  ".env.local",
++  ".env.production",
++  "credentials.json",
++  "secrets.json",
++  "*.pem",
++  "*.key",
++  "id_rsa",
++  "id_ed25519",
++];
++
++export const SECRET_PATTERNS = [
++  /(?:api[_-]?key|apikey)\s*[:=]\s*['"]?[\w-]+['"]?/i,
++  /(?:password|passwd|pwd)\s*[:=]\s*['"]?[^'"]+['"]?/i,
++  /(?:secret|token)\s*[:=]\s*['"]?[\w-]+['"]?/i,
++];
+diff --git a/src/security/secretDetector.ts b/src/security/secretDetector.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/security/secretDetector.ts
+@@ -0,0 +1,30 @@
++import { SENSITIVE_FILE_PATTERNS, SECRET_PATTERNS } from "./sensitivePatterns";
++
++export interface SecretWarning {
++  type: "sensitive_file" | "potential_secret";
++  path: string;
++  line?: number;
++  message: string;
++}
++
++export function isSensitiveFile(path: string): boolean {
++  return SENSITIVE_FILE_PATTERNS.some((pattern) => {
++    if (pattern.includes("*")) {
++      const regex = new RegExp(pattern.replace("*", ".*"));
++      return regex.test(path);
++    }
++    return path.endsWith(pattern) || path.includes(`/${pattern}`);
++  });
++}
++
++export function detectSecrets(content: string, path: string): SecretWarning[] {
++  const warnings: SecretWarning[] = [];
++
++  if (isSensitiveFile(path)) {
++    warnings.push({
++      type: "sensitive_file",
++      path,
++      message: `File "${path}" is a sensitive configuration file and should not be committed`,
++    });
++  }
++
++  return warnings;
++}

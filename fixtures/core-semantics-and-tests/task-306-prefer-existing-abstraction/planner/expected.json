@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": "implement-feature-with-existing-util",
+      "description": "Implement new feature using the existing utility from src/utils/existing.ts",
+      "file": "src/features/newFeature.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

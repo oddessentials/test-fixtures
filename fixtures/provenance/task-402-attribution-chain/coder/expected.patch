@@ -1,0 +1,27 @@
+diff --git a/src/utils/derived.ts b/src/utils/derived.ts
+index 0000000..0000001 100644
+--- a/src/utils/derived.ts
++++ b/src/utils/derived.ts
+@@ -1,3 +1,9 @@
++/**
++ * @attribution
++ * Derived from: lodash v4.17.21
++ * License: MIT
++ * Original source: https://github.com/lodash/lodash
++ */
+ export function deepClone<T>(obj: T): T {
+   return JSON.parse(JSON.stringify(obj));
+ }
+diff --git a/ATTRIBUTION.md b/ATTRIBUTION.md
+index 0000000..0000001 100644
+--- a/ATTRIBUTION.md
++++ b/ATTRIBUTION.md
+@@ -1 +1,8 @@
+ # Attribution
++
++## Third-Party Code
++
++### src/utils/derived.ts
++- **Source**: lodash v4.17.21
++- **License**: MIT
++- **URL**: https://github.com/lodash/lodash

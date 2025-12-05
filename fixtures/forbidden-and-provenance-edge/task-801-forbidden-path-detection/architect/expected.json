@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Implement forbidden path detection to prevent modifications to protected directories like dist/, node_modules/, .git/, and provide clear error messages when violations are detected.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/validation/forbiddenPaths.ts",
+    "src/validation/pathMatcher.ts"
+  ]
+}

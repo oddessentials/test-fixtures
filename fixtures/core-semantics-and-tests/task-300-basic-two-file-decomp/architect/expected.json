@@ -1,0 +1,19 @@
+{
+  "highLevelSummary": "Add a string formatting utility with proper decomposition: utility function in src/utils/format.ts, integration in src/main.ts, and comprehensive tests in test/format.test.ts.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [
+    {
+      "name": "FormatOptions",
+      "fields": ["prefix", "suffix", "uppercase"],
+      "primaryKey": null,
+      "indexes": null,
+      "relations": null
+    }
+  ],
+  "recommendedFileStructure": [
+    "src/utils/format.ts",
+    "src/main.ts",
+    "test/format.test.ts"
+  ]
+}

@@ -1,0 +1,50 @@
+diff --git a/src/integrity/checksumComputer.ts b/src/integrity/checksumComputer.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/integrity/checksumComputer.ts
+@@ -0,0 +1,15 @@
++import * as crypto from "crypto";
++
++export type HashAlgorithm = "md5" | "sha256" | "sha512";
++
++export function computeChecksum(
++  data: Buffer | string,
++  algorithm: HashAlgorithm = "sha256"
++): string {
++  const hash = crypto.createHash(algorithm);
++  hash.update(data);
++  return hash.digest("hex");
++}
++
++export function computeSHA256(data: Buffer | string): string {
++  return computeChecksum(data, "sha256");
++}
+diff --git a/src/integrity/validator.ts b/src/integrity/validator.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/integrity/validator.ts
+@@ -0,0 +1,20 @@
++import { computeChecksum, HashAlgorithm } from "./checksumComputer";
++
++export interface ValidationResult {
++  isValid: boolean;
++  expected: string;
++  actual: string;
++  algorithm: HashAlgorithm;
++}
++
++export function validateChecksum(
++  data: Buffer | string,
++  expectedChecksum: string,
++  algorithm: HashAlgorithm = "sha256"
++): ValidationResult {
++  const actual = computeChecksum(data, algorithm);
++  return {
++    isValid: actual === expectedChecksum.toLowerCase(),
++    expected: expectedChecksum.toLowerCase(),
++    actual,
++    algorithm,
++  };
++}

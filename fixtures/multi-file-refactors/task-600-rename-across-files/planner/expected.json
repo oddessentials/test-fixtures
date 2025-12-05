@@ -1,0 +1,30 @@
+{
+  "tasks": [
+    {
+      "id": "rename-in-user-service",
+      "description": "Rename getUserData to fetchUserProfile in src/services/user.ts",
+      "file": "src/services/user.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "update-handlers-import",
+      "description": "Update import and usage of fetchUserProfile in src/api/handlers.ts",
+      "file": "src/api/handlers.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": ["rename-in-user-service"]
+    },
+    {
+      "id": "update-profile-component",
+      "description": "Update import and usage of fetchUserProfile in src/components/Profile.tsx",
+      "file": "src/components/Profile.tsx",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": ["rename-in-user-service"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

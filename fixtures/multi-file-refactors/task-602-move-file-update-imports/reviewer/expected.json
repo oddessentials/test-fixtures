@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "File move completed correctly and all import paths updated consistently.",
+      "path": "src/utils/helpers.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "New helper file correctly placed in src/utils/ and properly wired into main.ts.",
+      "path": "src/utils/newHelper.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Correctly identifies that the request is ambiguous and clarification is needed before proceeding.",
+      "path": "TODO.md",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

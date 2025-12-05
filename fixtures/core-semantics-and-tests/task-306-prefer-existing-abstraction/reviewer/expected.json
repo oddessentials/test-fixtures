@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Correctly reuses existing utility from src/utils/existing.ts without creating new helpers.",
+      "path": "src/features/newFeature.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

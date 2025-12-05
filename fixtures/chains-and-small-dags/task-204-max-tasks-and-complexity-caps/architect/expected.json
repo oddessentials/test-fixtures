@@ -1,0 +1,19 @@
+{
+  "highLevelSummary": "Refactor legacy codebase with explicit constraints: maximum 3 tasks, no high-complexity work, prioritizing critical database and API layers over lower priority configuration and logging.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [
+    {
+      "name": "LegacyModule",
+      "fields": ["name", "priority", "complexity"],
+      "primaryKey": null,
+      "indexes": null,
+      "relations": null
+    }
+  ],
+  "recommendedFileStructure": [
+    "src/legacy/database.ts",
+    "src/legacy/api.ts",
+    "src/legacy/utils.ts"
+  ]
+}

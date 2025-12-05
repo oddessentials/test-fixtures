@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Patch correctly respects scope constraints, only modifying files in src/utils/ without touching public API or configuration.",
+      "path": "src/utils/helper.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

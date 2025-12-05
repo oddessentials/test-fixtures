@@ -1,0 +1,21 @@
+diff --git a/DEPENDENCIES.md b/DEPENDENCIES.md
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/DEPENDENCIES.md
+@@ -0,0 +1,15 @@
++# Dependency Graph
++
++## src/core/module.ts
++- Depends on: `src/utils/helper.ts`
++- Depended by: `src/main.ts`
++
++## src/utils/helper.ts
++- Depends on: none
++- Depended by: `src/core/module.ts`, `src/services/api.ts`
++
++## Impact Analysis
++
++Changes to `src/utils/helper.ts` will affect:
++- `src/core/module.ts`
++- `src/services/api.ts`

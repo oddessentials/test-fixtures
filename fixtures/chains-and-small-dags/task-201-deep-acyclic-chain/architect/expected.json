@@ -1,0 +1,20 @@
+{
+  "highLevelSummary": "Define a sequential data processing pipeline with four stages (reader, parser, transformer, writer) where each stage depends on the previous one in a strict linear chain with no circular dependencies.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [
+    {
+      "name": "PipelineStage",
+      "fields": ["input", "output", "process"],
+      "primaryKey": null,
+      "indexes": null,
+      "relations": null
+    }
+  ],
+  "recommendedFileStructure": [
+    "src/pipeline/reader.ts",
+    "src/pipeline/parser.ts",
+    "src/pipeline/transformer.ts",
+    "src/pipeline/writer.ts"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "tasks": [
+    {
+      "id": "create-shared-types",
+      "description": "Create shared types module to break circular dependency between auth and user",
+      "file": "src/modules/types.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "update-auth-module",
+      "description": "Update auth module to use shared types instead of importing from user",
+      "file": "src/modules/auth.ts",
+      "type": "refactor",
+      "complexity": "medium",
+      "dependsOn": ["create-shared-types"]
+    },
+    {
+      "id": "update-user-module",
+      "description": "Update user module to use shared types instead of importing from auth",
+      "file": "src/modules/user.ts",
+      "type": "refactor",
+      "complexity": "medium",
+      "dependsOn": ["create-shared-types"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

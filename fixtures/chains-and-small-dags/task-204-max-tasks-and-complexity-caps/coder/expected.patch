@@ -1,0 +1,41 @@
+diff --git a/src/legacy/database.ts b/src/legacy/database.ts
+index 0000000..0000001 100644
+--- a/src/legacy/database.ts
++++ b/src/legacy/database.ts
+@@ -1,5 +1,8 @@
+-export function query(sql: string): any {
+-  // legacy implementation
+-  return null;
++export interface QueryResult<T> {
++  data: T[];
++  count: number;
++}
++
++export function query<T>(sql: string): QueryResult<T> {
++  return { data: [], count: 0 };
+ }
+diff --git a/src/legacy/api.ts b/src/legacy/api.ts
+index 0000000..0000001 100644
+--- a/src/legacy/api.ts
++++ b/src/legacy/api.ts
+@@ -1,5 +1,7 @@
+-import { query } from "./database";
++import { query, QueryResult } from "./database";
+ 
+-export function fetchData(): any {
+-  return query("SELECT * FROM data");
++export function fetchData<T>(): QueryResult<T> {
++  return query<T>("SELECT * FROM data");
+ }
+diff --git a/src/legacy/utils.ts b/src/legacy/utils.ts
+index 0000000..0000001 100644
+--- a/src/legacy/utils.ts
++++ b/src/legacy/utils.ts
+@@ -1,3 +1,5 @@
+-export function formatData(data: any): string {
+-  return JSON.stringify(data);
++import { QueryResult } from "./database";
++
++export function formatData<T>(result: QueryResult<T>): string {
++  return JSON.stringify(result.data);
+ }

@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Rename completed consistently across all files - function definition and all imports/usages updated.",
+      "path": "src/services/user.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

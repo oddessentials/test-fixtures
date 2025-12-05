@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Add missing edge-case tests for the string parser utility, covering empty strings, null/undefined input, very long strings, and special characters to improve test coverage without modifying the implementation.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/utils/parser.ts",
+    "test/utils/parser.test.ts"
+  ]
+}

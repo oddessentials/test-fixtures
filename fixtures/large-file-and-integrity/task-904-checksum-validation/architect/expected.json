@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Implement checksum validation for file integrity verification, supporting multiple hash algorithms like MD5 and SHA-256, with clear validation results.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/integrity/checksumComputer.ts",
+    "src/integrity/validator.ts"
+  ]
+}

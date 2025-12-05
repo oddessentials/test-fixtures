@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Comprehensive edge-case tests added covering empty strings, null/undefined, long strings, and special characters.",
+      "path": "test/utils/parser.test.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

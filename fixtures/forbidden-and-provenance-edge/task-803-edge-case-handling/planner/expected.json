@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "implement-path-normalizer",
+      "description": "Implement path normalization to handle relative paths and special characters",
+      "file": "src/validation/pathNormalizer.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": []
+    },
+    {
+      "id": "implement-edge-cases",
+      "description": "Implement edge case handling for symlinks and cross-platform differences",
+      "file": "src/validation/edgeCases.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": ["implement-path-normalizer"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

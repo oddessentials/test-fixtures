@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Correctly identifies the conflicting constraints and requests clarification before proceeding.",
+      "path": "CONFLICT.md",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

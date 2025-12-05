@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "File locking correctly implemented with proper acquisition, release, and timeout handling.",
+      "path": "src/files/lockManager.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

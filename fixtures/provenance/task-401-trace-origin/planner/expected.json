@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": "document-provenance",
+      "description": "Document the provenance chain for src/services/handler.ts, tracing from original implementation to current state",
+      "file": "src/services/handler.ts",
+      "type": "unknown",
+      "complexity": "low",
+      "dependsOn": []
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

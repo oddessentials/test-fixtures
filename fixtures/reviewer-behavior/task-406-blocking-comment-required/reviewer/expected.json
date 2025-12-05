@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Security fix correctly uses parameterized queries to prevent SQL injection.",
+      "path": "src/db/query.ts",
+      "line": 2,
+      "blocking": false
+    }
+  ]
+}

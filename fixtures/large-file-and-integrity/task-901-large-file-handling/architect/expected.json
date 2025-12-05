@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Implement large file handling with chunked processing to avoid memory issues, including size thresholds and progress feedback for long operations.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/files/largeFileHandler.ts",
+    "src/files/chunkProcessor.ts"
+  ]
+}

@@ -1,0 +1,41 @@
+diff --git a/src/modules/types.ts b/src/modules/types.ts
+new file mode 100644
+index 0000000..0000001
+--- /dev/null
++++ b/src/modules/types.ts
+@@ -0,0 +1,11 @@
++export interface AuthContext {
++  userId: string;
++  permissions: string[];
++  token: string;
++}
++
++export interface UserContext {
++  id: string;
++  name: string;
++  role: string;
++}
+diff --git a/src/modules/auth.ts b/src/modules/auth.ts
+index 0000000..0000001 100644
+--- a/src/modules/auth.ts
++++ b/src/modules/auth.ts
+@@ -1,5 +1,5 @@
+-import { User } from "./user";
++import { UserContext } from "./types";
+ 
+-export function validateUser(user: User): boolean {
++export function validateUser(user: UserContext): boolean {
+   return user.id !== undefined && user.role !== undefined;
+ }
+diff --git a/src/modules/user.ts b/src/modules/user.ts
+index 0000000..0000001 100644
+--- a/src/modules/user.ts
++++ b/src/modules/user.ts
+@@ -1,5 +1,5 @@
+-import { Auth } from "./auth";
++import { AuthContext } from "./types";
+ 
+-export function checkPermission(auth: Auth, permission: string): boolean {
++export function checkPermission(auth: AuthContext, permission: string): boolean {
+   return auth.permissions.includes(permission);
+ }

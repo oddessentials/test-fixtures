@@ -1,0 +1,30 @@
+{
+  "tasks": [
+    {
+      "id": "create-format-utility",
+      "description": "Create the string formatting utility function in src/utils/format.ts",
+      "file": "src/utils/format.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "update-main-code",
+      "description": "Update main code to use the new formatting utility",
+      "file": "src/main.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["create-format-utility"]
+    },
+    {
+      "id": "add-format-tests",
+      "description": "Add comprehensive tests for the formatting utility",
+      "file": "test/format.test.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["create-format-utility"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

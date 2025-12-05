@@ -1,0 +1,21 @@
+diff --git a/src/main.ts b/src/main.ts
+index 0000000..0000001 100644
+--- a/src/main.ts
++++ b/src/main.ts
+@@ -1,5 +1,5 @@
+-import { oldHelper } from "./utils/deprecated";
++import { modernHelper } from "./utils/modern";
+ 
+ export function main(): void {
+-  console.log(oldHelper("test"));
++  console.log(modernHelper("test"));
+ }
+diff --git a/src/utils/deprecated.ts b/src/utils/deprecated.ts
+deleted file mode 100644
+index 0000001..0000000
+--- a/src/utils/deprecated.ts
++++ /dev/null
+@@ -1,3 +0,0 @@
+-export function oldHelper(input: string): string {
+-  return input;
+-}

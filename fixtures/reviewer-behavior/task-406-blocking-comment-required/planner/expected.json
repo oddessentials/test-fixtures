@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": "fix-sql-injection",
+      "description": "Fix SQL injection vulnerability in src/db/query.ts by using parameterized queries",
+      "file": "src/db/query.ts",
+      "type": "fix",
+      "complexity": "medium",
+      "dependsOn": []
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

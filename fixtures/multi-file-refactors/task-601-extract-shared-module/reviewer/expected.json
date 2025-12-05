@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Shared validation module correctly extracts common logic and all consuming files updated to import from it.",
+      "path": "src/utils/validation.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

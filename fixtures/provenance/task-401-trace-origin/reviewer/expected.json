@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Provenance documentation correctly traces the origin and transformations of the code.",
+      "path": "src/services/handler.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

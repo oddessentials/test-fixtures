@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Patch correctly targets only src/ files and avoids all forbidden paths.",
+      "path": "src/utils/helper.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

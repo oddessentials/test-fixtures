@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": "implement-atomic-writer",
+      "description": "Implement atomic file writer using temp file and rename pattern",
+      "file": "src/files/atomicWriter.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": []
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

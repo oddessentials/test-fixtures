@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Attribution chain correctly documented with license compliance information.",
+      "path": "src/utils/derived.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

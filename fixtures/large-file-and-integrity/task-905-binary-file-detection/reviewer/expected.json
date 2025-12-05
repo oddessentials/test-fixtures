@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Binary file detection correctly implemented with appropriate handling strategies.",
+      "path": "src/files/binaryDetector.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Shared types module correctly breaks the circular dependency between auth and user modules.",
+      "path": "src/modules/types.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

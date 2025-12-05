@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Correctly identifies that UserService does not exist and requests clarification before proceeding.",
+      "path": "MISSING_CONTEXT.md",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}

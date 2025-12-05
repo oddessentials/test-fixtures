@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Implement cycle detection for task dependencies to prevent circular dependencies and provide clear error messages when cycles are detected in the task graph.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/graph/cycleDetector.ts",
+    "src/graph/types.ts"
+  ]
+}

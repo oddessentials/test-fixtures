@@ -1,0 +1,11 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "Sensitive config protection correctly implemented with comprehensive patterns and clear warnings.",
+      "path": "src/security/secretDetector.ts",
+      "line": 1,
+      "blocking": false
+    }
+  ]
+}
