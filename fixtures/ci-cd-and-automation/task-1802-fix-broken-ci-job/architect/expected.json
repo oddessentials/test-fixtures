@@ -1,0 +1,7 @@
+{
+    "highLevelSummary": "Fix explicit 'any' type in src/utils.ts to satisfy linting rules. Replace 'any' with a specific type.",
+    "pagesOrScreens": [],
+    "apis": [],
+    "dataModels": [],
+    "recommendedFileStructure": []
+}

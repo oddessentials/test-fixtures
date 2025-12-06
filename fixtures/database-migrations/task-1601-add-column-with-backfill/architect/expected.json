@@ -1,0 +1,29 @@
+{
+    "feasible": true,
+    "highLevelSummary": "Add 'category_id' column safely by first adding it as nullable, backfilling, and then enforcing NOT NULL.",
+    "roadmap": [
+        {
+            "title": "Add Nullable Column",
+            "description": "Create a migration to add 'category_id' (nullable) to 'items'.",
+            "complexity": "medium",
+            "type": "feature"
+        },
+        {
+            "title": "Backfill Data",
+            "description": "Populate 'category_id' for existing rows.",
+            "complexity": "medium",
+            "type": "tech_debt"
+        },
+        {
+            "title": "Enforce Not Null",
+            "description": "Add NOT NULL constraint after verification.",
+            "complexity": "medium",
+            "type": "feature"
+        }
+    ],
+    "constraints": [
+        "No table locks",
+        "Zero downtime",
+        "Data integrity"
+    ]
+}

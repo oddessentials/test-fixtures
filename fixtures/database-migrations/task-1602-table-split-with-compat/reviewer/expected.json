@@ -1,0 +1,11 @@
+{
+    "comments": [
+        {
+            "file": "src/models/User.ts",
+            "line": 13,
+            "text": "Dual write implemented correctly.",
+            "blocking": false
+        }
+    ],
+    "decision": "approve"
+}

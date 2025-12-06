@@ -1,0 +1,25 @@
+diff --git a/src/users.ts b/src/users.ts
+index 0000000..1111111 100644
+--- a/src/users.ts
++++ b/src/users.ts
+@@ -1,5 +1,6 @@
+ export interface UserV1 {
+   id: string;
++  /** @deprecated Use UserV2 and displayName instead */
+   username: string;
+ }
+ 
+@@ -9,3 +10,12 @@ export const users: UserV1[] = [
+ 
+ export function getUsersV1(): UserV1[] {
+   return users;
++}
++
++export interface UserV2 {
++  id: string;
++  displayName: string;
++}
++
++export function getUsersV2(): UserV2[] {
++  return users.map(u => ({ id: u.id, displayName: u.username }));
+ }

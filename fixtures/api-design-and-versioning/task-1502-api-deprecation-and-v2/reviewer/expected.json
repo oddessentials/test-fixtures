@@ -1,0 +1,11 @@
+{
+    "comments": [
+        {
+            "file": "src/users.ts",
+            "line": 15,
+            "text": "Clean V2 implementation mapping existing data to new schema.",
+            "blocking": false
+        }
+    ],
+    "decision": "approve"
+}

@@ -1162,7 +1162,7 @@
         }
       ]
     },
-        {
+    {
       "id": "api-design-and-versioning",
       "name": "API Design, Backwards Compatibility, and Versioning",
       "range": "1500-1599",
@@ -1402,6 +1402,153 @@
             },
             "swarm": {
               "description": "Scenario teaching observability without creating noise, regressions, or unnecessary refactors."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "security-and-permissions",
+      "name": "Application Security & Permissions",
+      "range": "2000-2099",
+      "tasks": [
+        {
+          "id": "task-2001-fix-authorization-gap",
+          "title": "Tighten authorization without breaking legitimate flows",
+          "agents": {
+            "architect": {
+              "description": "Describes an endpoint incorrectly accessible to regular users and specifies the desired role/permission model. Non-goals: do not change authentication flows or unrelated endpoints."
+            },
+            "planner": {
+              "description": "Emits tasks to adjust only the relevant guards or middleware and add tests for allowed vs forbidden roles. No tasks for unrelated endpoints or global security rewrites."
+            },
+            "coder": {
+              "description": "Implements a minimal authorization change in the narrowest scope alongside focused tests. Avoids refactoring surrounding code or touching unrelated routes."
+            },
+            "reviewer": {
+              "description": "Confirms only authorized roles can access the endpoint, legitimate users are not locked out, and no unrelated changes were introduced."
+            },
+            "swarm": {
+              "description": "End-to-end scenario for precisely fixing an authorization bug without a broad security refactor."
+            }
+          }
+        },
+        {
+          "id": "task-2002-input-validation-hardening",
+          "title": "Harden input validation and sanitization",
+          "agents": {
+            "architect": {
+              "description": "Identifies an endpoint with insufficient input validation and prescribes stricter rules. Behavior for valid inputs must remain unchanged."
+            },
+            "planner": {
+              "description": "Creates tasks to add or tighten validation logic and extend tests with valid and invalid input cases. No changes for unrelated endpoints."
+            },
+            "coder": {
+              "description": "Implements new validation checks and updates tests in a minimal, targeted patch. Avoids new features or unrelated refactoring."
+            },
+            "reviewer": {
+              "description": "Verifies invalid inputs are rejected correctly, valid use cases still work, and the patch does not introduce new attack surface."
+            },
+            "swarm": {
+              "description": "End-to-end defensive security hardening focused on input validation."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "resilience-and-idempotency",
+      "name": "Resilience, Retries, and Idempotency",
+      "range": "2100-2199",
+      "tasks": [
+        {
+          "id": "task-2101-idempotent-retryable-operation",
+          "title": "Make network operation safely retryable and idempotent",
+          "agents": {
+            "architect": {
+              "description": "Describes a network-bound operation that may fail transiently and must be safely retryable. Repeated attempts must not cause duplicate side effects."
+            },
+            "planner": {
+              "description": "Emits tasks to introduce idempotency keys or deduplication, adjust retry logic, and extend tests for single-call, retried, and failure scenarios."
+            },
+            "coder": {
+              "description": "Implements idempotent behavior and bounded retry logic in a minimal patch, updating only designated code paths and tests."
+            },
+            "reviewer": {
+              "description": "Ensures retries no longer cause duplicates, error handling is sane (no infinite retries), and non-retry behavior is unchanged."
+            },
+            "swarm": {
+              "description": "End-to-end scenario training agents on robust retries and idempotency without a system overhaul."
+            }
+          }
+        },
+        {
+          "id": "task-2102-partial-failure-and-rollback",
+          "title": "Handle partial failure with graceful rollback or compensation",
+          "agents": {
+            "architect": {
+              "description": "Describes a multi-step operation where one step may fail after others have succeeded. Requires compensating action or rollback so state is not left inconsistent."
+            },
+            "planner": {
+              "description": "Breaks work into tasks identifying failure points, implementing compensation or rollback, and adding tests for success, partial failure, and compensation paths."
+            },
+            "coder": {
+              "description": "Implements compensation or rollback logic only for the described operation plus tests. No new features or unrelated flow changes."
+            },
+            "reviewer": {
+              "description": "Checks that inconsistent states are repaired or recoverable, compensation logic is correct, and happy-path behavior is preserved."
+            },
+            "swarm": {
+              "description": "End-to-end resilience scenario focusing on partial failure handling and state repair."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "i18n-and-accessibility",
+      "name": "Internationalization and Accessibility",
+      "range": "2200-2299",
+      "tasks": [
+        {
+          "id": "task-2201-internationalize-static-copy",
+          "title": "Extract hard-coded strings for internationalization",
+          "agents": {
+            "architect": {
+              "description": "Identifies a UI surface with hard-coded strings and requests extracting them into the existing i18n mechanism. Non-goals: no visual redesign, no behavior changes, no new locales."
+            },
+            "planner": {
+              "description": "Emits tasks to replace hard-coded strings with lookups, update translation files for existing locales, and adjust tests or snapshots. No new locales or major refactors."
+            },
+            "coder": {
+              "description": "Replaces hard-coded strings with i18n utility calls and updates relevant translation resources. Avoids layout changes or speculative text edits."
+            },
+            "reviewer": {
+              "description": "Ensures UI content matches original semantics, translations are wired correctly for existing locales, and no behavior changed except the string source."
+            },
+            "swarm": {
+              "description": "End-to-end i18n scenario where correctness depends on preserving meaning while changing string sources."
+            }
+          }
+        },
+        {
+          "id": "task-2202-accessibility-form-improvements",
+          "title": "Improve form accessibility without changing behavior",
+          "agents": {
+            "architect": {
+              "description": "Describes a form with accessibility issues (missing labels, ARIA attributes, keyboard traps) and specifies improvements that must not change validation or submission behavior."
+            },
+            "planner": {
+              "description": "Creates tasks for adding or correcting labels, ARIA attributes, and focus ordering, plus tests or checks for keyboard navigation. No visual redesign or new features."
+            },
+            "coder": {
+              "description": "Adds or adjusts accessibility attributes in form markup or components while preserving existing logic and layout."
+            },
+            "reviewer": {
+              "description": "Verifies the form is more accessible (screen-reader-friendly, keyboard navigable) and no functional behavior changed unexpectedly."
+            },
+            "swarm": {
+              "description": "Scenario training agents on targeted, behavior-preserving accessibility improvements."
             }
           }
         }

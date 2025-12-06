@@ -1,0 +1,9 @@
+{
+    "highLevelSummary": "Implement a standard CI pipeline using GitHub Actions to enforce code quality and build integrity. Create .github/workflows/ci.yml with install, lint, test, build steps. Use Node.js 18.",
+    "pagesOrScreens": [],
+    "apis": [],
+    "dataModels": [],
+    "recommendedFileStructure": [
+        ".github/workflows/ci.yml"
+    ]
+}

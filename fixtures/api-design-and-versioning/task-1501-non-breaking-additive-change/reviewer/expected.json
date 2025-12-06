@@ -1,0 +1,11 @@
+{
+    "comments": [
+        {
+            "file": "src/items.ts",
+            "line": 13,
+            "text": "Correctly handles optional sort without breaking existing requests.",
+            "blocking": false
+        }
+    ],
+    "decision": "approve"
+}

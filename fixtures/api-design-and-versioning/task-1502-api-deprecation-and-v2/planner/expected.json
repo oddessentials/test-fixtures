@@ -1,0 +1,26 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "title": "Define UserV2 and getUsersV2",
+            "description": "Add UserV2 interface and getUsersV2 function to src/users.ts. Map username to displayName.",
+            "filePaths": [
+                "src/users.ts"
+            ],
+            "type": "feature",
+            "dependency": []
+        },
+        {
+            "id": "2",
+            "title": "Deprecate UserV1.username",
+            "description": "Add @deprecated JSDoc tag to the username field in UserV1.",
+            "filePaths": [
+                "src/users.ts"
+            ],
+            "type": "refactor",
+            "dependency": [
+                "1"
+            ]
+        }
+    ]
+}

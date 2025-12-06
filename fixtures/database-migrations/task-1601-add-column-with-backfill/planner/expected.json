@@ -1,0 +1,38 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "title": "Migration: Add nullable category_id",
+            "description": "Add category_id column as NULL to items table.",
+            "filePaths": [
+                "migrations/002_add_column.sql"
+            ],
+            "type": "feature",
+            "dependency": []
+        },
+        {
+            "id": "2",
+            "title": "Backfill category_id",
+            "description": "Script to populate category_id for existing rows.",
+            "filePaths": [
+                "scripts/backfill.ts"
+            ],
+            "type": "tech_debt",
+            "dependency": [
+                "1"
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Migration: Enforce NOT NULL",
+            "description": "Alter column category_id to SET NOT NULL.",
+            "filePaths": [
+                "migrations/003_enforce_not_null.sql"
+            ],
+            "type": "feature",
+            "dependency": [
+                "2"
+            ]
+        }
+    ]
+}

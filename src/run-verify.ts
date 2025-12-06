@@ -11,7 +11,51 @@ const ROOT = path.resolve(__dirname, "..");
 const FIXTURES_ROOT = path.join(ROOT, "fixtures");
 const AGENTS: AgentKind[] = ["architect", "planner", "coder", "reviewer"];
 
-const UPDATE_MODE = process.argv.includes("--update");
+type FixtureAgentDir = {
+  topic: string;
+  task: string;
+  agent: AgentKind;
+  dir: string;
+};
+
+// Parse CLI arguments correctly and forever
+const args = process.argv.slice(2);
+const UPDATE_MODE = args.includes("--update");
+const HELP_MODE = args.includes("--help") || args.includes("-h");
+
+// First non-flag, non-update arg is treated as a simple substring filter
+const filter =
+  args.find((arg) => arg !== "--update" && !arg.startsWith("-")) ?? null;
+
+function printHelp() {
+  console.log(
+    [
+      "Usage:",
+      "  node dist/run-verify.js [--update] [filter]",
+      "",
+      "Options:",
+      "  --update         Snapshot/update expected outputs from actuals",
+      "  --help, -h       Show this help message",
+      "",
+      "Arguments:",
+      "  filter           Optional substring filter applied to",
+      "                   '<topic>/<task>/<agent>' labels.",
+      "",
+      "Examples:",
+      "  # Run all fixtures",
+      "  node dist/run-verify.js",
+      "",
+      "  # Run only planner fixtures",
+      "  node dist/run-verify.js planner",
+      "",
+      "  # Run only fixtures for a specific task",
+      "  node dist/run-verify.js task-2001",
+      "",
+      "  # Update snapshots for a single task",
+      "  node dist/run-verify.js --update task-2001",
+    ].join("\n")
+  );
+}
 
 function loadJson(filePath: string) {
   const raw = fs.readFileSync(filePath, "utf8");
@@ -38,18 +82,8 @@ function isDirectory(p: string) {
   }
 }
 
-function discoverFixtureAgentDirs(): Array<{
-  topic: string;
-  task: string;
-  agent: AgentKind;
-  dir: string;
-}> {
-  const results: Array<{
-    topic: string;
-    task: string;
-    agent: AgentKind;
-    dir: string;
-  }> = [];
+function discoverFixtureAgentDirs(): FixtureAgentDir[] {
+  const results: FixtureAgentDir[] = [];
 
   if (!fs.existsSync(FIXTURES_ROOT)) return results;
 
@@ -65,7 +99,6 @@ function discoverFixtureAgentDirs(): Array<{
 
     for (const task of tasks) {
       const taskDir = path.join(topicDir, task);
-
       for (const agent of AGENTS) {
         const agentDir = path.join(taskDir, agent);
         const verifyPath = path.join(agentDir, "verify.ts");
@@ -87,7 +120,6 @@ function getExpectedPaths(agentDir: string, agent: AgentKind) {
       kind: "patch" as const,
     };
   }
-
   return {
     expectedPath: path.join(agentDir, "expected.json"),
     kind: "json" as const,
@@ -112,11 +144,10 @@ async function runOneFixtureAgent(
     return;
   }
 
-  const expected =
-    kind === "json" ? loadJson(expectedPath) : loadText(expectedPath);
+  const expected = kind === "json" ? loadJson(expectedPath) : loadText(expectedPath);
 
-  // In this starter kit, "actual" is the same as "expected".
-  // In a real system, this would be the real agent output.
+  // Golden-master mode: for now, feed expected back in as actual.
+  // In a real system, "actual" would be the real agent output.
   const actual = expected;
 
   const ctx: VerifyCtx = {
@@ -126,7 +157,6 @@ async function runOneFixtureAgent(
   };
 
   if (UPDATE_MODE) {
-    // Snapshot mode stub: rewrite expected from actual.
     if (kind === "json") {
       writeJson(expectedPath, actual);
     } else {
@@ -142,7 +172,6 @@ async function runOneFixtureAgent(
   };
 
   const result = verifyModule.verify(ctx);
-
   const label = `${topic}/${task}/${agent}`;
 
   if (!result.ok) {
@@ -157,14 +186,17 @@ function pathToFileUrl(p: string) {
   let resolved = path.resolve(p);
   if (process.platform === "win32") {
     resolved = resolved.replace(/\\/g, "/");
-    if (!resolved.startsWith("/")) {
-      resolved = "/" + resolved;
-    }
+    if (!resolved.startsWith("/")) resolved = "/" + resolved;
   }
   return new URL(`file://${resolved}`);
 }
 
 async function main() {
+  if (HELP_MODE) {
+    printHelp();
+    return;
+  }
+
   const fixtures = discoverFixtureAgentDirs();
 
   if (fixtures.length === 0) {
@@ -172,9 +204,24 @@ async function main() {
     return;
   }
 
+  let ranCount = 0;
+
   for (const f of fixtures) {
+    const label = `${f.topic}/${f.task}/${f.agent}`;
+
+    // Simple, future-proof substring filtering on full label
+    if (filter && !label.includes(filter)) {
+      continue;
+    }
+
     // eslint-disable-next-line no-await-in-loop
     await runOneFixtureAgent(f.topic, f.task, f.agent, f.dir);
+    ranCount++;
+  }
+
+  if (filter && ranCount === 0) {
+    console.error(`No fixtures matched filter: ${filter}`);
+    process.exitCode = 1;
   }
 }
 

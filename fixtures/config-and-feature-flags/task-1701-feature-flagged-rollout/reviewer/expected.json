@@ -1,0 +1,11 @@
+{
+    "comments": [
+        {
+            "file": "src/config.ts",
+            "line": 4,
+            "text": "Feature flag added correctly.",
+            "blocking": false
+        }
+    ],
+    "decision": "approve"
+}

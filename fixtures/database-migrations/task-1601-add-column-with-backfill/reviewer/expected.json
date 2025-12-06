@@ -1,0 +1,11 @@
+{
+    "comments": [
+        {
+            "file": "migrations/002_add_column.sql",
+            "line": 1,
+            "text": "Correctly adds column as nullable.",
+            "blocking": false
+        }
+    ],
+    "decision": "approve"
+}

@@ -1,0 +1,14 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "title": "Update getItems to support sort param",
+            "description": "Modify src/items.ts to accept an optional sort query parameter. If present, sort the returned array by name.",
+            "filePaths": [
+                "src/items.ts"
+            ],
+            "type": "feature",
+            "dependency": []
+        }
+    ]
+}

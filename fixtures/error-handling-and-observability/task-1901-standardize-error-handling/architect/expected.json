@@ -1,0 +1,10 @@
+{
+    "highLevelSummary": "Implement a centralized error handling strategy using a custom AppError class and global middleware. Create AppError.ts and errorHandler.ts.",
+    "pagesOrScreens": [],
+    "apis": [],
+    "dataModels": [],
+    "recommendedFileStructure": [
+        "src/utils/AppError.ts",
+        "src/middleware/errorHandler.ts"
+    ]
+}

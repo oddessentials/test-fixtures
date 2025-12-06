@@ -1,0 +1,11 @@
+{
+    "comments": [
+        {
+            "file": ".github/workflows/ci.yml",
+            "line": 15,
+            "message": "Correctly sets up CI workflow.",
+            "blocking": false
+        }
+    ],
+    "decision": "approve"
+}
