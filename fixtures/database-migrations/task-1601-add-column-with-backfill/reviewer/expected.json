@@ -1,0 +1,17 @@
+{
+  "decision": "approve",
+  "comments": [
+    {
+      "message": "The migration correctly follows the safe multi-step pattern: add nullable column first, then backfill, then enforce NOT NULL. This ensures zero data loss for existing rows.",
+      "path": "migrations/001-add-phone-number-nullable.sql",
+      "line": 3,
+      "blocking": false
+    },
+    {
+      "message": "The backfill migration uses a sensible default value. Consider whether 'UNKNOWN' is the appropriate placeholder or if a more meaningful default should be used based on business requirements.",
+      "path": "migrations/002-backfill-phone-number.sql",
+      "line": 4,
+      "blocking": false
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "tasks": [
+    {
+      "id": "update-user-types",
+      "description": "Add optional lastLoginAt field to UserResponse type and optional phoneNumber to query parameters type in src/types/user.ts",
+      "file": "src/types/user.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "update-users-handler",
+      "description": "Update GET /api/users/:id handler in src/routes/users.ts to accept optional phoneNumber query parameter and include lastLoginAt in response when available",
+      "file": "src/routes/users.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["update-user-types"]
+    },
+    {
+      "id": "add-users-tests",
+      "description": "Add tests for the new optional phoneNumber query parameter and lastLoginAt response field, ensuring backwards compatibility with existing behavior",
+      "file": "test/routes/users.test.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["update-users-handler"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

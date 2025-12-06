@@ -1,0 +1,38 @@
+{
+  "tasks": [
+    {
+      "id": "add-flag-definition",
+      "description": "Add ENABLE_DARK_MODE flag definition to src/config/flags.ts with default value of false",
+      "file": "src/config/flags.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "create-dark-mode-toggle",
+      "description": "Create new DarkModeToggle component in src/components/DarkModeToggle.tsx that handles the dark mode toggle UI",
+      "file": "src/components/DarkModeToggle.tsx",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "integrate-flag-in-settings",
+      "description": "Update Settings component in src/components/Settings.tsx to conditionally render DarkModeToggle only when ENABLE_DARK_MODE flag is enabled",
+      "file": "src/components/Settings.tsx",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["add-flag-definition", "create-dark-mode-toggle"]
+    },
+    {
+      "id": "add-settings-tests",
+      "description": "Add tests for Settings component in test/components/Settings.test.tsx covering both flag states (enabled shows toggle, disabled hides toggle)",
+      "file": "test/components/Settings.test.tsx",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["integrate-flag-in-settings"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}
