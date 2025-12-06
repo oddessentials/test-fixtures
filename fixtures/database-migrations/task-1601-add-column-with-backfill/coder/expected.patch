@@ -1,0 +1,57 @@
+diff --git a/migrations/001-add-phone-number-nullable.sql b/migrations/001-add-phone-number-nullable.sql
+index 0000000..0000001 100644
+--- /dev/null
++++ b/migrations/001-add-phone-number-nullable.sql
+@@ -0,0 +1,4 @@
++-- Step 1: Add phone_number column as nullable
++-- This allows the migration to succeed even with existing rows
++ALTER TABLE users
++ADD COLUMN phone_number VARCHAR(20) NULL;
+diff --git a/migrations/002-backfill-phone-number.sql b/migrations/002-backfill-phone-number.sql
+index 0000000..0000001 100644
+--- /dev/null
++++ b/migrations/002-backfill-phone-number.sql
+@@ -0,0 +1,5 @@
++-- Step 2: Backfill existing rows with a default value
++-- This ensures all existing users have a phone_number before enforcing NOT NULL
++UPDATE users
++SET phone_number = 'UNKNOWN'
++WHERE phone_number IS NULL;
+diff --git a/migrations/003-enforce-phone-number-not-null.sql b/migrations/003-enforce-phone-number-not-null.sql
+index 0000000..0000001 100644
+--- /dev/null
++++ b/migrations/003-enforce-phone-number-not-null.sql
+@@ -0,0 +1,4 @@
++-- Step 3: Enforce NOT NULL constraint after backfill is complete
++-- Safe to run only after all existing rows have been backfilled
++ALTER TABLE users
++ALTER COLUMN phone_number SET NOT NULL;
+diff --git a/src/models/user.ts b/src/models/user.ts
+index 0000000..0000001 100644
+--- a/src/models/user.ts
++++ b/src/models/user.ts
+@@ -1,5 +1,6 @@
+ export interface User {
+   id: string;
+   email: string;
+   name: string;
++  phone_number: string;
+ }
+diff --git a/test/models/user.test.ts b/test/models/user.test.ts
+index 0000000..0000001 100644
+--- a/test/models/user.test.ts
++++ b/test/models/user.test.ts
+@@ -8,4 +8,14 @@ describe('User model', () => {
+     expect(user.name).toBe('Test User');
+   });
++
++  it('should include phone_number field', () => {
++    const user: User = {
++      id: 'user-1',
++      email: 'test@example.com',
++      name: 'Test User',
++      phone_number: '555-1234',
++    };
++    expect(user.phone_number).toBe('555-1234');
++  });
+ });

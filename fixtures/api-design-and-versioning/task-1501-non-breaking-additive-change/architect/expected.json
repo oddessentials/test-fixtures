@@ -1,0 +1,27 @@
+{
+  "highLevelSummary": "Add an optional phoneNumber query parameter and an optional lastLoginAt response field to the existing GET /api/users/:id endpoint. The change must be strictly backwards-compatible: no existing fields may be removed, renamed, or have their types changed, and existing clients must continue to work without modification.",
+  "pagesOrScreens": [],
+  "apis": [
+    {
+      "name": "GET /api/users/:id",
+      "description": "Retrieve user profile by ID. Now accepts optional phoneNumber query parameter and returns optional lastLoginAt field in response.",
+      "method": "GET",
+      "path": "/api/users/:id",
+      "authRequired": true
+    }
+  ],
+  "dataModels": [
+    {
+      "name": "UserResponse",
+      "fields": ["id", "name", "email", "lastLoginAt"],
+      "primaryKey": "id",
+      "indexes": null,
+      "relations": null
+    }
+  ],
+  "recommendedFileStructure": [
+    "src/routes/users.ts",
+    "src/types/user.ts",
+    "test/routes/users.test.ts"
+  ]
+}
