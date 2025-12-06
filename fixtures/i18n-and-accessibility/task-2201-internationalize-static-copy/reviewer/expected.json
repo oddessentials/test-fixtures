@@ -1,0 +1,11 @@
+{
+    "comments": [
+        {
+            "path": "src/components/Welcome.tsx",
+            "line": 6,
+            "message": "Correctly replaces hardcoded string with translation key.",
+            "blocking": false
+        }
+    ],
+    "decision": "approve"
+}

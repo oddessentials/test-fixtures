@@ -1,0 +1,24 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "type": "fix",
+            "description": "Implement rollback logic in registerUser",
+            "file": "src/services/registration.ts",
+            "complexity": "low",
+            "dependsOn": []
+        },
+        {
+            "id": "2",
+            "type": "fix",
+            "description": "Add tests for rollback on wallet failure",
+            "file": "src/tests/registration.test.ts",
+            "complexity": "low",
+            "dependsOn": [
+                "1"
+            ]
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}

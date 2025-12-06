@@ -1,0 +1,11 @@
+{
+    "comments": [
+        {
+            "path": "src/components/SignupForm.tsx",
+            "line": 6,
+            "message": "Good use of aria-label and semantic button element.",
+            "blocking": false
+        }
+    ],
+    "decision": "approve"
+}

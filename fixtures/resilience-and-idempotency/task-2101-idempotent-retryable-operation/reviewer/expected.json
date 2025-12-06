@@ -1,0 +1,11 @@
+{
+    "comments": [
+        {
+            "path": "src/services/payment.ts",
+            "line": 10,
+            "message": "Retry logic correctly targets 5xx errors. Ensure 'fetch' throws on network error for the catch block if used, or check response.ok.",
+            "blocking": false
+        }
+    ],
+    "decision": "approve"
+}

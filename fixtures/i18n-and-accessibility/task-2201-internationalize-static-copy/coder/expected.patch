@@ -1,0 +1,26 @@
+diff --git a/src/components/Welcome.tsx b/src/components/Welcome.tsx
+index ...
+--- a/src/components/Welcome.tsx
++++ b/src/components/Welcome.tsx
+@@ -1,7 +1,8 @@
+ import React from 'react';
++import { t } from '../i18n'; // or similar import
+ 
+ export const Welcome = () => {
+   return (
+     <div>
+-      <h1>Welcome to our App</h1>
++      <h1>{t('welcome_message')}</h1>
+     </div>
+   );
+ };
+diff --git a/src/locales/en.json b/src/locales/en.json
+index ...
+--- a/src/locales/en.json
++++ b/src/locales/en.json
+@@ -1,3 +1,4 @@
+ {
+-  "app_name": "My App"
++  "app_name": "My App",
++  "welcome_message": "Welcome to our App"
+ }

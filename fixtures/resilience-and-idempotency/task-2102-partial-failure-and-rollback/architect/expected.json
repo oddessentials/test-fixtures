@@ -1,0 +1,10 @@
+{
+    "highLevelSummary": "Update `registerUser` in `src/services/registration.ts` to handle partial failures. If `createWallet` fails, catch the error, execute `deleteUser` to compensate (rollback), and then rethrow the error.",
+    "pagesOrScreens": [],
+    "apis": [],
+    "dataModels": [],
+    "recommendedFileStructure": [
+        "src/services/registration.ts",
+        "src/tests/registration.test.ts"
+    ]
+}

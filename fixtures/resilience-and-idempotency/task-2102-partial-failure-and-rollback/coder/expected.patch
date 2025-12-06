@@ -1,0 +1,31 @@
+diff --git a/src/services/registration.ts b/src/services/registration.ts
+index ...
+--- a/src/services/registration.ts
++++ b/src/services/registration.ts
+@@ -1,6 +1,11 @@
+ export async function registerUser(email: string) {
+   const user = await createUser(email);
+-  const wallet = await createWallet(user.id);
+-  return { user, wallet };
++  try {
++    const wallet = await createWallet(user.id);
++    return { user, wallet };
++  } catch (error) {
++    await deleteUser(user.id);
++    throw error;
++  }
+ }
+ 
+ async function createUser(email: string) {
+diff --git a/src/tests/registration.test.ts b/src/tests/registration.test.ts
+index ...
+--- a/src/tests/registration.test.ts
++++ b/src/tests/registration.test.ts
+@@ -4,4 +4,7 @@ describe('Registration', () => {
+   it('registers user', async () => {
+     // test
+   });
++  it('rolls back on failure', async () => {
++    // test
++  });
+ });
