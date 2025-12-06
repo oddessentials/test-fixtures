@@ -1,13 +1,13 @@
 # **Fixture Kit — Unified Contract & Contributor Guide**
 
-_(Architect • Planner • Coder • Reviewer)_
+*(Architect • Planner • Coder • Reviewer)*
 
 This repository contains the **official golden fixture kit** for all four agents in the Swarm autonomous software-engineering system:
 
-- **architect** – high-level system design
-- **planner** – deterministic task decomposition
-- **coder** – minimal, unified-diff patch generation
-- **reviewer** – structured code reviews with blocking/non-blocking comments
+* **architect** – high-level system design
+* **planner** – deterministic task decomposition
+* **coder** – minimal, unified-diff patch generation
+* **reviewer** – structured code reviews with blocking/non-blocking comments
 
 Fixtures in this repo define **truth**, ensure **schema discipline**, and guarantee **agent-to-agent compatibility** across the entire pipeline.
 
@@ -17,20 +17,21 @@ Fixtures in this repo define **truth**, ensure **schema discipline**, and guaran
 
 This kit allows **any contributor**—internal or external—to:
 
-- Write deterministic, spec-valid fixtures
-- Verify that fixtures match the **locked agent schemas**
-- Test completeness and correctness with `npm run verify`
-- Refresh expected outputs safely via snapshot mode
-- Add new tasks/topics without touching any runner logic
+* Write deterministic, spec-valid fixtures
+* Verify that fixtures match the **locked agent schemas**
+* Test completeness and correctness with `npm run verify`
+* Refresh expected outputs safely via snapshot mode
+* Add new tasks/topics without touching any runner logic
+* Run a fast **golden path** subset via `--golden` for CI and sanity checks
 
 Fixtures enforce:
 
-- **Schema correctness** (ArchitectSpec, PlannerOutput, CoderOutput, ReviewerOutput)
-- **Determinism** (same inputs → same outputs)
-- **Forbidden-path hygiene** (no `dist/`, `.swarm/`, `node_modules/`, etc.)
-- **Non-fabrication** (no invented APIs, files, or metadata)
-- **Semantic correctness** (refactor-only constraints, atomic patches, task graphs)
-- **Cross-agent interoperability** (architect → planner → coder → reviewer)
+* **Schema correctness** (ArchitectSpec, PlannerOutput, CoderOutput, ReviewerOutput)
+* **Determinism** (same inputs → same outputs)
+* **Forbidden-path hygiene** (no `dist/`, `.swarm/`, `node_modules/`, etc.)
+* **Non-fabrication** (no invented APIs, files, or metadata)
+* **Semantic correctness** (refactor-only constraints, atomic patches, task graphs)
+* **Cross-agent interoperability** (architect → planner → coder → reviewer)
 
 This is the **unified contract** for all agents.
 
@@ -66,9 +67,9 @@ fixtures/<topic>/<task-id-descriptive-name>/
 
 ### Rules
 
-- Filenames are intentionally generic (`prompt.md`, `expected.json`, `expected.patch`, `verify.ts`).
-- `repo/` is optional and contains only the minimal source context needed for the task.
-- Agent folder names define the agent; no additional naming conventions are required.
+* Filenames are intentionally generic (`prompt.md`, `expected.json`, `expected.patch`, `verify.ts`).
+* `repo/` is optional and contains only the minimal source context needed for the task.
+* Agent folder names define the agent; no additional naming conventions are required.
 
 ---
 
@@ -76,10 +77,10 @@ fixtures/<topic>/<task-id-descriptive-name>/
 
 This command:
 
-- Discovers all fixtures automatically
-- Loads each agent’s expected output
-- Validates it against the correct Zod schema
-- Runs the agent’s `verify.ts` using `actual === expected` (self-test)
+* Discovers all fixtures automatically
+* Loads each agent’s expected output
+* Validates it against the correct Zod schema
+* Runs the agent’s `verify.ts` using `actual === expected` (bootstrap self-test mode)
 
 ```bash
 npm run verify
@@ -87,7 +88,8 @@ npm run verify
 
 You should see output like:
 
-```
+```text
+[run-verify] BOOTSTRAP MODE ACTIVE – using expected outputs as actuals.
 zero-change/task-001-is-even/architect OK
 zero-change/task-001-is-even/planner OK
 zero-change/task-001-is-even/coder OK
@@ -95,6 +97,26 @@ zero-change/task-001-is-even/reviewer OK
 ```
 
 If anything violates the agent schema or scenario logic, it will fail with a clear reason.
+
+## **Strict real-agent mode (optional)**
+
+Once real agents are wired into the runner, you can require actual execution instead of bootstrap mode:
+
+```bash
+npm run verify -- --strict-real-agents
+```
+
+In this mode, the harness will *fail* unless `getActualOutput(...)` is implemented to call real agents.
+
+## **Concurrency (optional)**
+
+You can run fixtures in parallel batches:
+
+```bash
+npm run verify -- --concurrency 8
+```
+
+If omitted, a sensible default is used.
 
 ---
 
@@ -107,6 +129,50 @@ npm run verify -- --update
 ```
 
 This regenerates each `expected.json` / `expected.patch` as the new golden snapshot.
+
+You can combine this with other flags, for example:
+
+```bash
+npm run verify -- --update --golden
+```
+
+to refresh only the golden-path fixtures.
+
+---
+
+## **Golden Path Mode (optional)**
+
+You can define a small, curated set of fixtures as a **golden path** for fast checks and CI stability.
+
+Golden fixtures are configured in:
+
+```text
+golden-fixtures.config.json
+```
+
+Example:
+
+```json
+{
+  "fixtures": [
+    "zero-change/task-001-is-even/planner",
+    "single-file/task-101-single-file-low-complexity/planner",
+    "ambiguity/task-501-unclear-requirements/planner"
+  ]
+}
+```
+
+To run only these fixtures:
+
+```bash
+npm run verify -- --golden
+```
+
+You can also combine golden mode with filters or concurrency, e.g.:
+
+```bash
+npm run verify -- --golden --concurrency 8
+```
 
 ---
 
@@ -123,9 +189,9 @@ For each agent folder (architect/planner/coder/reviewer):
 3. **Write `verify.ts`**
    A thin wrapper around shared helpers:
 
-   - schema validation (via Zod)
-   - semantic checks (e.g., “no new features”, “single low-complexity task”, “atomic patch”)
-   - forbidden-path safety
+   * schema validation (via Zod)
+   * semantic checks (e.g., “no new features”, “single low-complexity task”, “atomic patch”)
+   * forbidden-path safety
 
 4. **Add a `repo/` folder** only if your scenario requires source context.
 
@@ -153,19 +219,19 @@ Every `verify.ts` receives:
 
 and must enforce:
 
-- **Schema discipline**
+* **Schema discipline**
   Output must match the locked agent schema.
 
-- **Determinism**
+* **Determinism**
   No randomization, timestamps, or unstable ordering.
 
-- **Forbidden-path hygiene**
+* **Forbidden-path hygiene**
   No patches or plans touching `dist/`, `build/`, `.swarm/`, `.git/`, `node_modules/`, etc.
 
-- **Non-fabrication**
+* **Non-fabrication**
   No invented APIs, tests, behaviors, paths, or metadata.
 
-- **Semantic correctness**
+* **Semantic correctness**
   Behavior must follow the scenario’s contract (e.g. refactor-only, multi-hunk atomicity, backup rules).
 
 Return example:
@@ -204,22 +270,22 @@ Every verify file lives four directories below project root, so this path is alw
 
 # **6. Philosophy of This Suite**
 
-- **Correctness** > convenience
+* **Correctness** > convenience
 
-- **Schemas are versioned contracts**
+* **Schemas are versioned contracts**
   (Add fields as optional; avoid breaking changes.)
 
-- **Determinism is non-negotiable**
+* **Determinism is non-negotiable**
   Output must not depend on environment or ordering.
 
-- **Honesty**
+* **Honesty**
   Models cannot hallucinate structure, APIs, metadata, or files.
 
-- **Composability**
+* **Composability**
   All agents interoperate cleanly:
   architect → planner → coder → reviewer → swarm
 
-This suite is the _baseline for multi-agent evaluation and integration_.
+This suite is the *baseline for multi-agent evaluation and integration*.
 
 ---
 
@@ -237,10 +303,10 @@ fixtures/<topic>/task-XYZ-name/
 
 Each folder requires:
 
-- `prompt.md`
-- `expected.json` or `expected.patch`
-- `verify.ts`
-- (optional) `repo/`
+* `prompt.md`
+* `expected.json` or `expected.patch`
+* `verify.ts`
+* (optional) `repo/`
 
 Then run:
 
@@ -254,18 +320,21 @@ If all pass, your scenario is valid.
 
 # **8. TL;DR for Contributors**
 
-```
+```bash
 git clone <repo>
 npm install
-npm run verify                     # run all fixtures
-npm run verify -- --update         # refresh goldens
+npm run verify                         # run all fixtures (bootstrap mode)
+npm run verify -- --golden             # run curated golden-path fixtures only
+npm run verify -- --concurrency 8      # run all fixtures with higher concurrency
+npm run verify -- --strict-real-agents # require real agent execution
+npm run verify -- --update             # refresh goldens
 # add new tasks under fixtures/...
-npm run verify                     # all tasks auto-discovered
+npm run verify                         # all tasks auto-discovered
 ```
 
 ## **Why `npm run verify -- --update` Exists (for Contributors)**
 
-Fixtures in this repo use **golden outputs** (`expected.json` / `expected.patch`) that represent the _correct_ result for each scenario. Over time, these goldens can become **outdated** when we intentionally improve schemas, prompts, or agent contracts. When that happens, running `npm run verify` will fail across many fixtures—not because the fixtures are wrong, but because the **spec evolved**.
+Fixtures in this repo use **golden outputs** (`expected.json` / `expected.patch`) that represent the *correct* result for each scenario. Over time, these goldens can become **outdated** when we intentionally improve schemas, prompts, or agent contracts. When that happens, running `npm run verify` will fail across many fixtures—not because the fixtures are wrong, but because the **spec evolved**.
 
 Instead of editing dozens or hundreds of files by hand, contributors use:
 
@@ -277,24 +346,28 @@ This command automatically regenerates each fixture’s `expected.*` file using 
 
 Think of it like Jest’s snapshot updates:
 
-> _You write a fixture once, and snapshot mode keeps it healthy whenever the spec evolves._
+> *You write a fixture once, and snapshot mode keeps it healthy whenever the spec evolves.*
 
 # Exceptions
+
 ## Documentation-Only Patch Rule
------------------------------
+
+---
+
 Documentation-only or comment-only patches are explicitly permitted when the architect clearly requests documentation improvements (e.g., TSDoc, README updates, inline comments). Such patches remain subject to all other rules: minimal, atomic, no forbidden paths, and no runtime behavior changes.
 
-
 ## Configuration & Non-Source File Safety Rule
--------------------------------------------
+
+---
+
 When a task requires modifying configuration, environment, workflow, or other normally-forbidden files, the architect MUST:
 
-  1. Explicitly list *every* configuration or non-source file that is permitted
-     to be modified for this task (e.g., .github/workflows/ci.yml,
-     config/staging.json, migrations/001-add-users.sql).
+1. Explicitly list *every* configuration or non-source file that is permitted
+   to be modified for this task (e.g., .github/workflows/ci.yml,
+   config/staging.json, migrations/001-add-users.sql).
 
-  2. Reaffirm that all other configuration, environment, or non-source files
-     remain forbidden. No sibling files or directories are implicitly allowed.
+2. Reaffirm that all other configuration, environment, or non-source files
+   remain forbidden. No sibling files or directories are implicitly allowed.
 
 This explicit-file-whitelist requirement ensures the planner, coder, and reviewer
 operate with a deterministic and safe scope, preventing accidental or speculative
