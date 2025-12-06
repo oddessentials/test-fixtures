@@ -1,0 +1,11 @@
+{
+    "comments": [
+        {
+            "path": "src/routes/adminRoutes.ts",
+            "line": 6,
+            "message": "Correctly checks for ADMIN role and returns 403. Good use of explicit status code.",
+            "blocking": false
+        }
+    ],
+    "decision": "approve"
+}

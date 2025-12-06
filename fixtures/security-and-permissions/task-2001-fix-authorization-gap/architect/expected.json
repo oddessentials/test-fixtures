@@ -1,0 +1,18 @@
+{
+    "highLevelSummary": "Identify the route handler for `/api/admin/system-stats` and insert a check to verify that `req.user.role` is 'ADMIN'. If not, return a 403 Forbidden error. Ensure no changes are made to global authentication.",
+    "pagesOrScreens": [],
+    "apis": [
+        {
+            "name": "Get System Stats",
+            "description": "Returns system stats",
+            "method": "GET",
+            "path": "/api/admin/system-stats",
+            "authRequired": true
+        }
+    ],
+    "dataModels": [],
+    "recommendedFileStructure": [
+        "src/routes/adminRoutes.ts",
+        "src/tests/adminRoutes.test.ts"
+    ]
+}

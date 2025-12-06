@@ -1,0 +1,24 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "type": "fix",
+            "description": "Add welcome_message to en.json",
+            "file": "src/locales/en.json",
+            "complexity": "low",
+            "dependsOn": []
+        },
+        {
+            "id": "2",
+            "type": "fix",
+            "description": "Replace hardcoded text with translation key in Welcome.tsx",
+            "file": "src/components/Welcome.tsx",
+            "complexity": "low",
+            "dependsOn": [
+                "1"
+            ]
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}

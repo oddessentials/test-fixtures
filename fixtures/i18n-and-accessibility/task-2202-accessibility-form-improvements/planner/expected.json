@@ -1,0 +1,14 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "type": "fix",
+            "description": "Improve accessibility markup in SignupForm",
+            "file": "src/components/SignupForm.tsx",
+            "complexity": "low",
+            "dependsOn": []
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}

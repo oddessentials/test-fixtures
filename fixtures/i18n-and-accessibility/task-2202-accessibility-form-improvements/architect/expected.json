@@ -1,0 +1,11 @@
+{
+    "highLevelSummary": "Update `SignupForm.tsx` to improve accessibility. Change the submit `div` to a `<button type=\"submit\">`. Add `aria-label` or `<label>` tags to inputs.",
+    "pagesOrScreens": [
+        "Signup Screen"
+    ],
+    "apis": [],
+    "dataModels": [],
+    "recommendedFileStructure": [
+        "src/components/SignupForm.tsx"
+    ]
+}

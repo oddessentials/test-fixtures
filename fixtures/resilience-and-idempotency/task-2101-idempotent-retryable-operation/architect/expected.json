@@ -1,0 +1,20 @@
+{
+    "highLevelSummary": "Modify `processPayment` to handle idempotency and retries. Check a store for `idempotencyKey`. If missing, call external API with exponential backoff retry (3 attempts) on transient errors. Save result before returning.",
+    "pagesOrScreens": [],
+    "apis": [],
+    "dataModels": [
+        {
+            "name": "IdempotencyRecord",
+            "fields": [
+                "key",
+                "result",
+                "createdAt"
+            ],
+            "primaryKey": "key"
+        }
+    ],
+    "recommendedFileStructure": [
+        "src/services/payment.ts",
+        "src/utils/retry.ts"
+    ]
+}

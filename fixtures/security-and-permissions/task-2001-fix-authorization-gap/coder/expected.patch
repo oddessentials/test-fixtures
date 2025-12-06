@@ -1,0 +1,26 @@
+diff --git a/src/routes/adminRoutes.ts b/src/routes/adminRoutes.ts
+index e69de29..d954848 100644
+--- a/src/routes/adminRoutes.ts
++++ b/src/routes/adminRoutes.ts
+@@ -4,6 +4,9 @@ const router = Router();
+ 
+ router.get('/system-stats', (req, res) => {
+   // TODO: Add role check
++  if ((req as any).user?.role !== 'ADMIN') {
++    return res.status(403).json({ error: 'Forbidden' });
++  }
+   res.json({
+     uptime: process.uptime(),
+     cpuUsage: process.cpuUsage()
+diff --git a/src/tests/adminRoutes.test.ts b/src/tests/adminRoutes.test.ts
+index e69de29..d954848 100644
+--- a/src/tests/adminRoutes.test.ts
++++ b/src/tests/adminRoutes.test.ts
+@@ -2,4 +2,7 @@ describe('Admin Routes', () => {
+   it('should be implemented', () => {
+     expect(true).toBe(true);
+   });
++  it('should return 403 for non-admins', () => {
++    // test implementation
++  });
+ });

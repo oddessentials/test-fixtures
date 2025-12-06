@@ -1,0 +1,24 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "type": "fix",
+            "description": "Add input validation and sanitization to comments controller",
+            "file": "src/controllers/comments.ts",
+            "complexity": "low",
+            "dependsOn": []
+        },
+        {
+            "id": "2",
+            "type": "fix",
+            "description": "Add tests for valid and invalid comment inputs",
+            "file": "src/tests/comments.test.ts",
+            "complexity": "low",
+            "dependsOn": [
+                "1"
+            ]
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}

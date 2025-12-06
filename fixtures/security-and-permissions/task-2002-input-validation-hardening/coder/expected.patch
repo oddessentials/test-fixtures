@@ -1,0 +1,32 @@
+diff --git a/src/controllers/comments.ts b/src/controllers/comments.ts
+index ...
+--- a/src/controllers/comments.ts
++++ b/src/controllers/comments.ts
+@@ -3,8 +3,13 @@ import { Request, Response } from 'express';
+ export const createComment = (req: Request, res: Response) => {
+   const { content } = req.body;
+ 
++  if (!content || typeof content !== 'string' || content.length < 1 || content.length > 500) {
++    return res.status(400).json({ error: 'Invalid content' });
++  }
++  const sanitized = content.replace(/<[^>]*>/g, '');
++
+   // Save to DB (mocked)
+-  console.log('Saving comment:', content);
++  console.log('Saving comment:', sanitized);
+ 
+-  res.status(201).json({ success: true, content });
++  res.status(201).json({ success: true, content: sanitized });
+ };
+diff --git a/src/tests/comments.test.ts b/src/tests/comments.test.ts
+index ...
+--- a/src/tests/comments.test.ts
++++ b/src/tests/comments.test.ts
+@@ -3,4 +3,7 @@ describe('Comments', () => {
+   it('should create a comment', () => {
+     // mock request
+   });
++  it('should reject invalid comments', () => {
++    // test
++  });
+ });

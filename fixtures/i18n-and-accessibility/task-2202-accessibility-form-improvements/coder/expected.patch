@@ -1,0 +1,17 @@
+diff --git a/src/components/SignupForm.tsx b/src/components/SignupForm.tsx
+index ...
+--- a/src/components/SignupForm.tsx
++++ b/src/components/SignupForm.tsx
+@@ -3,8 +3,8 @@ import React from 'react';
+ export const SignupForm = () => {
+   return (
+     <form>
+-      <input type="text" placeholder="Email" />
+-      <input type="password" placeholder="Password" />
+-      <div onClick={() => alert('submit')}>Sign Up</div>
++      <input type="text" placeholder="Email" aria-label="Email" />
++      <input type="password" placeholder="Password" aria-label="Password" />
++      <button type="submit" onClick={() => alert('submit')}>Sign Up</button>
+     </form>
+   );
+ };

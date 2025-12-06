@@ -1,0 +1,18 @@
+{
+    "highLevelSummary": "Modify the `/api/comments` handler in `src/controllers/comments.ts` to validate the `content` field. Ensure it is a non-empty string with max length 500. Strip HTML tags to prevent XSS. Return 400 Bad Request for invalid input.",
+    "pagesOrScreens": [],
+    "apis": [
+        {
+            "name": "Create Comment",
+            "description": "Creates a new comment",
+            "method": "POST",
+            "path": "/api/comments",
+            "authRequired": true
+        }
+    ],
+    "dataModels": [],
+    "recommendedFileStructure": [
+        "src/controllers/comments.ts",
+        "src/tests/comments.test.ts"
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "type": "fix",
+            "description": "Implement retry logic utility",
+            "file": "src/utils/retry.ts",
+            "complexity": "low",
+            "dependsOn": []
+        },
+        {
+            "id": "2",
+            "type": "fix",
+            "description": "Update processPayment to use retry and enforce idempotency",
+            "file": "src/services/payment.ts",
+            "complexity": "medium",
+            "dependsOn": [
+                "1"
+            ]
+        },
+        {
+            "id": "3",
+            "type": "fix",
+            "description": "Add tests for retries and idempotency",
+            "file": "src/tests/payment.test.ts",
+            "complexity": "low",
+            "dependsOn": [
+                "2"
+            ]
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}

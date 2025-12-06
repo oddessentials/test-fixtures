@@ -1,0 +1,12 @@
+{
+    "highLevelSummary": "Refactor `Welcome.tsx` to use i18n. Add `welcome_message` to `src/locales/en.json`. Replace literal string 'Welcome to our App' with `t('welcome_message')`.",
+    "pagesOrScreens": [
+        "Welcome Screen"
+    ],
+    "apis": [],
+    "dataModels": [],
+    "recommendedFileStructure": [
+        "src/components/Welcome.tsx",
+        "src/locales/en.json"
+    ]
+}
