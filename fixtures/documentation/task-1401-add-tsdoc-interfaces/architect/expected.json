@@ -1,0 +1,9 @@
+{
+    "highLevelSummary": "Add TSDoc comments to User interface in src/types/user.ts for better developer experience.",
+    "pagesOrScreens": [],
+    "apis": [],
+    "dataModels": [],
+    "recommendedFileStructure": [
+        "src/types/user.ts"
+    ]
+}

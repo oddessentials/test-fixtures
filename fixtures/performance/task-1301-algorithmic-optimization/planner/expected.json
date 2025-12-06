@@ -1,0 +1,15 @@
+{
+    "tasks": [
+        {
+            "id": "refactor-find-duplicates",
+            "title": "Refactor findDuplicates to use Set for O(N) complexity",
+            "description": "Rewrite the findDuplicates logic in src/utils/arrayUtils.ts to use a Set to track seen items, reducing complexity from O(N^2) to O(N). Ensure function signature is preserved.",
+            "type": "refactor",
+            "complexity": "low",
+            "file": "src/utils/arrayUtils.ts",
+            "dependsOn": []
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}

@@ -1161,6 +1161,251 @@
           }
         }
       ]
+    },
+        {
+      "id": "api-design-and-versioning",
+      "name": "API Design, Backwards Compatibility, and Versioning",
+      "range": "1500-1599",
+      "tasks": [
+        {
+          "id": "task-1501-non-breaking-additive-change",
+          "title": "Non-breaking additive API change",
+          "agents": {
+            "architect": {
+              "description": "Requests adding an optional field or query parameter to an existing endpoint and states explicitly that the change must be backwards-compatible. No existing client behavior may break."
+            },
+            "planner": {
+              "description": "Creates tasks to update handler logic, request/response types, and tests. Does not produce tasks that remove or rename existing fields or alter established semantics."
+            },
+            "coder": {
+              "description": "Implements the optional field in a minimal patch, updates types, and adds or updates tests. Avoids touching surrounding code or unrelated endpoints."
+            },
+            "reviewer": {
+              "description": "Ensures backwards compatibility is preserved, the new field is optional, and no unrelated refactors or breaking changes appear in the patch."
+            },
+            "swarm": {
+              "description": "End-to-end additive API evolution with zero behavior changes for existing clients."
+            }
+          }
+        },
+        {
+          "id": "task-1502-api-deprecation-and-v2",
+          "title": "Deprecate field and add v2 endpoint",
+          "agents": {
+            "architect": {
+              "description": "Describes a deprecated field in v1 and requests a new v2 endpoint. Specifies v1 must remain fully functional during transition."
+            },
+            "planner": {
+              "description": "Produces tasks to add v2 route, annotate deprecated field in v1, and update tests for both versions. No removal tasks for v1 behavior."
+            },
+            "coder": {
+              "description": "Implements v2 endpoint and deprecation markers while keeping v1 logic intact. Patch must be minimal and aligned with architect scope."
+            },
+            "reviewer": {
+              "description": "Checks that v1 remains untouched behaviorally, v2 is correct, and deprecation markers are present but non-breaking."
+            },
+            "swarm": {
+              "description": "Scenario for careful versioned API evolution handling both old and new contracts."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "database-migrations",
+      "name": "Database Migrations & Data Integrity",
+      "range": "1600-1699",
+      "tasks": [
+        {
+          "id": "task-1601-add-column-with-backfill",
+          "title": "Add non-nullable column safely",
+          "agents": {
+            "architect": {
+              "description": "Requests addition of a non-nullable column using safe multi-step migration: add nullable column -> backfill data -> enforce NOT NULL."
+            },
+            "planner": {
+              "description": "Emits tasks for migration creation, application code adjustments, and backfill checks. No destructive steps."
+            },
+            "coder": {
+              "description": "Implements additive-first migration sequence and code updates. Does not alter unrelated models or tables."
+            },
+            "reviewer": {
+              "description": "Verifies correct ordering (add, backfill, enforce), tests new schema behavior, and ensures zero data loss."
+            },
+            "swarm": {
+              "description": "End-to-end safe DB evolution with data integrity guarantees."
+            }
+          }
+        },
+        {
+          "id": "task-1602-table-split-with-compat",
+          "title": "Table split with compatibility window",
+          "agents": {
+            "architect": {
+              "description": "Describes splitting a large table into two normalized tables while maintaining compatibility for existing queries during the migration window."
+            },
+            "planner": {
+              "description": "Produces tasks for new schema creation, incremental data copy, temporary dual-read/dual-write logic, and eventual cleanup."
+            },
+            "coder": {
+              "description": "Implements migrations and code changes such that no callers break mid-migration; cleanup only after compatibility is confirmed."
+            },
+            "reviewer": {
+              "description": "Checks for compatibility guarantees, safe rollout sequencing, and presence of fallback paths if needed."
+            },
+            "swarm": {
+              "description": "Scenario for multi-step backward-compatible database refactors."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "config-and-feature-flags",
+      "name": "Configuration, Environments, and Feature Flags",
+      "range": "1700-1799",
+      "tasks": [
+        {
+          "id": "task-1701-feature-flagged-rollout",
+          "title": "Add feature behind config flag",
+          "agents": {
+            "architect": {
+              "description": "Requests addition of a new feature behind an existing flag system. Behavior when flag=off must remain identical to current production."
+            },
+            "planner": {
+              "description": "Emits tasks for integrating the feature with the config system, writing tests for both flag states, and updating documentation."
+            },
+            "coder": {
+              "description": "Implements the feature behind a flag; no behavior change when disabled; avoids hardcoded .env changes."
+            },
+            "reviewer": {
+              "description": "Ensures zero regression with the flag off, clean flag integration, and minimal code surface changes."
+            },
+            "swarm": {
+              "description": "End-to-end gated feature rollout ensuring safe, reversible changes."
+            }
+          }
+        },
+        {
+          "id": "task-1702-environment-specific-bugfix",
+          "title": "Fix staging-only config bug",
+          "agents": {
+            "architect": {
+              "description": "Describes a bug affecting staging only. Production config cannot be touched."
+            },
+            "planner": {
+              "description": "Emits tasks to inspect environment configs, correct the staging value, and validate behavior. No changes to production or shared config."
+            },
+            "coder": {
+              "description": "Modifies staging config only; avoids touching production secrets or values."
+            },
+            "reviewer": {
+              "description": "Checks that only the intended environment is changed, no secrets are leaked, and no global hacks are added."
+            },
+            "swarm": {
+              "description": "Scenario to teach precise environment-scoped fixes with zero collateral edits."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ci-cd-and-automation",
+      "name": "CI/CD Pipelines and Automation",
+      "range": "1800-1899",
+      "tasks": [
+        {
+          "id": "task-1801-add-ci-checks",
+          "title": "Wire lint and test to CI workflow",
+          "agents": {
+            "architect": {
+              "description": "Requests that existing lint and test scripts be executed in CI. No source code changes are allowed."
+            },
+            "planner": {
+              "description": "Creates tasks targeting only config/workflow files. No weakening of tests or logic."
+            },
+            "coder": {
+              "description": "Adds or updates CI workflow to run lint and test scripts. Does not touch application code."
+            },
+            "reviewer": {
+              "description": "Ensures workflow is correct, minimal, and free of hacks like \"|| true\" that mask failures."
+            },
+            "swarm": {
+              "description": "Teaches Swarm CI integration without altering app correctness."
+            }
+          }
+        },
+        {
+          "id": "task-1802-fix-broken-ci-job",
+          "title": "Repair misconfigured pipeline",
+          "agents": {
+            "architect": {
+              "description": "Describes a failing CI job due to configuration error (bad script, missing environment variable, wrong path). Application code is correct."
+            },
+            "planner": {
+              "description": "Produces tasks limited to pipeline config; includes validation to re-run CI checks."
+            },
+            "coder": {
+              "description": "Fixes only workflow/YAML configuration; does not touch any source, tests, or package scripts."
+            },
+            "reviewer": {
+              "description": "Ensures the fix resolves the root cause and does not weaken CI checks."
+            },
+            "swarm": {
+              "description": "Scenario where agents debug pipeline configuration rather than app code."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "error-handling-and-observability",
+      "name": "Error Handling, Logging, and Observability",
+      "range": "1900-1999",
+      "tasks": [
+        {
+          "id": "task-1901-standardize-error-handling",
+          "title": "Consistent error handling pattern",
+          "agents": {
+            "architect": {
+              "description": "Requests standardizing error-handling across selected handlers without changing external API behavior."
+            },
+            "planner": {
+              "description": "Emits tasks for refactoring designated files only, introducing shared error helpers, and updating tests accordingly."
+            },
+            "coder": {
+              "description": "Refactors only targeted paths; maintains old semantics; avoids unrelated cleanup."
+            },
+            "reviewer": {
+              "description": "Ensures behavior is preserved, logs are consistent, and no new failure modes are introduced."
+            },
+            "swarm": {
+              "description": "Scenario ensuring behavior-preserving refactors remain minimal and controlled."
+            }
+          }
+        },
+        {
+          "id": "task-1902-add-structured-logging",
+          "title": "Add structured logs and correlation ID",
+          "agents": {
+            "architect": {
+              "description": "Requests adding structured logging and correlation IDs to critical paths. No PII allowed; no functional change."
+            },
+            "planner": {
+              "description": "Creates tasks to inject logging and propagate the ID through a narrow call chain; includes tests asserting logs when enabled."
+            },
+            "coder": {
+              "description": "Implements logs and ID propagation only in designated areas; avoids touching unrelated modules."
+            },
+            "reviewer": {
+              "description": "Ensures logs omit sensitive data, logging levels are appropriate, and the patch surface is minimal."
+            },
+            "swarm": {
+              "description": "Scenario teaching observability without creating noise, regressions, or unnecessary refactors."
+            }
+          }
+        }
+      ]
     }
   ]
 }

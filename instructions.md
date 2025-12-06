@@ -4,7 +4,7 @@
 
 This guide explains exactly how to create fixtures under `/fixtures/` for all topics, tasks, and agents described in the master JSON. The goal is a fully populated, schema-valid, deterministic fixture suite.
 
-Follow this process consistently for every task.
+Follow this process consistently for every task in the api-design-and-versioning, database-migrations, config-and-feature-flags, ci-cd-and-automation, and error-handling-and-observability topics.
 
 ---
 
@@ -45,7 +45,27 @@ fixtures/
 * `repo/` is included only when a scenario requires source files.
 * fixtures/zero-change/task-001-is-even/* is already completed and serves as a template for new tasks.
 * Never try to update src/schemas/*.
-* Documentation-only or comment-only patches are explicitly permitted when the architect clearly requests documentation improvements (e.g., TSDoc, README updates, inline comments). Such patches remain subject to all other rules: minimal, atomic, no forbidden paths, no runtime behavior changes.
+
+
+## Documentation-Only Patch Rule
+-----------------------------
+Documentation-only or comment-only patches are explicitly permitted when the architect clearly requests documentation improvements (e.g., TSDoc, README updates, inline comments). Such patches remain subject to all other rules: minimal, atomic, no forbidden paths, and no runtime behavior changes.
+
+
+## Configuration & Non-Source File Safety Rule
+-------------------------------------------
+When a task requires modifying configuration, environment, workflow, or other normally-forbidden files, the architect MUST:
+
+  1. Explicitly list *every* configuration or non-source file that is permitted
+     to be modified for this task (e.g., .github/workflows/ci.yml,
+     config/staging.json, migrations/001-add-users.sql).
+
+  2. Reaffirm that all other configuration, environment, or non-source files
+     remain forbidden. No sibling files or directories are implicitly allowed.
+
+This explicit-file-whitelist requirement ensures the planner, coder, and reviewer
+operate with a deterministic and safe scope, preventing accidental or speculative
+changes outside the architect’s intent.
 
 ---
 
