@@ -1,0 +1,11 @@
+{
+    "decision": "approve",
+    "comments": [
+        {
+            "message": "Valid ESM conversion.",
+            "path": "src/utils.js",
+            "line": 1,
+            "blocking": false
+        }
+    ]
+}

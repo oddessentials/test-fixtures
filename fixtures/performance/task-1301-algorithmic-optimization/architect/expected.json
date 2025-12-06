@@ -1,0 +1,9 @@
+{
+    "highLevelSummary": "Refactor findDuplicates in src/utils/arrayUtils.ts from O(N^2) to O(N) using a Set, without changing the signature.",
+    "pagesOrScreens": [],
+    "apis": [],
+    "dataModels": [],
+    "recommendedFileStructure": [
+        "src/utils/arrayUtils.ts"
+    ]
+}

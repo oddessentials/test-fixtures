@@ -1,0 +1,12 @@
+{
+    "feasibility": "feasible",
+    "highLevelSummary": "Update `lodash` from 4.17.15 to 4.17.21 to resolve a prototype pollution vulnerability. No other dependencies should be changed.",
+    "complexity": "low",
+    "pagesOrScreens": [],
+    "apis": [],
+    "dataModels": [],
+    "recommendedFileStructure": [
+        "package.json",
+        "package-lock.json"
+    ]
+}

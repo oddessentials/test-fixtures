@@ -1,0 +1,15 @@
+{
+    "tasks": [
+        {
+            "id": "add-tsdoc-user",
+            "title": "Add TSDoc to User interface",
+            "description": "Add TSDoc comments to the User interface and its properties (id, name, email) in src/types/user.ts.",
+            "type": "refactor",
+            "complexity": "low",
+            "file": "src/types/user.ts",
+            "dependsOn": []
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}

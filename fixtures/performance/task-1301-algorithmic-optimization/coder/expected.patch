@@ -1,0 +1,23 @@
+diff --git a/src/utils/arrayUtils.ts b/src/utils/arrayUtils.ts
+--- a/src/utils/arrayUtils.ts
++++ b/src/utils/arrayUtils.ts
+@@ -1,10 +1,11 @@
+ export function findDuplicates(items: number[]): number[] {
+-  const duplicates: number[] = [];
+-  for (let i = 0; i < items.length; i++) {
+-    for (let j = i + 1; j < items.length; j++) {
+-      if (items[i] === items[j] && !duplicates.includes(items[i])) {
+-        duplicates.push(items[i]);
+-      }
++  const seen = new Set<number>();
++  const duplicates = new Set<number>();
++  for (const item of items) {
++    if (seen.has(item)) {
++      duplicates.add(item);
++    } else {
++      seen.add(item);
+     }
+   }
+-  return duplicates;
++  return Array.from(duplicates);
+ }

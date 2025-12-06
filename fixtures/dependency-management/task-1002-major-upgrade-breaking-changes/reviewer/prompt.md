@@ -1,0 +1,37 @@
+You are a senior code reviewer.
+
+## Task
+Review the React 18 upgrade patch.
+
+## Patch
+```diff
+diff --git a/package.json b/package.json
+index 1234567..8901234 100644
+--- a/package.json
++++ b/package.json
+@@ -2,6 +2,6 @@
+   "dependencies": {
+-    "react": "^17.0.2",
+-    "react-dom": "^17.0.2"
++    "react": "^18.0.0",
++    "react-dom": "^18.0.0"
+   }
+ }
+diff --git a/src/index.js b/src/index.js
+index 1234567..8901234 100644
+--- a/src/index.js
++++ b/src/index.js
+@@ -1,5 +1,6 @@
+ import React from 'react';
+-import ReactDOM from 'react-dom';
++import { createRoot } from 'react-dom/client';
+ import App from './App';
+ 
+-ReactDOM.render(<App />, document.getElementById('root'));
++const root = createRoot(document.getElementById('root'));
++root.render(<App />);
+```
+
+## Considerations
+- Did they use the new root API?
+- Are the versions correct?

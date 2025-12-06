@@ -1,0 +1,14 @@
+{
+    "tasks": [
+        {
+            "id": "refactor-getdata",
+            "type": "refactor",
+            "description": "Refactor getData function in src/api.js to use async/await and try/catch",
+            "complexity": "low",
+            "file": "src/api.js",
+            "dependsOn": []
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}

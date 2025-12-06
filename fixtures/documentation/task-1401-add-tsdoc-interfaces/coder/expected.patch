@@ -1,0 +1,15 @@
+diff --git a/src/types/user.ts b/src/types/user.ts
+--- a/src/types/user.ts
++++ b/src/types/user.ts
+@@ -1,5 +1,10 @@
++/**
++ * User interface representing a system user.
++ */
+ export interface User {
++  /** Unique identifier */
+   id: string;
++  /** Full name of the user */
+   name: string;
++  /** Optional email address */
+   email?: string;
+ }

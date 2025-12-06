@@ -1,0 +1,11 @@
+{
+    "decision": "approve",
+    "comments": [
+        {
+            "message": "Looks good. Correctly updates lodash to 4.17.21.",
+            "path": "package.json",
+            "line": 4,
+            "blocking": false
+        }
+    ]
+}

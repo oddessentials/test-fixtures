@@ -937,6 +937,475 @@
           }
         }
       ]
+    },
+    {
+      "id": "dependency-management",
+      "name": "Dependency Management & Security",
+      "range": "1000-1099",
+      "tasks": [
+        {
+          "id": "task-1001-security-audit-fix",
+          "title": "Fix security vulnerability in dependency",
+          "agents": {
+            "architect": {
+              "description": "Identifies a vulnerable dependency from a security report and specifies the exact target safe version, plus any constraints or non-goals (for example, 'do not change unrelated packages'). Clearly indicates that updating package.json and lockfiles is allowed for this dependency."
+            },
+            "planner": {
+              "description": "Plans a focused upgrade of the vulnerable package and any directly affected dependents, including tasks to run tests or checks that confirm the vulnerability is resolved. Does not introduce unrelated dependency changes."
+            },
+            "coder": {
+              "description": "Updates package.json and the appropriate lockfile entries for the vulnerable dependency, and adjusts usage if the API changed slightly. Keeps the patch minimal and does not modify unrelated dependencies."
+            },
+            "reviewer": {
+              "description": "Verifies that the dependency is upgraded to the specified safe version, that tests or checks pass, and that no unnecessary dependency churn or regressions were introduced."
+            },
+            "swarm": {
+              "description": "End-to-end security patch application and verification, limited to the vulnerable dependency and its immediate impact surface."
+            }
+          }
+        },
+        {
+          "id": "task-1002-major-upgrade-breaking-changes",
+          "title": "Major dependency upgrade with breaking changes",
+          "agents": {
+            "architect": {
+              "description": "Analyzes the release notes and breaking changes for a major library update (for example, a React or database driver upgrade), outlines required code migrations, and explicitly defines scope and non-goals (for example, 'migrate auth flows only; do not refactor unrelated features')."
+            },
+            "planner": {
+              "description": "Creates a structured migration plan that includes dependency updates in package.json/lockfiles and a set of refactoring tasks that touch only the affected modules. Tasks should capture any required API changes and necessary test updates."
+            },
+            "coder": {
+              "description": "Performs the major version upgrade, updates package.json/lockfiles, and refactors only the code affected by the breaking changes to align with the new API surface. Avoids speculative cleanups unrelated to the migration."
+            },
+            "reviewer": {
+              "description": "Checks that deprecated or removed APIs are no longer used, that the code is compatible with the new major version, and that the change set respects the migration scope without introducing unrelated modifications."
+            },
+            "swarm": {
+              "description": "End-to-end major version migration that handles API breakage in a controlled, scoped way and results in passing tests."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "modernization",
+      "name": "Codebase Modernization & Refactoring",
+      "range": "1100-1199",
+      "tasks": [
+        {
+          "id": "task-1101-convert-cjs-to-esm",
+          "title": "Convert CommonJS to ESM",
+          "agents": {
+            "architect": {
+              "description": "Specifies converting a legacy CommonJS module (or small set of modules) to ES Modules (import/export), including any constraints such as which files are in scope and whether package.json \"type\" may be updated. Emphasizes that behavior must remain the same."
+            },
+            "planner": {
+              "description": "Plans file-by-file conversion from require/module.exports to import/export, including any necessary updates to the package.json type field or build config. Ensures the plan is limited to the specified modules."
+            },
+            "coder": {
+              "description": "Rewrites require/module.exports to import/export syntax, fixes relative import paths, and updates any package.json type settings as needed. Does not change runtime behavior beyond what is required for the module system migration."
+            },
+            "reviewer": {
+              "description": "Ensures valid ESM syntax, correct imports/exports, and that the modules behave the same as before. Flags any unintended behavior changes or unnecessary edits."
+            },
+            "swarm": {
+              "description": "End-to-end module system migration for a small, clearly scoped portion of the codebase while preserving behavior."
+            }
+          }
+        },
+        {
+          "id": "task-1102-async-await-migration",
+          "title": "Migrate callbacks/promises to async/await",
+          "agents": {
+            "architect": {
+              "description": "Identifies specific callback-based or complex promise-based code paths that should be simplified using async/await, and states that behavior and error handling must remain semantically equivalent. May highlight tricky flows such as retries or parallelism."
+            },
+            "planner": {
+              "description": "Targets specific functions or modules for async/await refactoring, ensuring the plan is limited to those areas. Includes tasks to preserve error-handling semantics, logging, and ordering."
+            },
+            "coder": {
+              "description": "Refactors the selected code to clean async/await syntax, preserving the original control flow and error handling logic. Does not introduce new features or broaden the scope beyond the identified functions."
+            },
+            "reviewer": {
+              "description": "Verifies that the async behavior, error handling, and side effects strictly match the original behavior, and that tests cover the refactored flows. Flags any behavioral drift or unnecessary changes."
+            },
+            "swarm": {
+              "description": "Code modernization run focused on async/await adoption that improves readability without changing behavior."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "debugging-and-repair",
+      "name": "Debugging & Repository Repair",
+      "range": "1200-1299",
+      "tasks": [
+        {
+          "id": "task-1201-fix-broken-build",
+          "title": "Fix broken build / compilation error",
+          "agents": {
+            "architect": {
+              "description": "Analyzes compilation or build errors (for example, TypeScript type mismatches, missing files, or misconfigured scripts), diagnoses the root cause, and specifies the minimal area of the codebase that should be changed to repair the build."
+            },
+            "planner": {
+              "description": "Creates one or a small number of targeted tasks to resolve the specific build error while avoiding broad, speculative changes. May include a task to adjust configuration or types and a task to run the build to confirm the fix."
+            },
+            "coder": {
+              "description": "Fixes the code or configuration so the build passes, using the smallest reasonable change (for example, adding a missing import or correcting a type). Does not suppress errors with broad ignore flags or unrelated configuration changes."
+            },
+            "reviewer": {
+              "description": "Confirms that the build now passes, that the fix addresses the real root cause, and that the patch does not simply hide the error (for example, by disabling type checking). Flags any unnecessary or risky edits."
+            },
+            "swarm": {
+              "description": "End-to-end repair of a repository in a broken state, resulting in a clean, passing build with minimal, well-justified changes."
+            }
+          }
+        },
+        {
+          "id": "task-1202-flakey-test-fix",
+          "title": "Fix flakey or failing test",
+          "agents": {
+            "architect": {
+              "description": "Identifies a specific test that fails intermittently or under certain conditions, points to likely causes such as race conditions, timing issues, or improper mocking, and describes the expected stable behavior."
+            },
+            "planner": {
+              "description": "Plans a focused investigation and remediation of the flaky test, including tasks to adjust test setup, mocking, or underlying code behavior. Explicitly avoids fixes that simply disable or weaken the test."
+            },
+            "coder": {
+              "description": "Refactors the test and/or implementation code so the test becomes deterministic and reliable (for example, by removing brittle timing assumptions or improper shared state). Does not fix flakiness by adding arbitrary sleeps or skipping the test."
+            },
+            "reviewer": {
+              "description": "Validates that the test is now stable across runs, that the underlying behavior is correct, and that no shortcuts were taken (such as test skipping, excessive timeouts, or over-broad mocking)."
+            },
+            "swarm": {
+              "description": "Scenario focused on making an unreliable test stable through proper debugging of asynchronous or stateful behavior, rather than weakening test coverage."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "performance",
+      "name": "Performance Optimization",
+      "range": "1300-1399",
+      "tasks": [
+        {
+          "id": "task-1301-algorithmic-optimization",
+          "title": "Optimize algorithmic complexity",
+          "agents": {
+            "architect": {
+              "description": "Identifies a specific performance bottleneck (e.g., an O(N^2) lookup) and prescribes a more efficient data structure or algorithm (e.g., using a Set/Map for O(1) access), while warning against premature optimization of non-hot paths."
+            },
+            "planner": {
+              "description": "Plans the refactor to switch algorithms, ensuring that edge cases and correctness tests are retained or updated. Includes validation steps to confirm the performance gain."
+            },
+            "coder": {
+              "description": "Reimplements the logic with the improved algorithm, ensuring the new implementation passes all existing tests and preserves external behavior. Produces a minimal, focused patch."
+            },
+            "reviewer": {
+              "description": "Verifies the time complexity improvement and ensures the code remains readable and correct. Flags any regression in readability or correctness that is not justified by the speedup."
+            },
+            "swarm": {
+              "description": "End-to-end performance refactor improving efficiency while maintaining correctness."
+            }
+          }
+        },
+        {
+          "id": "task-1302-bundle-size-reduction",
+          "title": "Reduction of bundle size via tree-shaking",
+          "agents": {
+            "architect": {
+              "description": "Identifies large imports that can be tree-shaken (e.g. importing an entire library instead of a single submodule) and mandates more granular imports."
+            },
+            "planner": {
+              "description": "Targets specific files and import statements for refinement, ensuring no functionality is lost."
+            },
+            "coder": {
+              "description": "Refactors imports to be more granular and specific, removing unused code paths where possible while preserving behavior."
+            },
+            "reviewer": {
+              "description": "Checks that the application still builds and runs correctly and that refined imports reduce bundle size without regressions."
+            },
+            "swarm": {
+              "description": "Optimization run focusing on efficient packaging and import management."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "documentation",
+      "name": "Documentation & Standardization",
+      "range": "1400-1499",
+      "tasks": [
+        {
+          "id": "task-1401-add-tsdoc-interfaces",
+          "title": "Add TSDoc to exported interfaces",
+          "agents": {
+            "architect": {
+              "description": "Requests the addition of missing TSDoc comments to public interfaces and types to improve developer experience. Makes clear that no logic should be changed and that documentation-only patches are allowed."
+            },
+            "planner": {
+              "description": "Identifies undocumented exported types and creates a plan to document them. Ensures all tasks are documentation-only and do not modify runtime behavior."
+            },
+            "coder": {
+              "description": "Writes clear, concise TSDoc comments for the specified types, explaining properties and usage without altering logic. Produces a documentation-only unified diff, containing only comment additions or updates."
+            },
+            "reviewer": {
+              "description": "Checks that comments are accurate, helpful, and follow standard TSDoc formatting. Ensures the patch is documentation-only (no behavior changes) and flags any unnecessary edits or reformatting."
+            },
+            "swarm": {
+              "description": "Documentation-focused run where the patch consists solely of TSDoc updates, now officially supported by the system."
+            }
+          }
+        }
+      ]
+    },
+        {
+      "id": "api-design-and-versioning",
+      "name": "API Design, Backwards Compatibility, and Versioning",
+      "range": "1500-1599",
+      "tasks": [
+        {
+          "id": "task-1501-non-breaking-additive-change",
+          "title": "Non-breaking additive API change",
+          "agents": {
+            "architect": {
+              "description": "Requests adding an optional field or query parameter to an existing endpoint and states explicitly that the change must be backwards-compatible. No existing client behavior may break."
+            },
+            "planner": {
+              "description": "Creates tasks to update handler logic, request/response types, and tests. Does not produce tasks that remove or rename existing fields or alter established semantics."
+            },
+            "coder": {
+              "description": "Implements the optional field in a minimal patch, updates types, and adds or updates tests. Avoids touching surrounding code or unrelated endpoints."
+            },
+            "reviewer": {
+              "description": "Ensures backwards compatibility is preserved, the new field is optional, and no unrelated refactors or breaking changes appear in the patch."
+            },
+            "swarm": {
+              "description": "End-to-end additive API evolution with zero behavior changes for existing clients."
+            }
+          }
+        },
+        {
+          "id": "task-1502-api-deprecation-and-v2",
+          "title": "Deprecate field and add v2 endpoint",
+          "agents": {
+            "architect": {
+              "description": "Describes a deprecated field in v1 and requests a new v2 endpoint. Specifies v1 must remain fully functional during transition."
+            },
+            "planner": {
+              "description": "Produces tasks to add v2 route, annotate deprecated field in v1, and update tests for both versions. No removal tasks for v1 behavior."
+            },
+            "coder": {
+              "description": "Implements v2 endpoint and deprecation markers while keeping v1 logic intact. Patch must be minimal and aligned with architect scope."
+            },
+            "reviewer": {
+              "description": "Checks that v1 remains untouched behaviorally, v2 is correct, and deprecation markers are present but non-breaking."
+            },
+            "swarm": {
+              "description": "Scenario for careful versioned API evolution handling both old and new contracts."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "database-migrations",
+      "name": "Database Migrations & Data Integrity",
+      "range": "1600-1699",
+      "tasks": [
+        {
+          "id": "task-1601-add-column-with-backfill",
+          "title": "Add non-nullable column safely",
+          "agents": {
+            "architect": {
+              "description": "Requests addition of a non-nullable column using safe multi-step migration: add nullable column -> backfill data -> enforce NOT NULL."
+            },
+            "planner": {
+              "description": "Emits tasks for migration creation, application code adjustments, and backfill checks. No destructive steps."
+            },
+            "coder": {
+              "description": "Implements additive-first migration sequence and code updates. Does not alter unrelated models or tables."
+            },
+            "reviewer": {
+              "description": "Verifies correct ordering (add, backfill, enforce), tests new schema behavior, and ensures zero data loss."
+            },
+            "swarm": {
+              "description": "End-to-end safe DB evolution with data integrity guarantees."
+            }
+          }
+        },
+        {
+          "id": "task-1602-table-split-with-compat",
+          "title": "Table split with compatibility window",
+          "agents": {
+            "architect": {
+              "description": "Describes splitting a large table into two normalized tables while maintaining compatibility for existing queries during the migration window."
+            },
+            "planner": {
+              "description": "Produces tasks for new schema creation, incremental data copy, temporary dual-read/dual-write logic, and eventual cleanup."
+            },
+            "coder": {
+              "description": "Implements migrations and code changes such that no callers break mid-migration; cleanup only after compatibility is confirmed."
+            },
+            "reviewer": {
+              "description": "Checks for compatibility guarantees, safe rollout sequencing, and presence of fallback paths if needed."
+            },
+            "swarm": {
+              "description": "Scenario for multi-step backward-compatible database refactors."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "config-and-feature-flags",
+      "name": "Configuration, Environments, and Feature Flags",
+      "range": "1700-1799",
+      "tasks": [
+        {
+          "id": "task-1701-feature-flagged-rollout",
+          "title": "Add feature behind config flag",
+          "agents": {
+            "architect": {
+              "description": "Requests addition of a new feature behind an existing flag system. Behavior when flag=off must remain identical to current production."
+            },
+            "planner": {
+              "description": "Emits tasks for integrating the feature with the config system, writing tests for both flag states, and updating documentation."
+            },
+            "coder": {
+              "description": "Implements the feature behind a flag; no behavior change when disabled; avoids hardcoded .env changes."
+            },
+            "reviewer": {
+              "description": "Ensures zero regression with the flag off, clean flag integration, and minimal code surface changes."
+            },
+            "swarm": {
+              "description": "End-to-end gated feature rollout ensuring safe, reversible changes."
+            }
+          }
+        },
+        {
+          "id": "task-1702-environment-specific-bugfix",
+          "title": "Fix staging-only config bug",
+          "agents": {
+            "architect": {
+              "description": "Describes a bug affecting staging only. Production config cannot be touched."
+            },
+            "planner": {
+              "description": "Emits tasks to inspect environment configs, correct the staging value, and validate behavior. No changes to production or shared config."
+            },
+            "coder": {
+              "description": "Modifies staging config only; avoids touching production secrets or values."
+            },
+            "reviewer": {
+              "description": "Checks that only the intended environment is changed, no secrets are leaked, and no global hacks are added."
+            },
+            "swarm": {
+              "description": "Scenario to teach precise environment-scoped fixes with zero collateral edits."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ci-cd-and-automation",
+      "name": "CI/CD Pipelines and Automation",
+      "range": "1800-1899",
+      "tasks": [
+        {
+          "id": "task-1801-add-ci-checks",
+          "title": "Wire lint and test to CI workflow",
+          "agents": {
+            "architect": {
+              "description": "Requests that existing lint and test scripts be executed in CI. No source code changes are allowed."
+            },
+            "planner": {
+              "description": "Creates tasks targeting only config/workflow files. No weakening of tests or logic."
+            },
+            "coder": {
+              "description": "Adds or updates CI workflow to run lint and test scripts. Does not touch application code."
+            },
+            "reviewer": {
+              "description": "Ensures workflow is correct, minimal, and free of hacks like \"|| true\" that mask failures."
+            },
+            "swarm": {
+              "description": "Teaches Swarm CI integration without altering app correctness."
+            }
+          }
+        },
+        {
+          "id": "task-1802-fix-broken-ci-job",
+          "title": "Repair misconfigured pipeline",
+          "agents": {
+            "architect": {
+              "description": "Describes a failing CI job due to configuration error (bad script, missing environment variable, wrong path). Application code is correct."
+            },
+            "planner": {
+              "description": "Produces tasks limited to pipeline config; includes validation to re-run CI checks."
+            },
+            "coder": {
+              "description": "Fixes only workflow/YAML configuration; does not touch any source, tests, or package scripts."
+            },
+            "reviewer": {
+              "description": "Ensures the fix resolves the root cause and does not weaken CI checks."
+            },
+            "swarm": {
+              "description": "Scenario where agents debug pipeline configuration rather than app code."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "error-handling-and-observability",
+      "name": "Error Handling, Logging, and Observability",
+      "range": "1900-1999",
+      "tasks": [
+        {
+          "id": "task-1901-standardize-error-handling",
+          "title": "Consistent error handling pattern",
+          "agents": {
+            "architect": {
+              "description": "Requests standardizing error-handling across selected handlers without changing external API behavior."
+            },
+            "planner": {
+              "description": "Emits tasks for refactoring designated files only, introducing shared error helpers, and updating tests accordingly."
+            },
+            "coder": {
+              "description": "Refactors only targeted paths; maintains old semantics; avoids unrelated cleanup."
+            },
+            "reviewer": {
+              "description": "Ensures behavior is preserved, logs are consistent, and no new failure modes are introduced."
+            },
+            "swarm": {
+              "description": "Scenario ensuring behavior-preserving refactors remain minimal and controlled."
+            }
+          }
+        },
+        {
+          "id": "task-1902-add-structured-logging",
+          "title": "Add structured logs and correlation ID",
+          "agents": {
+            "architect": {
+              "description": "Requests adding structured logging and correlation IDs to critical paths. No PII allowed; no functional change."
+            },
+            "planner": {
+              "description": "Creates tasks to inject logging and propagate the ID through a narrow call chain; includes tests asserting logs when enabled."
+            },
+            "coder": {
+              "description": "Implements logs and ID propagation only in designated areas; avoids touching unrelated modules."
+            },
+            "reviewer": {
+              "description": "Ensures logs omit sensitive data, logging levels are appropriate, and the patch surface is minimal."
+            },
+            "swarm": {
+              "description": "Scenario teaching observability without creating noise, regressions, or unnecessary refactors."
+            }
+          }
+        }
+      ]
     }
   ]
 }

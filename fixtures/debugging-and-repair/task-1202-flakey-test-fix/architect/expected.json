@@ -1,0 +1,11 @@
+{
+    "feasibility": "feasible",
+    "highLevelSummary": "Fix race condition in `test/flaky.test.js` by awaiting the async `fetchData` call.",
+    "complexity": "low",
+    "pagesOrScreens": [],
+    "apis": [],
+    "dataModels": [],
+    "recommendedFileStructure": [
+        "test/flaky.test.js"
+    ]
+}

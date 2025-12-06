@@ -1,0 +1,11 @@
+{
+    "decision": "approve",
+    "comments": [
+        {
+            "message": "Correct fix. Awaiting the promise ensures the test waits for completion.",
+            "path": "test/flaky.test.js",
+            "line": 1,
+            "blocking": false
+        }
+    ]
+}

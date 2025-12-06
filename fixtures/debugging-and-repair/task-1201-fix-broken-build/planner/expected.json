@@ -1,0 +1,14 @@
+{
+    "tasks": [
+        {
+            "id": "fix-type-error",
+            "type": "fix",
+            "description": "Change retries value from string '3' to number 3 in src/main.ts",
+            "complexity": "low",
+            "file": "src/main.ts",
+            "dependsOn": []
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}

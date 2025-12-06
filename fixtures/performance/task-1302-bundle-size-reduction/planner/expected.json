@@ -1,0 +1,15 @@
+{
+    "tasks": [
+        {
+            "id": "refactor-import",
+            "title": "Refactor lodash import in src/index.ts",
+            "description": "Change the import in `src/index.ts` from `import * as _ from 'lodash'` to a granular import like `import uniq from 'lodash/uniq'` to reduce bundle size. Update usage of `_.uniq` to `uniq`.",
+            "type": "refactor",
+            "complexity": "low",
+            "file": "src/index.ts",
+            "dependsOn": []
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}
