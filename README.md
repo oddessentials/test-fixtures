@@ -260,3 +260,6 @@ This command automatically regenerates each fixture’s `expected.*` file using 
 Think of it like Jest’s snapshot updates:
 
 > _You write a fixture once, and snapshot mode keeps it healthy whenever the spec evolves._
+
+# Exceptions
+Documentation-only or comment-only patches are explicitly permitted when the architect clearly requests documentation improvements (e.g., TSDoc, README updates, inline comments). Such patches remain subject to all other rules: minimal, atomic, no forbidden paths, no runtime behavior changes.

@@ -1084,6 +1084,83 @@
           }
         }
       ]
+    },
+    {
+      "id": "performance",
+      "name": "Performance Optimization",
+      "range": "1300-1399",
+      "tasks": [
+        {
+          "id": "task-1301-algorithmic-optimization",
+          "title": "Optimize algorithmic complexity",
+          "agents": {
+            "architect": {
+              "description": "Identifies a specific performance bottleneck (e.g., an O(N^2) lookup) and prescribes a more efficient data structure or algorithm (e.g., using a Set/Map for O(1) access), while warning against premature optimization of non-hot paths."
+            },
+            "planner": {
+              "description": "Plans the refactor to switch algorithms, ensuring that edge cases and correctness tests are retained or updated. Includes validation steps to confirm the performance gain."
+            },
+            "coder": {
+              "description": "Reimplements the logic with the improved algorithm, ensuring the new implementation passes all existing tests and preserves external behavior. Produces a minimal, focused patch."
+            },
+            "reviewer": {
+              "description": "Verifies the time complexity improvement and ensures the code remains readable and correct. Flags any regression in readability or correctness that is not justified by the speedup."
+            },
+            "swarm": {
+              "description": "End-to-end performance refactor improving efficiency while maintaining correctness."
+            }
+          }
+        },
+        {
+          "id": "task-1302-bundle-size-reduction",
+          "title": "Reduction of bundle size via tree-shaking",
+          "agents": {
+            "architect": {
+              "description": "Identifies large imports that can be tree-shaken (e.g. importing an entire library instead of a single submodule) and mandates more granular imports."
+            },
+            "planner": {
+              "description": "Targets specific files and import statements for refinement, ensuring no functionality is lost."
+            },
+            "coder": {
+              "description": "Refactors imports to be more granular and specific, removing unused code paths where possible while preserving behavior."
+            },
+            "reviewer": {
+              "description": "Checks that the application still builds and runs correctly and that refined imports reduce bundle size without regressions."
+            },
+            "swarm": {
+              "description": "Optimization run focusing on efficient packaging and import management."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "documentation",
+      "name": "Documentation & Standardization",
+      "range": "1400-1499",
+      "tasks": [
+        {
+          "id": "task-1401-add-tsdoc-interfaces",
+          "title": "Add TSDoc to exported interfaces",
+          "agents": {
+            "architect": {
+              "description": "Requests the addition of missing TSDoc comments to public interfaces and types to improve developer experience. Makes clear that no logic should be changed and that documentation-only patches are allowed."
+            },
+            "planner": {
+              "description": "Identifies undocumented exported types and creates a plan to document them. Ensures all tasks are documentation-only and do not modify runtime behavior."
+            },
+            "coder": {
+              "description": "Writes clear, concise TSDoc comments for the specified types, explaining properties and usage without altering logic. Produces a documentation-only unified diff, containing only comment additions or updates."
+            },
+            "reviewer": {
+              "description": "Checks that comments are accurate, helpful, and follow standard TSDoc formatting. Ensures the patch is documentation-only (no behavior changes) and flags any unnecessary edits or reformatting."
+            },
+            "swarm": {
+              "description": "Documentation-focused run where the patch consists solely of TSDoc updates, now officially supported by the system."
+            }
+          }
+        }
+      ]
     }
   ]
 }

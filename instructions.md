@@ -4,7 +4,7 @@
 
 This guide explains exactly how to create fixtures under `/fixtures/` for all topics, tasks, and agents described in the master JSON. The goal is a fully populated, schema-valid, deterministic fixture suite.
 
-Follow this process consistently for every task the dependency-management, moderinzation, and debugging-and-repair topics.
+Follow this process consistently for every task the performance and documentation topics.
 
 ---
 
@@ -44,6 +44,7 @@ fixtures/
 * Adding a readable slug (`.../task-001-is-even/`) is recommended.
 * `repo/` is included only when a scenario requires source files.
 * fixtures/zero-change/task-001-is-even/* is already completed and serves as a template for new tasks.
+* Documentation-only or comment-only patches are explicitly permitted when the architect clearly requests documentation improvements (e.g., TSDoc, README updates, inline comments). Such patches remain subject to all other rules: minimal, atomic, no forbidden paths, no runtime behavior changes.
 
 ---
 
