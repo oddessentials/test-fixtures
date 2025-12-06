@@ -1,0 +1,12 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "title": "Fix Lint Error",
+            "description": "Change argument type from 'any' to 'unknown' in logData.",
+            "file": "src/utils.ts",
+            "type": "fix",
+            "dependency": []
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "title": "Create AppError Class",
+            "description": "Implement AppError extending Error with statusCode.",
+            "file": "src/utils/AppError.ts",
+            "type": "feature",
+            "dependency": []
+        },
+        {
+            "id": "2",
+            "title": "Implement Error Middleware",
+            "description": "Create global error handler middleware.",
+            "file": "src/middleware/errorHandler.ts",
+            "type": "feature",
+            "dependency": [
+                "1"
+            ]
+        }
+    ]
+}

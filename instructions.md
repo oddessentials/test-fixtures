@@ -4,8 +4,8 @@
 
 This guide explains exactly how to create fixtures under `/fixtures/` for all topics, tasks, and agents described in the master JSON. The goal is a fully populated, schema-valid, deterministic fixture suite.
 
-Follow this process consistently for every task in the api-design-and-versioning, database-migrations, config-and-feature-flags, ci-cd-and-automation, and error-handling-and-observability topics.
-
+Follow this process consistently for every task in the api-design-and-versioning, database-migrations, and config-and-feature-flags topics.
+Follow this process consistently for every task in the security-and-permissions, resilience-and-idempotency, and i18n-and-accessibility topics.
 ---
 
 # **1. Directory Layout (Authoritative)**
@@ -218,3 +218,22 @@ should produce one `OK` line for every `(topic × task × agent)` combination.
 
 When all are green, the fixture suite fully covers the entire JSON roadmap with deterministic, schema-valid, scenario-correct goldens.
 
+---
+
+# 8. Fixture Verify File Import Rule
+
+**All `verify.ts` files must import fixture helpers from the *source* tree, using this exact relative path:**
+
+```ts
+import {
+  verifyArchitect,
+  verifyPlanner,
+  verifyCoder,
+  verifyReviewer,
+  type VerifyCtx,
+  type VerifyResult
+} from "../../../../src/fixture-helpers";
+```
+
+**Do NOT import from `dist/`** and do NOT change the relative depth.
+Every verify file lives four directories below project root, so this path is always correct.

@@ -1,0 +1,11 @@
+{
+    "comments": [
+        {
+            "file": "src/utils/AppError.ts",
+            "line": 10,
+            "message": "Correctly sets isOperational tag.",
+            "blocking": false
+        }
+    ],
+    "decision": "approve"
+}

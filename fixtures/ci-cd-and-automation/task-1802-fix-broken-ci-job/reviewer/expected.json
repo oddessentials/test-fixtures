@@ -1,0 +1,11 @@
+{
+    "comments": [
+        {
+            "file": "src/utils.ts",
+            "line": 2,
+            "message": "Correctly replaced 'any' with 'unknown'.",
+            "blocking": false
+        }
+    ],
+    "decision": "approve"
+}

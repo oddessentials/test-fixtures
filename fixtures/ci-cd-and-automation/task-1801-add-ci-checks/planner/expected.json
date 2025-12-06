@@ -1,0 +1,12 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "title": "Create CI Workflow",
+            "description": "Add .github/workflows/ci.yml with lint, test, build steps for Node 18.",
+            "file": ".github/workflows/ci.yml",
+            "type": "feature",
+            "dependency": []
+        }
+    ]
+}

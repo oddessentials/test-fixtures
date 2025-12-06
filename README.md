@@ -182,6 +182,24 @@ or
 { ok: false, reason: "bad complexity value" }
 ```
 
+## Fixture Verify File Import Rule
+
+**All `verify.ts` files must import fixture helpers from the *source* tree, using this exact relative path:**
+
+```ts
+import {
+  verifyArchitect,
+  verifyPlanner,
+  verifyCoder,
+  verifyReviewer,
+  type VerifyCtx,
+  type VerifyResult
+} from "../../../../src/fixture-helpers";
+```
+
+**Do NOT import from `dist/`** and do NOT change the relative depth.
+Every verify file lives four directories below project root, so this path is always correct.
+
 ---
 
 # **6. Philosophy of This Suite**

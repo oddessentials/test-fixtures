@@ -1,0 +1,19 @@
+diff --git a/src/utils/AppError.ts b/src/utils/AppError.ts
+new file mode 100644
+index 0000000..4444444
+--- /dev/null
++++ b/src/utils/AppError.ts
+@@ -0,0 +1,12 @@
++export class AppError extends Error {
++  public statusCode: number;
++  public status: string;
++  public isOperational: boolean;
++
++  constructor(message: string, statusCode: number) {
++    super(message);
++    this.statusCode = statusCode;
++    this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
++    this.isOperational = true;
++    Error.captureStackTrace(this, this.constructor);
++  }
++}

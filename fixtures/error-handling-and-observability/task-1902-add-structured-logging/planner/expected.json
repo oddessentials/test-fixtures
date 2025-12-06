@@ -1,0 +1,22 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "title": "Create Logger",
+            "description": "Implement structured logger in src/utils/logger.ts.",
+            "file": "src/utils/logger.ts",
+            "type": "feature",
+            "dependency": []
+        },
+        {
+            "id": "2",
+            "title": "Request Logger Middleware",
+            "description": "Implement middleware to log request details.",
+            "file": "src/middleware/requestLogger.ts",
+            "type": "feature",
+            "dependency": [
+                "1"
+            ]
+        }
+    ]
+}
