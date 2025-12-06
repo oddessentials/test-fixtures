@@ -1,4 +1,4 @@
-import { verifyPlanner, type VerifyCtx, type VerifyResult } from "../../../../dist/src/fixture-helpers";
+import { verifyPlanner, type VerifyCtx, type VerifyResult } from "../../../../src/fixture-helpers";
 
 export function verify(ctx: VerifyCtx): VerifyResult {
     return verifyPlanner(ctx, (plan) => {

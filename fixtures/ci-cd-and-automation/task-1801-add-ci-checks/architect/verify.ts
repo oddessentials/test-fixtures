@@ -1,4 +1,4 @@
-import { verifyArchitect, type VerifyCtx, type VerifyResult } from "../../../../dist/src/fixture-helpers";
+import { verifyArchitect, type VerifyCtx, type VerifyResult } from "../../../../src/fixture-helpers";
 
 export function verify(ctx: VerifyCtx): VerifyResult {
   return verifyArchitect(ctx, (spec) => {

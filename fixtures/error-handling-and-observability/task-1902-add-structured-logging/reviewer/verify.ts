@@ -1,4 +1,4 @@
-import { verifyReviewer, type VerifyCtx, type VerifyResult } from "../../../../dist/src/fixture-helpers";
+import { verifyReviewer, type VerifyCtx, type VerifyResult } from "../../../../src/fixture-helpers";
 
 export function verify(ctx: VerifyCtx): VerifyResult {
     return verifyReviewer(ctx, (review) => {
