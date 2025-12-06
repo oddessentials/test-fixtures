@@ -1,0 +1,46 @@
+{
+  "tasks": [
+    {
+      "id": "create-shipping-table",
+      "description": "Create migration to add the new order_shipping table with foreign key to orders in migrations/001-create-order-shipping-table.sql",
+      "file": "migrations/001-create-order-shipping-table.sql",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": []
+    },
+    {
+      "id": "copy-shipping-data",
+      "description": "Create migration to copy existing shipping data from orders table to the new order_shipping table in migrations/002-copy-shipping-data.sql",
+      "file": "migrations/002-copy-shipping-data.sql",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": ["create-shipping-table"]
+    },
+    {
+      "id": "create-shipping-model",
+      "description": "Create new OrderShipping model in src/models/order-shipping.ts with proper type definitions",
+      "file": "src/models/order-shipping.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["create-shipping-table"]
+    },
+    {
+      "id": "update-order-model",
+      "description": "Update Order model in src/models/order.ts to implement dual-write logic that writes to both old columns and new order_shipping table during compatibility window",
+      "file": "src/models/order.ts",
+      "type": "refactor",
+      "complexity": "medium",
+      "dependsOn": ["create-shipping-model"]
+    },
+    {
+      "id": "add-order-tests",
+      "description": "Add tests for the table split including dual-write behavior and backwards compatibility in test/models/order.test.ts",
+      "file": "test/models/order.test.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["update-order-model"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

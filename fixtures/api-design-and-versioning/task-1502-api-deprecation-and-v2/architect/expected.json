@@ -1,0 +1,42 @@
+{
+  "highLevelSummary": "Deprecate the price field in the v1 products endpoint and introduce a new v2 endpoint with priceInCents and formattedPrice fields. The v1 endpoint must remain fully functional during the transition period; existing clients must continue to work without modification.",
+  "pagesOrScreens": [],
+  "apis": [
+    {
+      "name": "GET /api/v1/products/:id",
+      "description": "Retrieve product by ID (v1). The price field is now deprecated; clients should migrate to v2.",
+      "method": "GET",
+      "path": "/api/v1/products/:id",
+      "authRequired": true
+    },
+    {
+      "name": "GET /api/v2/products/:id",
+      "description": "Retrieve product by ID (v2). Returns priceInCents and formattedPrice instead of the deprecated price field.",
+      "method": "GET",
+      "path": "/api/v2/products/:id",
+      "authRequired": true
+    }
+  ],
+  "dataModels": [
+    {
+      "name": "ProductResponseV1",
+      "fields": ["id", "name", "price"],
+      "primaryKey": "id",
+      "indexes": null,
+      "relations": null
+    },
+    {
+      "name": "ProductResponseV2",
+      "fields": ["id", "name", "priceInCents", "formattedPrice"],
+      "primaryKey": "id",
+      "indexes": null,
+      "relations": null
+    }
+  ],
+  "recommendedFileStructure": [
+    "src/routes/products-v1.ts",
+    "src/routes/products-v2.ts",
+    "src/types/product.ts",
+    "test/routes/products.test.ts"
+  ]
+}

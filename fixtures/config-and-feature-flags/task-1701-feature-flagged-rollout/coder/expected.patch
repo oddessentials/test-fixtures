@@ -1,0 +1,97 @@
+diff --git a/src/config/flags.ts b/src/config/flags.ts
+index 0000000..0000001 100644
+--- a/src/config/flags.ts
++++ b/src/config/flags.ts
+@@ -1,4 +1,6 @@
+ export const featureFlags = {
+   ENABLE_ANALYTICS: process.env.ENABLE_ANALYTICS === 'true',
+   ENABLE_BETA_FEATURES: process.env.ENABLE_BETA_FEATURES === 'true',
++  // Dark mode feature flag - defaults to false for safe rollout
++  ENABLE_DARK_MODE: process.env.ENABLE_DARK_MODE === 'true',
+ };
+diff --git a/src/components/DarkModeToggle.tsx b/src/components/DarkModeToggle.tsx
+index 0000000..0000001 100644
+--- /dev/null
++++ b/src/components/DarkModeToggle.tsx
+@@ -0,0 +1,22 @@
++import React, { useState } from 'react';
++
++export function DarkModeToggle() {
++  const [isDarkMode, setIsDarkMode] = useState(false);
++
++  const handleToggle = () => {
++    setIsDarkMode(!isDarkMode);
++    document.documentElement.classList.toggle('dark', !isDarkMode);
++  };
++
++  return (
++    <div className="dark-mode-toggle">
++      <label htmlFor="dark-mode">
++        <span>Dark Mode</span>
++        <input
++          type="checkbox"
++          id="dark-mode"
++          checked={isDarkMode}
++          onChange={handleToggle}
++        />
++      </label>
++    </div>
++  );
++}
+diff --git a/src/components/Settings.tsx b/src/components/Settings.tsx
+index 0000000..0000001 100644
+--- a/src/components/Settings.tsx
++++ b/src/components/Settings.tsx
+@@ -1,4 +1,6 @@
+ import React from 'react';
++import { featureFlags } from '../config/flags';
++import { DarkModeToggle } from './DarkModeToggle';
+ 
+ export function Settings() {
+   return (
+@@ -6,6 +8,9 @@ export function Settings() {
+       <h1>Settings</h1>
+       <section>
+         <h2>Preferences</h2>
++        {featureFlags.ENABLE_DARK_MODE && (
++          <DarkModeToggle />
++        )}
+         <p>Configure your account preferences here.</p>
+       </section>
+     </div>
+diff --git a/test/components/Settings.test.tsx b/test/components/Settings.test.tsx
+index 0000000..0000001 100644
+--- a/test/components/Settings.test.tsx
++++ b/test/components/Settings.test.tsx
+@@ -1,5 +1,6 @@
+ import React from 'react';
+ import { render, screen } from '@testing-library/react';
++import * as flags from '../src/config/flags';
+ import { Settings } from '../src/components/Settings';
+ 
+ describe('Settings component', () => {
+@@ -7,4 +8,24 @@ describe('Settings component', () => {
+     render(<Settings />);
+     expect(screen.getByText('Settings')).toBeInTheDocument();
+   });
++
++  describe('with ENABLE_DARK_MODE flag', () => {
++    it('should show dark mode toggle when flag is enabled', () => {
++      jest.spyOn(flags, 'featureFlags', 'get').mockReturnValue({
++        ...flags.featureFlags,
++        ENABLE_DARK_MODE: true,
++      });
++      render(<Settings />);
++      expect(screen.getByText('Dark Mode')).toBeInTheDocument();
++    });
++
++    it('should hide dark mode toggle when flag is disabled', () => {
++      jest.spyOn(flags, 'featureFlags', 'get').mockReturnValue({
++        ...flags.featureFlags,
++        ENABLE_DARK_MODE: false,
++      });
++      render(<Settings />);
++      expect(screen.queryByText('Dark Mode')).not.toBeInTheDocument();
++    });
++  });
+ });

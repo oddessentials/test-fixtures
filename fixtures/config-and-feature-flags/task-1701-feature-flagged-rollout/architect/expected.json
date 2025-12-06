@@ -1,0 +1,14 @@
+{
+  "highLevelSummary": "Add a dark mode feature behind the ENABLE_DARK_MODE feature flag. When the flag is disabled, the application must behave identically to current production with no visible changes. When enabled, users see a dark mode toggle in settings. No hardcoded .env changes; tests must cover both flag states.",
+  "pagesOrScreens": [
+    "Settings page with conditional dark mode toggle"
+  ],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "src/config/flags.ts",
+    "src/components/Settings.tsx",
+    "src/components/DarkModeToggle.tsx",
+    "test/components/Settings.test.tsx"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "highLevelSummary": "Add a non-nullable phone_number column to the users table using a safe multi-step migration: first add the column as nullable, then backfill existing rows, then enforce the NOT NULL constraint. No data loss is acceptable; the migration must be non-destructive.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [
+    {
+      "name": "User",
+      "fields": ["id", "email", "name", "phone_number"],
+      "primaryKey": "id",
+      "indexes": ["email"],
+      "relations": null
+    }
+  ],
+  "recommendedFileStructure": [
+    "migrations/001-add-phone-number-nullable.sql",
+    "migrations/002-backfill-phone-number.sql",
+    "migrations/003-enforce-phone-number-not-null.sql",
+    "src/models/user.ts",
+    "test/models/user.test.ts"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "tasks": [
+    {
+      "id": "add-nullable-column",
+      "description": "Create migration to add phone_number column as nullable to the users table in migrations/001-add-phone-number-nullable.sql",
+      "file": "migrations/001-add-phone-number-nullable.sql",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "backfill-phone-number",
+      "description": "Create migration to backfill existing rows with a default phone_number value in migrations/002-backfill-phone-number.sql",
+      "file": "migrations/002-backfill-phone-number.sql",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": ["add-nullable-column"]
+    },
+    {
+      "id": "enforce-not-null",
+      "description": "Create migration to enforce NOT NULL constraint on phone_number column after backfill is complete in migrations/003-enforce-phone-number-not-null.sql",
+      "file": "migrations/003-enforce-phone-number-not-null.sql",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["backfill-phone-number"]
+    },
+    {
+      "id": "update-user-model",
+      "description": "Update User model in src/models/user.ts to include the phone_number field",
+      "file": "src/models/user.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["add-nullable-column"]
+    },
+    {
+      "id": "add-user-tests",
+      "description": "Add tests for the new phone_number field in test/models/user.test.ts to verify schema behavior",
+      "file": "test/models/user.test.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["update-user-model"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

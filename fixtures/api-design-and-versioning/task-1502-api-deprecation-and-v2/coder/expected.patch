@@ -1,0 +1,89 @@
+diff --git a/src/types/product.ts b/src/types/product.ts
+index 0000000..0000001 100644
+--- a/src/types/product.ts
++++ b/src/types/product.ts
+@@ -1,5 +1,17 @@
+ export interface ProductResponseV1 {
+   id: string;
+   name: string;
+-  price: number;
++  /**
++   * @deprecated Use priceInCents from v2 API instead
++   */
++  price: number;
++}
++
++export interface ProductResponseV2 {
++  id: string;
++  name: string;
++  priceInCents: number;
++  formattedPrice: string;
+ }
+diff --git a/src/routes/products-v1.ts b/src/routes/products-v1.ts
+index 0000000..0000001 100644
+--- a/src/routes/products-v1.ts
++++ b/src/routes/products-v1.ts
+@@ -1,10 +1,14 @@
+ import { ProductResponseV1 } from '../types/product';
+ 
++/**
++ * @deprecated This endpoint is deprecated. Please migrate to /api/v2/products/:id
++ */
+ export async function getProductByIdV1(id: string): Promise<ProductResponseV1> {
+   const product = await fetchProductFromDb(id);
+   return {
+     id: product.id,
+     name: product.name,
++    // @deprecated - use priceInCents from v2 API
+     price: product.priceInCents,
+   };
+ }
+diff --git a/src/routes/products-v2.ts b/src/routes/products-v2.ts
+index 0000000..0000001 100644
+--- /dev/null
++++ b/src/routes/products-v2.ts
+@@ -0,0 +1,15 @@
++import { ProductResponseV2 } from '../types/product';
++
++export async function getProductByIdV2(id: string): Promise<ProductResponseV2> {
++  const product = await fetchProductFromDb(id);
++  return {
++    id: product.id,
++    name: product.name,
++    priceInCents: product.priceInCents,
++    formattedPrice: formatPrice(product.priceInCents),
++  };
++}
++
++function formatPrice(cents: number): string {
++  return `$${(cents / 100).toFixed(2)}`;
++}
+diff --git a/test/routes/products.test.ts b/test/routes/products.test.ts
+index 0000000..0000001 100644
+--- a/test/routes/products.test.ts
++++ b/test/routes/products.test.ts
+@@ -1,4 +1,5 @@
+ import { getProductByIdV1 } from '../src/routes/products-v1';
++import { getProductByIdV2 } from '../src/routes/products-v2';
+ 
+ describe('GET /api/v1/products/:id', () => {
+   it('should return product with deprecated price field', async () => {
+@@ -8,4 +9,20 @@ describe('GET /api/v1/products/:id', () => {
+     expect(response.price).toBeDefined();
+   });
+ });
++
++describe('GET /api/v2/products/:id', () => {
++  it('should return product with priceInCents and formattedPrice', async () => {
++    const response = await getProductByIdV2('product-1');
++    expect(response.id).toBe('product-1');
++    expect(response.priceInCents).toBeDefined();
++    expect(response.formattedPrice).toBeDefined();
++    expect(response.formattedPrice).toMatch(/^\$\d+\.\d{2}$/);
++  });
++
++  it('should not include deprecated price field', async () => {
++    const response = await getProductByIdV2('product-1');
++    expect(response).not.toHaveProperty('price');
++  });
++});

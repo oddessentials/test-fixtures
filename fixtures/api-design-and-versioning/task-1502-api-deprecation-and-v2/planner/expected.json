@@ -1,0 +1,38 @@
+{
+  "tasks": [
+    {
+      "id": "update-product-types",
+      "description": "Add ProductResponseV2 type with priceInCents and formattedPrice fields, and add deprecation JSDoc to price field in ProductResponseV1 in src/types/product.ts",
+      "file": "src/types/product.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "add-deprecation-to-v1",
+      "description": "Add deprecation comment/annotation to the price field in the v1 products handler response in src/routes/products-v1.ts",
+      "file": "src/routes/products-v1.ts",
+      "type": "refactor",
+      "complexity": "low",
+      "dependsOn": ["update-product-types"]
+    },
+    {
+      "id": "create-v2-endpoint",
+      "description": "Create new GET /api/v2/products/:id endpoint in src/routes/products-v2.ts that returns priceInCents and formattedPrice instead of the deprecated price field",
+      "file": "src/routes/products-v2.ts",
+      "type": "feature",
+      "complexity": "medium",
+      "dependsOn": ["update-product-types"]
+    },
+    {
+      "id": "add-version-tests",
+      "description": "Add tests for both v1 (verifying backwards compatibility and deprecation) and v2 (verifying new response format) endpoints in test/routes/products.test.ts",
+      "file": "test/routes/products.test.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["add-deprecation-to-v1", "create-v2-endpoint"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}

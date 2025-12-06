@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "fix-staging-timeout",
+      "description": "Update API_TIMEOUT value in config/staging.json from 1000 to 30000 to fix the premature timeout issue",
+      "file": "config/staging.json",
+      "type": "fix",
+      "complexity": "low",
+      "dependsOn": []
+    },
+    {
+      "id": "add-staging-config-test",
+      "description": "Add test in test/config/staging.test.ts to validate that API_TIMEOUT is set to the correct value (30000) in staging configuration",
+      "file": "test/config/staging.test.ts",
+      "type": "feature",
+      "complexity": "low",
+      "dependsOn": ["fix-staging-timeout"]
+    }
+  ],
+  "ambiguities": [],
+  "invalidTaskCount": 0
+}
