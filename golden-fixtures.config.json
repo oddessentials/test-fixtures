@@ -1,0 +1,21 @@
+{
+  "fixtures": [
+    "zero-change/task-001-is-even/planner",
+    "zero-change/task-010-no-op/planner",
+    "zero-change/task-000-impossible-requirements/planner",
+
+    "single-file/task-101-single-file-low-complexity/planner",
+
+
+    "chains-and-small-dags/task-201-deep-acyclic-chain/planner",
+    "chains-and-small-dags/task-203-circular-dependency-trap/planner",
+    "chains-and-small-dags/task-204-max-tasks-and-complexity-caps/planner",
+
+    "core-semantics-and-tests/task-300-basic-two-file-decomp/planner",
+    "core-semantics-and-tests/task-301-forbidden-paths-filter/planner",
+    "core-semantics-and-tests/task-302-mixed-types-and-complexities/planner",
+
+    "ambiguity/task-501-unclear-requirements/planner",
+    "ambiguity/task-502-conflicting-constraints/planner"
+  ]
+}

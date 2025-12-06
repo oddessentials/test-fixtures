@@ -43,29 +43,28 @@ fixtures/
 * `<topic-id>` and `<task-id>` come directly from the master JSON.
 * Adding a readable slug (`.../task-001-is-even/`) is recommended.
 * `repo/` is included only when a scenario requires source files.
-* fixtures/zero-change/task-001-is-even/* is already completed and serves as a template for new tasks.
-* Never try to update src/schemas/*.
+* `fixtures/zero-change/task-001-is-even/*` is already completed and serves as a template for new tasks.
+* Never try to update `src/schemas/*`.
 
+---
 
 ## Documentation-Only Patch Rule
------------------------------
+
 Documentation-only or comment-only patches are explicitly permitted when the architect clearly requests documentation improvements (e.g., TSDoc, README updates, inline comments). Such patches remain subject to all other rules: minimal, atomic, no forbidden paths, and no runtime behavior changes.
 
+---
 
 ## Configuration & Non-Source File Safety Rule
--------------------------------------------
+
 When a task requires modifying configuration, environment, workflow, or other normally-forbidden files, the architect MUST:
 
-  1. Explicitly list *every* configuration or non-source file that is permitted
-     to be modified for this task (e.g., .github/workflows/ci.yml,
-     config/staging.json, migrations/001-add-users.sql).
+1. Explicitly list *every* configuration or non-source file that is permitted
+   (e.g., `.github/workflows/ci.yml`, `config/staging.json`, `migrations/001-add-users.sql`).
 
-  2. Reaffirm that all other configuration, environment, or non-source files
-     remain forbidden. No sibling files or directories are implicitly allowed.
+2. Reaffirm that **all other** configuration, environment, or non-source files remain forbidden.
+   No sibling files or directories are implicitly allowed.
 
-This explicit-file-whitelist requirement ensures the planner, coder, and reviewer
-operate with a deterministic and safe scope, preventing accidental or speculative
-changes outside the architect’s intent.
+This explicit-file-whitelist requirement ensures the planner, coder, and reviewer operate with a deterministic and safe scope, preventing accidental or speculative changes outside the architect’s intent.
 
 ---
 
@@ -86,8 +85,14 @@ changes outside the architect’s intent.
 Swap the helper depending on the agent:
 
 ```ts
-import type { VerifyCtx, VerifyResult } from "test-fixtures/fixture-helpers";
-import { verifyArchitect } from "test-fixtures/fixture-helpers"; // or verifyPlanner, verifyCoder, verifyReviewer
+import {
+  verifyArchitect,
+  verifyPlanner,
+  verifyCoder,
+  verifyReviewer,
+  type VerifyCtx,
+  type VerifyResult
+} from "../../../../src/fixture-helpers";
 
 export function verify(ctx: VerifyCtx): VerifyResult {
   return verifyArchitect(ctx, (parsed, ctx) => {
@@ -112,13 +117,11 @@ git checkout -b fixtures/<topic-id>/<task-id>
 
 # create the prompts, expected outputs, verify.ts, and repo/ if required
 
-npm run verify                # fails until all four agents are implemented
-npm run verify -- --update    # only when confident the goldens are correct
-
-git add .
-git commit -m "feat(fixtures): add <topic>/<task-id> full fixture suite"
-git push -u origin HEAD
-# open PR; CI runs "npm run ci"
+npm run verify                     # runs in bootstrap mode (expected == actual)
+npm run verify -- --update         # only when confident the goldens are correct
+npm run verify -- --strict-real-agents   # if real agents are wired in
+npm run verify -- --golden         # run curated golden fixtures only
+npm run verify -- --concurrency 8  # optional parallel execution
 ```
 
 **Important:**
@@ -159,9 +162,10 @@ Use `--update` only when intentionally regenerating goldens (e.g., after updatin
 * Must conform to `reviewerOutputSchema`.
 * Every comment must include:
 
-  ```json
-  "blocking": true | false
-  ```
+```json
+"blocking": true | false
+```
+
 * Comments must be grounded in actual patch lines.
 
 ---
@@ -184,11 +188,6 @@ fixtures/zero-change/task-001-is-even/
   reviewer/verify.ts
 ```
 
-* Architect defines a tiny utility.
-* Planner emits 1 low-complexity fix task.
-* Coder outputs minimal patch correcting logic.
-* Reviewer approves with grounded comments.
-
 Running:
 
 ```bash
@@ -198,6 +197,7 @@ npm run verify
 produces:
 
 ```
+[run-verify] BOOTSTRAP MODE ACTIVE – using expected outputs as actuals.
 zero-change/task-001-is-even/architect OK
 zero-change/task-001-is-even/planner OK
 zero-change/task-001-is-even/coder OK
@@ -214,13 +214,13 @@ A full run of:
 npm run verify
 ```
 
-should produce one `OK` line for every `(topic × task × agent)` combination.
+should produce one `OK` line for every `(topic × task × agent)` combination — or fewer lines when using `--golden`.
 
 When all are green, the fixture suite fully covers the entire JSON roadmap with deterministic, schema-valid, scenario-correct goldens.
 
 ---
 
-# 8. Fixture Verify File Import Rule
+# **8. Fixture Verify File Import Rule**
 
 **All `verify.ts` files must import fixture helpers from the *source* tree, using this exact relative path:**
 
@@ -235,5 +235,6 @@ import {
 } from "../../../../src/fixture-helpers";
 ```
 
-**Do NOT import from `dist/`** and do NOT change the relative depth.
+**Do NOT import from `dist/`**
+and do NOT change the relative depth.
 Every verify file lives four directories below project root, so this path is always correct.
