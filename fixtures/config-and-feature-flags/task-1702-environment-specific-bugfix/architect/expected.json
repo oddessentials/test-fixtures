@@ -1,0 +1,10 @@
+{
+  "highLevelSummary": "Fix the API_TIMEOUT value in the staging configuration from 1000ms to 30000ms. The production configuration must not be touched under any circumstances. No global hacks or workarounds; only the staging environment is affected by this change.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [],
+  "recommendedFileStructure": [
+    "config/staging.json",
+    "test/config/staging.test.ts"
+  ]
+}

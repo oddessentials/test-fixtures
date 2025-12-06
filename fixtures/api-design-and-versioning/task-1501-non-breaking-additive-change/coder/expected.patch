@@ -1,0 +1,63 @@
+diff --git a/src/types/user.ts b/src/types/user.ts
+index 0000000..0000001 100644
+--- a/src/types/user.ts
++++ b/src/types/user.ts
+@@ -1,5 +1,7 @@
+ export interface UserResponse {
+   id: string;
+   name: string;
+   email: string;
++  lastLoginAt?: string;
+ }
++
++export interface UserQueryParams {
++  phoneNumber?: string;
++}
+diff --git a/src/routes/users.ts b/src/routes/users.ts
+index 0000000..0000001 100644
+--- a/src/routes/users.ts
++++ b/src/routes/users.ts
+@@ -1,10 +1,15 @@
+-import { UserResponse } from '../types/user';
++import { UserResponse, UserQueryParams } from '../types/user';
+ 
+-export async function getUserById(id: string): Promise<UserResponse> {
++export async function getUserById(
++  id: string,
++  query?: UserQueryParams
++): Promise<UserResponse> {
+   const user = await fetchUserFromDb(id);
++  if (query?.phoneNumber && !user.phoneNumber) {
++    return null;
++  }
+   return {
+     id: user.id,
+     name: user.name,
+     email: user.email,
++    lastLoginAt: user.lastLoginAt ?? undefined,
+   };
+ }
+diff --git a/test/routes/users.test.ts b/test/routes/users.test.ts
+index 0000000..0000001 100644
+--- a/test/routes/users.test.ts
++++ b/test/routes/users.test.ts
+@@ -10,4 +10,18 @@ describe('GET /api/users/:id', () => {
+     expect(response.name).toBe('Test User');
+     expect(response.email).toBe('test@example.com');
+   });
++
++  it('should include lastLoginAt when available', async () => {
++    const response = await getUserById('user-1');
++    expect(response.lastLoginAt).toBeDefined();
++  });
++
++  it('should work without phoneNumber query parameter (backwards compatible)', async () => {
++    const response = await getUserById('user-1');
++    expect(response.id).toBe('user-1');
++  });
++
++  it('should filter by phoneNumber when provided', async () => {
++    const response = await getUserById('user-1', { phoneNumber: '555-1234' });
++    expect(response).toBeDefined();
++  });
+ });

@@ -1,0 +1,35 @@
+diff --git a/config/staging.json b/config/staging.json
+index 0000000..0000001 100644
+--- a/config/staging.json
++++ b/config/staging.json
+@@ -1,6 +1,6 @@
+ {
+   "environment": "staging",
+   "API_BASE_URL": "https://api.staging.example.com",
+-  "API_TIMEOUT": 1000,
++  "API_TIMEOUT": 30000,
+   "LOG_LEVEL": "debug"
+ }
+diff --git a/test/config/staging.test.ts b/test/config/staging.test.ts
+index 0000000..0000001 100644
+--- a/test/config/staging.test.ts
++++ b/test/config/staging.test.ts
+@@ -1,4 +1,5 @@
+ import stagingConfig from '../config/staging.json';
+ 
+ describe('Staging configuration', () => {
+   it('should have correct environment', () => {
+@@ -6,4 +7,14 @@ describe('Staging configuration', () => {
+     expect(stagingConfig.environment).toBe('staging');
+   });
++
++  it('should have correct API_TIMEOUT value', () => {
++    // API_TIMEOUT should be 30000ms (30 seconds), not 1000ms
++    expect(stagingConfig.API_TIMEOUT).toBe(30000);
++  });
++
++  it('should have reasonable timeout for API calls', () => {
++    // Timeout should be at least 10 seconds to avoid premature timeouts
++    expect(stagingConfig.API_TIMEOUT).toBeGreaterThanOrEqual(10000);
++  });
+ });

@@ -1,0 +1,40 @@
+{
+  "highLevelSummary": "Split the orders table into two normalized tables (orders and order_shipping) while maintaining a compatibility window. Implement dual-write logic and incremental data copy to ensure existing queries continue to work. No data loss is acceptable; the old shipping columns remain during the transition period.",
+  "pagesOrScreens": [],
+  "apis": [],
+  "dataModels": [
+    {
+      "name": "Order",
+      "fields": ["id", "customer_id", "total_amount", "status", "created_at"],
+      "primaryKey": "id",
+      "indexes": ["customer_id"],
+      "relations": [
+        {
+          "field": "shipping",
+          "target": "OrderShipping",
+          "type": "one-to-one"
+        }
+      ]
+    },
+    {
+      "name": "OrderShipping",
+      "fields": ["id", "order_id", "address", "city", "zip", "country"],
+      "primaryKey": "id",
+      "indexes": ["order_id"],
+      "relations": [
+        {
+          "field": "order",
+          "target": "Order",
+          "type": "many-to-one"
+        }
+      ]
+    }
+  ],
+  "recommendedFileStructure": [
+    "migrations/001-create-order-shipping-table.sql",
+    "migrations/002-copy-shipping-data.sql",
+    "src/models/order.ts",
+    "src/models/order-shipping.ts",
+    "test/models/order.test.ts"
+  ]
+}
