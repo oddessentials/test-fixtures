@@ -1,0 +1,38 @@
+You are a senior code reviewer.
+
+## Task
+Review the async/await refactor.
+
+## Patch
+```diff
+diff --git a/src/api.js b/src/api.js
+index 1234567..8901234 100644
+--- a/src/api.js
++++ b/src/api.js
+@@ -1,10 +1,11 @@
+-function getData(url) {
+-  return fetch(url)
+-    .then(response => response.json())
+-    .then(data => {
+-      console.log(data);
+-      return data;
+-    })
+-    .catch(error => {
+-      console.error(error);
+-      throw error;
+-    });
++async function getData(url) {
++  try {
++    const response = await fetch(url);
++    const data = await response.json();
++    console.log(data);
++    return data;
++  } catch (error) {
++    console.error(error);
++    throw error;
++  }
+ }
+```
+
+## Considerations
+- Is error handling preserved?

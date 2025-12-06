@@ -1,0 +1,14 @@
+{
+    "tasks": [
+        {
+            "id": "fix-race-condition",
+            "type": "fix",
+            "description": "Update test/flaky.test.js to use async/await for fetchData",
+            "complexity": "low",
+            "file": "test/flaky.test.js",
+            "dependsOn": []
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}

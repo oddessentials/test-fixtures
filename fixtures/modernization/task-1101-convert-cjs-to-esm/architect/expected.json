@@ -1,0 +1,11 @@
+{
+    "feasibility": "feasible",
+    "highLevelSummary": "Convert `src/utils.js` from CommonJS to ESM by replacing `module.exports` with named exports.",
+    "complexity": "low",
+    "pagesOrScreens": [],
+    "apis": [],
+    "dataModels": [],
+    "recommendedFileStructure": [
+        "src/utils.js"
+    ]
+}

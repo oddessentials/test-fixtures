@@ -1,0 +1,25 @@
+You are a senior code reviewer.
+
+## Task
+Review the ESM conversion.
+
+## Patch
+```diff
+diff --git a/src/utils.js b/src/utils.js
+index 1234567..8901234 100644
+--- a/src/utils.js
++++ b/src/utils.js
+@@ -1,6 +1,2 @@
+-const add = (a, b) => a + b;
+-const subtract = (a, b) => a - b;
+-
+-module.exports = {
+-  add,
+-  subtract
+-};
++export const add = (a, b) => a + b;
++export const subtract = (a, b) => a - b;
+```
+
+## Considerations
+- Is it valid ESM?

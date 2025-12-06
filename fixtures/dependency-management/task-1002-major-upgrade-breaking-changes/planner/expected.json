@@ -1,0 +1,24 @@
+{
+    "tasks": [
+        {
+            "id": "upgrade-deps",
+            "type": "fix",
+            "description": "Upgrade react and react-dom to version 18 in package.json",
+            "complexity": "low",
+            "file": "package.json",
+            "dependsOn": []
+        },
+        {
+            "id": "migrate-render",
+            "type": "refactor",
+            "description": "Replace ReactDOM.render with ReactDOM.createRoot in src/index.js",
+            "complexity": "low",
+            "file": "src/index.js",
+            "dependsOn": [
+                "upgrade-deps"
+            ]
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}

@@ -1,0 +1,24 @@
+You are a senior code reviewer.
+
+## Task
+Review the provided patch for the `lodash` vulnerability fix (upgrade to 4.17.21).
+
+## Patch
+```diff
+diff --git a/package.json b/package.json
+index 1234567..8901234 100644
+--- a/package.json
++++ b/package.json
+@@ -2,6 +2,6 @@
+   "name": "my-service",
+   "dependencies": {
+-    "lodash": "4.17.15",
++    "lodash": "4.17.21",
+     "express": "4.17.1"
+   }
+ }
+```
+
+## Considerations
+- Is the version correct?
+- Are there any unrelated changes?

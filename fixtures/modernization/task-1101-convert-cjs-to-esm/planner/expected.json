@@ -1,0 +1,14 @@
+{
+    "tasks": [
+        {
+            "id": "convert-utils",
+            "type": "refactor",
+            "description": "Convert src/utils.js to use ESM syntax (export instead of module.exports)",
+            "complexity": "low",
+            "file": "src/utils.js",
+            "dependsOn": []
+        }
+    ],
+    "ambiguities": [],
+    "invalidTaskCount": 0
+}
