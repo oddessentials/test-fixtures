@@ -4,8 +4,8 @@
 
 This guide explains exactly how to create fixtures under `/fixtures/` for all topics, tasks, and agents described in the master JSON. The goal is a fully populated, schema-valid, deterministic fixture suite.
 
-Follow this process consistently for every task in the api-design-and-versioning, database-migrations, config-and-feature-flags, ci-cd-and-automation, and error-handling-and-observability topics.
-
+Follow this process consistently for every task in the api-design-and-versioning, database-migrations, and config-and-feature-flags topics.
+Follow this process consistently for every task in the security-and-permissions, resilience-and-idempotency, and i18n-and-accessibility topics.
 ---
 
 # **1. Directory Layout (Authoritative)**
