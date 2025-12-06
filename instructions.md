@@ -4,7 +4,7 @@
 
 This guide explains exactly how to create fixtures under `/fixtures/` for all topics, tasks, and agents described in the master JSON. The goal is a fully populated, schema-valid, deterministic fixture suite.
 
-Follow this process consistently for every task.
+Follow this process consistently for every task the dependency-management, moderinzation, and debugging-and-repair topics.
 
 ---
 

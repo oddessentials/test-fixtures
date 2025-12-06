@@ -937,6 +937,153 @@
           }
         }
       ]
+    },
+    {
+      "id": "dependency-management",
+      "name": "Dependency Management & Security",
+      "range": "1000-1099",
+      "tasks": [
+        {
+          "id": "task-1001-security-audit-fix",
+          "title": "Fix security vulnerability in dependency",
+          "agents": {
+            "architect": {
+              "description": "Identifies a vulnerable dependency from a security report and specifies the exact target safe version, plus any constraints or non-goals (for example, 'do not change unrelated packages'). Clearly indicates that updating package.json and lockfiles is allowed for this dependency."
+            },
+            "planner": {
+              "description": "Plans a focused upgrade of the vulnerable package and any directly affected dependents, including tasks to run tests or checks that confirm the vulnerability is resolved. Does not introduce unrelated dependency changes."
+            },
+            "coder": {
+              "description": "Updates package.json and the appropriate lockfile entries for the vulnerable dependency, and adjusts usage if the API changed slightly. Keeps the patch minimal and does not modify unrelated dependencies."
+            },
+            "reviewer": {
+              "description": "Verifies that the dependency is upgraded to the specified safe version, that tests or checks pass, and that no unnecessary dependency churn or regressions were introduced."
+            },
+            "swarm": {
+              "description": "End-to-end security patch application and verification, limited to the vulnerable dependency and its immediate impact surface."
+            }
+          }
+        },
+        {
+          "id": "task-1002-major-upgrade-breaking-changes",
+          "title": "Major dependency upgrade with breaking changes",
+          "agents": {
+            "architect": {
+              "description": "Analyzes the release notes and breaking changes for a major library update (for example, a React or database driver upgrade), outlines required code migrations, and explicitly defines scope and non-goals (for example, 'migrate auth flows only; do not refactor unrelated features')."
+            },
+            "planner": {
+              "description": "Creates a structured migration plan that includes dependency updates in package.json/lockfiles and a set of refactoring tasks that touch only the affected modules. Tasks should capture any required API changes and necessary test updates."
+            },
+            "coder": {
+              "description": "Performs the major version upgrade, updates package.json/lockfiles, and refactors only the code affected by the breaking changes to align with the new API surface. Avoids speculative cleanups unrelated to the migration."
+            },
+            "reviewer": {
+              "description": "Checks that deprecated or removed APIs are no longer used, that the code is compatible with the new major version, and that the change set respects the migration scope without introducing unrelated modifications."
+            },
+            "swarm": {
+              "description": "End-to-end major version migration that handles API breakage in a controlled, scoped way and results in passing tests."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "modernization",
+      "name": "Codebase Modernization & Refactoring",
+      "range": "1100-1199",
+      "tasks": [
+        {
+          "id": "task-1101-convert-cjs-to-esm",
+          "title": "Convert CommonJS to ESM",
+          "agents": {
+            "architect": {
+              "description": "Specifies converting a legacy CommonJS module (or small set of modules) to ES Modules (import/export), including any constraints such as which files are in scope and whether package.json \"type\" may be updated. Emphasizes that behavior must remain the same."
+            },
+            "planner": {
+              "description": "Plans file-by-file conversion from require/module.exports to import/export, including any necessary updates to the package.json type field or build config. Ensures the plan is limited to the specified modules."
+            },
+            "coder": {
+              "description": "Rewrites require/module.exports to import/export syntax, fixes relative import paths, and updates any package.json type settings as needed. Does not change runtime behavior beyond what is required for the module system migration."
+            },
+            "reviewer": {
+              "description": "Ensures valid ESM syntax, correct imports/exports, and that the modules behave the same as before. Flags any unintended behavior changes or unnecessary edits."
+            },
+            "swarm": {
+              "description": "End-to-end module system migration for a small, clearly scoped portion of the codebase while preserving behavior."
+            }
+          }
+        },
+        {
+          "id": "task-1102-async-await-migration",
+          "title": "Migrate callbacks/promises to async/await",
+          "agents": {
+            "architect": {
+              "description": "Identifies specific callback-based or complex promise-based code paths that should be simplified using async/await, and states that behavior and error handling must remain semantically equivalent. May highlight tricky flows such as retries or parallelism."
+            },
+            "planner": {
+              "description": "Targets specific functions or modules for async/await refactoring, ensuring the plan is limited to those areas. Includes tasks to preserve error-handling semantics, logging, and ordering."
+            },
+            "coder": {
+              "description": "Refactors the selected code to clean async/await syntax, preserving the original control flow and error handling logic. Does not introduce new features or broaden the scope beyond the identified functions."
+            },
+            "reviewer": {
+              "description": "Verifies that the async behavior, error handling, and side effects strictly match the original behavior, and that tests cover the refactored flows. Flags any behavioral drift or unnecessary changes."
+            },
+            "swarm": {
+              "description": "Code modernization run focused on async/await adoption that improves readability without changing behavior."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "debugging-and-repair",
+      "name": "Debugging & Repository Repair",
+      "range": "1200-1299",
+      "tasks": [
+        {
+          "id": "task-1201-fix-broken-build",
+          "title": "Fix broken build / compilation error",
+          "agents": {
+            "architect": {
+              "description": "Analyzes compilation or build errors (for example, TypeScript type mismatches, missing files, or misconfigured scripts), diagnoses the root cause, and specifies the minimal area of the codebase that should be changed to repair the build."
+            },
+            "planner": {
+              "description": "Creates one or a small number of targeted tasks to resolve the specific build error while avoiding broad, speculative changes. May include a task to adjust configuration or types and a task to run the build to confirm the fix."
+            },
+            "coder": {
+              "description": "Fixes the code or configuration so the build passes, using the smallest reasonable change (for example, adding a missing import or correcting a type). Does not suppress errors with broad ignore flags or unrelated configuration changes."
+            },
+            "reviewer": {
+              "description": "Confirms that the build now passes, that the fix addresses the real root cause, and that the patch does not simply hide the error (for example, by disabling type checking). Flags any unnecessary or risky edits."
+            },
+            "swarm": {
+              "description": "End-to-end repair of a repository in a broken state, resulting in a clean, passing build with minimal, well-justified changes."
+            }
+          }
+        },
+        {
+          "id": "task-1202-flakey-test-fix",
+          "title": "Fix flakey or failing test",
+          "agents": {
+            "architect": {
+              "description": "Identifies a specific test that fails intermittently or under certain conditions, points to likely causes such as race conditions, timing issues, or improper mocking, and describes the expected stable behavior."
+            },
+            "planner": {
+              "description": "Plans a focused investigation and remediation of the flaky test, including tasks to adjust test setup, mocking, or underlying code behavior. Explicitly avoids fixes that simply disable or weaken the test."
+            },
+            "coder": {
+              "description": "Refactors the test and/or implementation code so the test becomes deterministic and reliable (for example, by removing brittle timing assumptions or improper shared state). Does not fix flakiness by adding arbitrary sleeps or skipping the test."
+            },
+            "reviewer": {
+              "description": "Validates that the test is now stable across runs, that the underlying behavior is correct, and that no shortcuts were taken (such as test skipping, excessive timeouts, or over-broad mocking)."
+            },
+            "swarm": {
+              "description": "Scenario focused on making an unreliable test stable through proper debugging of asynchronous or stateful behavior, rather than weakening test coverage."
+            }
+          }
+        }
+      ]
     }
   ]
 }
